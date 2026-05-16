@@ -1,0 +1,79 @@
+@import url('https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-blue: #0028FF;
+  --color-cream: #F5F5F0;
+  --color-orange: #FF5A00;
+  --color-pale-orange: #FFEEE5;
+  --color-pale-blue: #E5E9FF;
+  --color-grey: #807B78;
+  
+  --font-sans: "Switzer", ui-sans-serif, system-ui, sans-serif;
+  --font-switzer: "Switzer", ui-sans-serif, system-ui, sans-serif;
+  --font-tiro: "Tiro Devanagari Hindi", serif;
+  --font-friz: "EB Garamond", "Garamond", "Georgia", serif;
+}
+
+:root {
+  --blue: #0028FF;
+  --black: #000000;
+  --cream: #F5F5F0;
+  --white: #FFFFFF;
+  --orange: #FF5A00;
+  --pale-orange: #FFEEE5;
+  --pale-blue: #E5E9FF;
+  --grey: #807B78;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--black);
+  font-family: var(--font-switzer);
+  overflow-x: hidden;
+}
+
+.font-display { font-family: var(--font-switzer); }
+.font-accent { font-family: var(--font-tiro); font-style: italic; }
+.font-friz { font-family: var(--font-friz); }
+
+@media (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
+.animate-marquee-left { animation: marquee-left 30s linear infinite; }
+.animate-marquee-right { animation: marquee-right 30s linear infinite; }
+
+.animate-marquee-left:hover,
+.animate-marquee-right:hover { animation-play-state: paused; }
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.animate-marquee-up { animation: marquee-up 24s linear infinite; }
+.animate-marquee-down { animation: marquee-down 24s linear infinite; }
+
+.animate-marquee-up:hover,
+.animate-marquee-down:hover { animation-play-state: paused; }
+
+@keyframes marquee-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+@keyframes marquee-down {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0); }
+}
