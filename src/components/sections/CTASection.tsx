@@ -49,10 +49,10 @@ export default function CTASection({ onNavigate }: { onNavigate: () => void }) {
   return (
     <section ref={sectionRef} className="relative bg-[#F5F5F0] pt-8 md:pt-12 pb-6 md:pb-8">
       {/* Global Vertical line */}
-      <div className="hidden md:block absolute top-[0px] bottom-0 left-[max(1.5rem,min(5vw,4rem))] w-px bg-black z-20 pointer-events-none" />
+      <div className="hidden md:block absolute top-[0px] bottom-0 w-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
 
       {/* Top horizontal border to seamlessly connect with Testimonials */}
-      <div className="hidden md:block absolute top-0 left-[max(1.5rem,min(5vw,4rem))] right-0 h-px bg-black z-20 pointer-events-none" />
+      <div className="hidden md:block absolute top-0 right-0 h-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
 
       <div className="md:ml-[max(1.5rem,min(5vw,4rem))] px-6 md:px-12 relative z-10 h-full mt-4 md:mt-8">
         

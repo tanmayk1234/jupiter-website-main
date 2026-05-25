@@ -49,7 +49,7 @@ export default function Cases() {
   return (
     <section className="relative overflow-hidden" style={{ backgroundColor: "#F5F5F0" }}>
       {/* Global Vertical Line */}
-      <div className="hidden md:block absolute top-0 bottom-0 left-[max(1.5rem,min(5vw,4rem))] w-px bg-black z-20 pointer-events-none" />
+      <div className="hidden md:block absolute top-0 bottom-0 w-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
 
       {/* Header with horizontal borders */}
       <div className="md:ml-[max(1.5rem,min(5vw,4rem))] border-t border-b border-black">

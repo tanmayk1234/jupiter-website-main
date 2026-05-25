@@ -83,8 +83,8 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
       className="relative min-h-screen pt-20 px-6 md:px-[max(1.5rem,min(5vw,4rem))] flex flex-col justify-center overflow-hidden"
       style={{ backgroundColor: "#F5F5F0" }}
     >
-      {/* Left vertical border — runs full height, solid gear pixels cover the line at intersection */}
-      <div ref={vLineRef} className="hidden md:block absolute top-0 bottom-0 left-[max(1.5rem,min(5vw,4rem))] w-px bg-black z-20 pointer-events-none opacity-0" />
+      {/* Left vertical border — starts exactly below the logo and runs full height */}
+      <div ref={vLineRef} className="hidden md:block absolute bottom-0 w-px bg-black z-20 pointer-events-none opacity-0" style={{ left: "max(1.5rem, min(5vw, 4rem))", top: "88px" }} />
 
       {/* Background Lottie */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0 scale-[1.1] md:scale-[1.15] translate-x-0 md:translate-x-[5%] translate-y-[-5%] md:translate-y-[-2%]">

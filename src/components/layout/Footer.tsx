@@ -22,7 +22,7 @@ export default function Footer({ onNavigate }: { onNavigate: () => void }) {
   return (
     <footer className="relative bg-[#020202] text-white overflow-hidden section-dark pt-0 pb-6 border-t border-white/20">
       {/* Global Vertical line */}
-      <div className="hidden md:block absolute top-0 bottom-0 left-[max(1.5rem,min(5vw,4rem))] w-px bg-white/20 z-20 pointer-events-none" />
+      <div className="hidden md:block absolute top-0 bottom-0 w-px bg-white/20 z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
 
       {/* Main Content Area */}
       <div className="md:ml-[max(1.5rem,min(5vw,4rem))] relative z-10 pb-16 md:pb-24 border-b border-white/20">

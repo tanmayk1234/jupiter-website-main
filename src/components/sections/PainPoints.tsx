@@ -59,7 +59,7 @@ export default function PainPoints() {
 
   return (
     <section ref={sectionRef} className="relative py-[128px] px-6 md:px-[max(1.5rem,min(5vw,4rem))]" style={{ backgroundColor: "#F5F5F0" }}>
-      <div className="hidden md:block absolute top-0 bottom-0 left-[max(1.5rem,min(5vw,4rem))] w-px bg-black z-20 pointer-events-none" />
+      <div className="hidden md:block absolute top-0 bottom-0 w-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
 
       <div className="max-w-[1100px] mx-auto">
         {/* Headline */}

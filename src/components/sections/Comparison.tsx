@@ -53,7 +53,7 @@ export default function Comparison() {
   return (
     <section ref={sectionRef} className="relative bg-cream py-[128px] px-6 md:px-[max(1.5rem,min(5vw,4rem))]">
       {/* Vertical line left side */}
-      <div className="hidden md:block absolute top-[0px] bottom-0 left-[max(1.5rem,min(5vw,4rem))] w-px bg-black/10 z-20 pointer-events-none" />
+      <div className="hidden md:block absolute top-[0px] bottom-0 w-px bg-black/10 z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
 
       <div className="max-w-[1200px] mx-auto flex flex-col items-center relative z-10">
         <span className="font-display font-medium text-[13px] text-grey uppercase tracking-[0.1em] mb-8">

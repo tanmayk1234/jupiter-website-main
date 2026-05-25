@@ -22,13 +22,14 @@ export default function Navbar({ onNavigate, isLoaded = true }: { onNavigate: ()
     
     // Initial fade in
     gsap.fromTo(navRef.current,
-      { yPercent: -100, opacity: 0 },
+      { yPercent: -200, opacity: 0 },
       { yPercent: 0, opacity: 1, duration: 0.7, delay: 2.5, ease: "power3.out" }
     );
 
     // Hide/Show on scroll logic using GSAP for perfect sync with Lenis
     const showAnim = gsap.to(navRef.current, {
-      yPercent: -100,
+      yPercent: -200,
+      opacity: 0,
       paused: true,
       duration: 0.3,
       ease: "power2.inOut"
@@ -81,33 +82,49 @@ export default function Navbar({ onNavigate, isLoaded = true }: { onNavigate: ()
         className={`fixed top-0 left-0 right-0 z-[100] transition-colors duration-300 ease-in-out ${textColor} overflow-visible`}
         style={{ backgroundColor: bgColor }}
       >
-        {/* Horizontal bottom border — full width, logo sits on top and its solid pixels cover the line */}
-        <div className={`absolute bottom-0 left-0 right-0 h-px transition-colors duration-300 ${borderColor}`} />
-
-        {/* Jupiter logo — circular bgColor covers curved gear edge so lines emerge cleanly */}
+        {/* Horizontal bottom border — Left segment */}
         <div
-          className="hidden md:block absolute pointer-events-none z-10"
+          className={`absolute bottom-0 left-0 h-px transition-colors duration-300 ${borderColor}`}
+          style={{
+            width: "calc(max(1.5rem, min(5vw, 4rem)) - 24px)",
+          }}
+        />
+
+        {/* Horizontal bottom border — Right segment */}
+        <div
+          className={`absolute bottom-0 right-0 h-px transition-colors duration-300 ${borderColor}`}
+          style={{
+            left: "calc(max(1.5rem, min(5vw, 4rem)) + 24px)",
+          }}
+        />
+
+        {/* Top vertical border segment above the logo */}
+        <div
+          className={`hidden md:block absolute top-0 w-px transition-colors duration-300 ${borderColor}`}
+          style={{
+            left: "max(1.5rem, min(5vw, 4rem))",
+            height: "40px",
+          }}
+        />
+
+        {/* Jupiter logo — centered exactly at line intersection, no background color, cut to cut */}
+        <div
+          className="hidden md:block absolute pointer-events-none z-30"
           style={{
             bottom: 0,
             left: "max(1.5rem, min(5vw, 4rem))",
-            transform: "translate(-50%, 28%)",
-            width: "70px",
-            height: "70px",
-            borderRadius: "50%",
-            backgroundColor: bgColor,
-            transition: "background-color 300ms ease-in-out",
+            transform: "translate(-50%, 50%)",
+            width: "48px",
+            height: "48px",
+            backgroundColor: "transparent",
           }}
         >
           <img
             src="/jupiter-logo.png"
             alt="Jupiter"
             style={{
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "100px",
-              height: "100px",
+              width: "100%",
+              height: "100%",
               objectFit: "contain",
               display: "block",
             }}
@@ -115,21 +132,33 @@ export default function Navbar({ onNavigate, isLoaded = true }: { onNavigate: ()
         </div>
 
         <div className="flex items-stretch h-14 md:h-16">
-          {/* Left spacer with vertical border */}
+          {/* Left spacer with NO vertical border (border removed so it doesn't cross the logo) */}
           <div
-            className={`hidden md:block shrink-0 border-r transition-colors duration-300 ${borderRightColor}`}
+            className="hidden md:block shrink-0"
             style={{ width: "max(1.5rem, min(5vw, 4rem))" }}
           />
 
           {/* Inner nav */}
           <div className="flex-1 relative flex items-center px-5 md:px-6">
             {/* Jupiter wordmark — left side, offset right to clear the gear logo */}
-            <span className="hidden md:block font-friz font-medium text-[25px] tracking-[0.12em] select-none relative z-20" style={{ marginLeft: "18px" }}>
+            <span
+              className="hidden md:block font-friz font-medium tracking-[0.12em] select-none relative z-20"
+              style={{
+                marginLeft: "44px",
+                fontSize: "clamp(16px, 1.6vw, 22px)"
+              }}
+            >
               Jupiter Engineering Solutions
             </span>
 
             {/* Desktop links — absolutely centered in the nav */}
-            <ul className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-6 font-display font-medium text-[15px]">
+            <ul
+              className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center font-display font-medium"
+              style={{
+                gap: "clamp(12px, 1.5vw, 24px)",
+                fontSize: "clamp(13px, 1vw, 15px)"
+              }}
+            >
               {navLinks.map((link) => (
                 <li key={link.label}>
                   <a

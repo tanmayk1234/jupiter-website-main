@@ -164,7 +164,7 @@ export default function Services() {
         >+</span>
       ))}
 
-      <div className="hidden md:block absolute top-0 bottom-0 left-[max(1.5rem,min(5vw,4rem))] w-px bg-white/40 z-20 pointer-events-none" />
+      <div className="hidden md:block absolute top-0 bottom-0 w-px bg-white/40 z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
 
       {/* Mobile: stacked layout */}
       <div className="md:hidden px-6 py-24 flex flex-col gap-16">
