@@ -1,0 +1,4 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/purplehatinstitu/://purplehatinstitute.com
+    - /bin/rsync -av --exclude='.git' ./ $DEPLOYPATH
