@@ -3,6 +3,7 @@ import gsap from "gsap";
 import SplitText from "../ui/SplitText";
 import { DotLottiePlayer, PlayerEvents } from "@dotlottie/react-player";
 import type { DotLottieCommonPlayer } from "@dotlottie/react-player";
+import { useTranslation } from "../providers/LanguageContext";
 
 // WGB icon-button component
 function WGBButton({ label, variant, onClick }: { label: string; variant: "dark" | "blue" | "mono"; onClick?: () => void }) {
@@ -34,6 +35,7 @@ function WGBButton({ label, variant, onClick }: { label: string; variant: "dark"
 }
 
 export default function Hero({ isLoaded }: { isLoaded: boolean }) {
+  const { language, t } = useTranslation();
   const containerRef  = useRef<HTMLElement>(null);
   const subtextRef    = useRef<HTMLParagraphElement>(null);
   const btnsRef       = useRef<HTMLDivElement>(null);
@@ -92,7 +94,7 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
           <div ref={introLottieRef} className="absolute inset-0 w-full h-full">
             <DotLottiePlayer
               ref={preloaderPlayerRef}
-              src="https://cdn.prod.website-files.com/697c605c74f4a5968ab8d9c6/69a83b0fa481c63dd41c659b_WGB_Preloader_Orbit_Blueflow.lottie"
+              src="/assets/lottie/preloader-orbit.lottie"
               autoplay={false}
               loop={false}
               onEvent={(event) => {
@@ -120,7 +122,7 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
           <div ref={loopLottieRef} className="absolute inset-0 w-full h-full opacity-0">
             <DotLottiePlayer
               ref={loopPlayerRef}
-              src="https://cdn.prod.website-files.com/697c605c74f4a5968ab8d9c6/6996eb2c7a740eb6e1debd8b_69b8f67476355b80033ea66492e38130_cirkels%202.lottie"
+              src="/assets/lottie/loop-circles.lottie"
               autoplay={false}
               loop
               className="absolute inset-0 w-full h-full"
@@ -131,7 +133,7 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
         <div ref={mobileLottieRef} className="block md:hidden w-full h-full opacity-0">
           <DotLottiePlayer
             ref={mobilePlayerRef}
-            src="https://cdn.prod.website-files.com/697c605c74f4a5968ab8d9c6/69a83b6ade2cd438e9b11a95_WGB_Loop_Zwart_Transparant_1000x1000.lottie"
+            src="/assets/lottie/mobile-loop.lottie"
             autoplay={false}
             loop
             className="absolute inset-0 w-full h-full"
@@ -145,12 +147,13 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
         {/* Headline */}
         <div>
           <SplitText
+            key={language}
             startTrigger={isLoaded}
             delay={2.6}
             className="font-display font-medium text-[clamp(3rem,5.8vw,8rem)] leading-[0.98] tracking-[-0.04em] m-0 text-black mb-8"
             text={
               <>
-                The Future Leader<br /> In All Things<br /> <em className="font-accent font-normal tracking-normal">Graphite</em>
+                {t("hero_headline_1")}<br /> {t("hero_headline_2")}<br /> <em className="font-accent font-normal tracking-normal">{t("hero_headline_3")}</em>
               </>
             }
           />
@@ -161,11 +164,11 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
           <div className="hidden md:block shrink-0" style={{ width: "clamp(0px, 5.5vw, 88px)" }} />
           <div className="flex flex-col gap-6">
             <p ref={subtextRef} className="opacity-0 font-display text-black/60 text-[clamp(13px,1vw,16px)] max-w-[55ch]">
-              Fabrication, engineering, and manufacturing of process equipment for critical industrial applications. We rely on expertise to optimize your processes for the best possible outcomes.
+              {t("hero_subtext")}
             </p>
             <div ref={btnsRef} className="flex flex-wrap items-center gap-3">
               <span className="opacity-0">
-                <WGBButton label="Request a Technical Consultation" variant="mono" />
+                <WGBButton label={t("hero_cta")} variant="mono" />
               </span>
             </div>
           </div>

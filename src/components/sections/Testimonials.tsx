@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { useTranslation } from "../providers/LanguageContext";
 
 function PlusIconSm() {
   return (
@@ -8,44 +9,45 @@ function PlusIconSm() {
   );
 }
 
-const testimonialsLeft = [
-  {
-    text: "I wanted to position Service Factory as a strategic partner - not just a service provider. LinkedIn has helped me communicate exactly that and generate new business in a targeted way. The response from the industry tells me we are on the right track.",
-  },
-  {
-    name: "Guido Thiemann",
-    title: "Managing Director Pushfire",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-    text: "Niklas and his team have a deep understanding of how communication works. They extract my knowledge and turn it into a system that delivers real business results.",
-  },
-  {
-    name: "Florian Litterst",
-    title: "Founder adsventure",
-    image: "https://randomuser.me/api/portraits/men/44.jpg",
-    text: "Our LinkedIn content funnel has already made a massive impact. For one of our biggest deals, we had a 5-month sales cycle - and throughout that entire time, we were consistently putting content in front of them.",
-  },
-];
-
-const testimonialsRight = [
-  {
-    text: "Today I make nearly 100% of my revenue with LinkedIn and proven through my posts.",
-  },
-  {
-    name: "Christian",
-    title: "CEO",
-    image: "https://randomuser.me/api/portraits/men/55.jpg",
-    text: "They don't just execute, they think strategically about our entire funnel. We saw a 3x increase in qualified meetings in just 90 days.",
-  },
-  {
-    name: "Daniel Bidmon",
-    title: "Co-Founder & CEO",
-    image: "https://randomuser.me/api/portraits/men/66.jpg",
-    text: "WGB helped us go from 0 to a pipeline we actually trust. The LinkedIn content built real authority.",
-  },
-];
-
 export default function Testimonials() {
+  const { language, t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
+
+  const testimonialsLeft = [
+    {
+      text: t("test_1_text"),
+    },
+    {
+      name: t("test_2_name"),
+      title: t("test_2_title"),
+      image: "/assets/images/testimonials/user32.jpg",
+      text: t("test_2_text"),
+    },
+    {
+      name: t("test_3_name"),
+      title: t("test_3_title"),
+      image: "/assets/images/testimonials/user44.jpg",
+      text: t("test_3_text"),
+    },
+  ];
+
+  const testimonialsRight = [
+    {
+      text: t("test_4_text"),
+    },
+    {
+      name: t("test_5_name"),
+      title: t("test_5_title"),
+      image: "/assets/images/testimonials/user55.jpg",
+      text: t("test_5_text"),
+    },
+    {
+      name: t("test_6_name"),
+      title: t("test_6_title"),
+      image: "/assets/images/testimonials/user66.jpg",
+      text: t("test_6_text"),
+    },
+  ];
 
   return (
     <section ref={sectionRef} className="relative h-[800px] md:h-[85vh] min-h-[600px] max-h-[1000px] overflow-hidden" style={{ backgroundColor: "#F5F5F0" }}>
@@ -60,24 +62,38 @@ export default function Testimonials() {
         {/* Left Static Column */}
         <div className="w-full md:w-[45%] shrink-0 relative z-30 flex flex-col justify-center h-full">
           <h2 className="font-display font-medium text-[clamp(2.5rem,4.5vw,5rem)] leading-[1.05] tracking-[-0.03em] text-black mb-6 mt-12 md:mt-0">
-            We treat your <em className="font-accent font-normal tracking-normal">sales</em> <br className="hidden md:block" />
-            <em className="font-accent font-normal tracking-normal">pipeline</em> like it's our own
+            {language === "en" ? (
+              <>
+                We engineer thermal & <br className="hidden md:block" />
+                <em className="font-accent font-normal tracking-normal">process systems</em> to <em className="font-accent font-normal tracking-normal">last</em>
+              </>
+            ) : language === "gu" ? (
+              <>
+                અમે થર્મલ અને <br className="hidden md:block" />
+                <em className="font-accent font-normal tracking-normal">પ્રોસેસ સિસ્ટમ્સને</em> ટકાઉ <em className="font-accent font-normal tracking-normal">બનાવીએ છીએ</em>
+              </>
+            ) : (
+              <>
+                మేము థర్మల్ మరియు <br className="hidden md:block" />
+                <em className="font-accent font-normal tracking-normal">ప్రాసెస్ వ్యవస్థలను</em> మన్నికగా <em className="font-accent font-normal tracking-normal">డిజైన్ చేస్తాము</em>
+              </>
+            )}
           </h2>
           <p className="font-display text-[15px] md:text-[16px] text-black/80 leading-[1.6] max-w-[420px] mb-8 font-medium">
-            You don't just hire an agency. We go beyond simple service delivery to engineer your growth with the same obsession we apply to our own business.
+            {t("testimonials_subtext")}
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <button className="inline-flex items-center gap-2.5 bg-black text-white rounded-lg font-display font-semibold text-[14px] pl-3 pr-5 py-2.5 hover:opacity-80 transition-opacity duration-300 shrink-0">
               <span className="flex items-center justify-center w-5 h-5 rounded-sm bg-white/20 transition-colors">
                 <PlusIconSm />
               </span>
-              Explore cases
+              {t("cases_explore_btn")}
             </button>
             <button className="inline-flex items-center gap-2.5 bg-[#0028FF] text-white rounded-lg font-display font-semibold text-[14px] pl-3 pr-5 py-2.5 hover:bg-black transition-colors duration-300 shrink-0">
               <span className="flex items-center justify-center w-5 h-5 rounded-sm bg-white/20 transition-colors">
                 <PlusIconSm />
               </span>
-              Talk to us
+              {t("talk_to_us")}
             </button>
           </div>
         </div>

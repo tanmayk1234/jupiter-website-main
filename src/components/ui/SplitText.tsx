@@ -17,6 +17,7 @@ export default function SplitText({
   delay?: number;
   startTrigger?: boolean;
   types?: string;
+  key?: React.Key;
 }) {
   const textRef = useRef<HTMLDivElement>(null);
 
@@ -24,7 +25,7 @@ export default function SplitText({
     if (!textRef.current || !startTrigger) return;
     
     // Split text into words (and optionally lines) before it is painted
-    const split = new SplitType(textRef.current, { types: types });
+    const split = new SplitType(textRef.current, { types: types as any });
     
     // Hide all words initially so they don't flash
     gsap.set(split.words, { opacity: 0 });

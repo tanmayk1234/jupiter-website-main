@@ -1,13 +1,6 @@
-function WGBLogoLarge() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 51" fill="currentColor" className="w-full h-full">
-      <path d="M82.5066 23.3806C82.5066 16.3352 85.906 12.4169 91.2127 12.4169C96.5194 12.4169 95.7279 13.364 97.0384 15.1416V12.7542H102.112V34.9022C102.112 40.637 98.1542 43.5693 92.8865 43.5693C87.6187 43.5693 83.856 41.156 83.1035 36.1218H88.2155C88.5269 38.3794 90.3564 39.5731 92.8086 39.5731C95.2609 39.5731 97.0384 38.3405 97.0384 34.98V31.4119C95.6501 33.3192 93.6779 34.3053 91.2127 34.3053C85.8282 34.3053 82.5066 30.1534 82.5066 23.3806ZM97.0254 23.3806C97.0254 19.06 95.3257 16.6077 92.3545 16.6077C89.3833 16.6077 87.7225 18.9821 87.7225 23.3806C87.7225 27.779 89.3444 30.1145 92.3545 30.1145C95.3646 30.1145 97.0254 27.7401 97.0254 23.3806Z" />
-      <path d="M115.294 12.4169C112.764 12.4169 110.779 13.364 109.468 15.1416V5.72188H104.395V33.968H109.468V31.4119C110.857 33.3192 112.829 34.3053 115.294 34.3053C120.678 34.3053 124 30.1534 124 23.3806C124 16.6077 120.601 12.4169 115.294 12.4169ZM114.152 30.1145C111.103 30.1145 109.481 27.7401 109.481 23.3806C109.481 19.021 111.181 16.6077 114.152 16.6077C117.123 16.6077 118.784 18.9821 118.784 23.3806C118.784 27.779 117.162 30.1145 114.152 30.1145Z" />
-      <path d="M69.1426 12.7542L73.7357 28.9078L77.6541 12.7542H82.7142L77.1481 33.981H70.5699L66.3271 17.8273L62.0973 33.981H55.5191L49.9399 12.7542H55.0131L58.9315 28.9078L63.5245 12.7542H69.1426Z" />
-      <path d="M43.2969 0.583858C26.754 13.5197 9.65325 15.9979 9.65325 15.9979C9.65325 15.9979 8.45957 16.1795 8.0314 16.6726C7.34374 17.4122 7.64216 18.2425 7.64216 18.2555C7.81083 18.8005 11.314 30.7891 0.454131 48.1883C-0.246507 49.3042 -0.0389108 49.9789 0.48008 50.4978C1.05097 50.952 1.73863 51.0817 2.77662 50.2773C19.3195 37.3414 36.4202 34.8632 36.4202 34.8632C36.4202 34.8632 37.6009 34.7335 38.0031 34.2664C38.6908 33.462 38.4313 32.6056C38.2886 32.1515 34.7076 20.1369 45.6193 2.65982C46.32 1.54399 46.1124 0.869303 45.5934 0.350312C45.0225 -0.103805 44.3348 -0.233553 43.2969 0.570883V0.583858Z" />
-    </svg>
-  );
-}
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import { useTranslation } from "../providers/LanguageContext";
 
 // 4-point star mark
 function SmallStar() {
@@ -18,7 +11,110 @@ function SmallStar() {
   );
 }
 
-export default function Footer({ onNavigate }: { onNavigate: () => void }) {
+interface FooterProps {
+  onViewChange?: (view: "home" | "order" | "about" | "blog" | "resources" | "sustainability") => void;
+}
+
+export default function Footer({ onViewChange }: FooterProps) {
+  const { language, t } = useTranslation();
+  const [activeModal, setActiveModal] = useState<"privacy" | "imprint" | "cookies" | null>(null);
+
+  const footerLinks = [
+    { label: t("home"), view: "home" as const },
+    { label: t("order"), view: "order" as const },
+    { label: t("sustainability"), view: "sustainability" as const },
+    { label: t("about"), view: "about" as const }
+  ];
+
+  // Helper to get modal titles based on current language
+  const getModalTitle = (type: "privacy" | "imprint" | "cookies") => {
+    if (type === "privacy") {
+      return language === "en" ? "Privacy Policy" : language === "gu" ? "ગોપનીયતા નીતિ" : "గోప్యతా విధానం";
+    }
+    if (type === "imprint") {
+      return language === "en" ? "Imprint & Legal Notice" : language === "gu" ? "ઇમ્પ્રિન્ટ / કાનૂની નોટિસ" : "ఇంప్రింట్ / లీగల్ నోటీసు";
+    }
+    return language === "en" ? "Cookie Policy" : language === "gu" ? "કૂકી નીતિ" : "కుకీల విధానం";
+  };
+
+  // Helper to get modal body copy based on current language
+  const getModalContent = (type: "privacy" | "imprint" | "cookies") => {
+    if (type === "privacy") {
+      return language === "en" ? (
+        <>
+          <p className="font-semibold">At Jupiter Engineering Solutions, we prioritize the confidentiality and security of our clients' data.</p>
+          <p><strong>1. Information Collection:</strong> We collect contact information and technical design requirements (such as engineering specifications, CAD drawings, thermal parameters) to provide customized engineering services.</p>
+          <p><strong>2. Data Protection:</strong> All drawings and industrial designs are kept on secure servers. Access is strictly limited to authorized engineering personnel. We implement industrial-grade encryption for all intellectual property.</p>
+          <p><strong>3. ASME Compliance:</strong> Design compliance and structural verification documents are stored securely in accordance with ISO 9001 and ASME Section VIII directives. We do not sell or share your information with third-party marketing companies.</p>
+        </>
+      ) : language === "gu" ? (
+        <>
+          <p className="font-semibold">જ્યુપિટર એન્જિનિયરિંગ સોલ્યુશન્સ પર, અમે અમારા ક્લાયન્ટ્સના ડેટાની ગુપ્તતા અને સુરક્ષાને અગ્રતા આપીએ છીએ.</p>
+          <p><strong>૧. માહિતી સંગ્રહ:</strong> કસ્ટમાઇઝ્ડ એન્જિનિયરિંગ સેવાઓ પ્રદાન કરવા માટે અમે સંપર્ક માહિતી અને તકનીકી ડિઝાઇન આવશ્યકતાઓ (જેમ કે એન્જિનિયરિંગ સ્પષ્ટીકરણો, CAD રેખાંકનો) એકત્રિત કરીએ છીએ.</p>
+          <p><strong>૨. ડેટા સુરક્ષા:</strong> તમામ રેખાંકનો અને ઔદ્યોગિક ડિઝાઇન સુરક્ષિત સર્વર્સ પર રાખવામાં આવે છે. ઔદ્યોગિક હીટ એક્સચેન્જર્સ અને પ્રેશર વેસલ્સની ડિઝાઇન ફાઇલોનો ઉપયોગ ગુપ્ત રીતે થાય છે.</p>
+          <p><strong>૩. ASME પાલન:</strong> ISO 9001 અને ASME સેક્શન VIII નિર્દેશો અનુસાર ડિઝાઇન પાલન અને માળખાકીય ચકાસણી દસ્તાવેજો સુરક્ષિત રીતે સંગ્રહિત થાય છે.</p>
+        </>
+      ) : (
+        <>
+          <p className="font-semibold">జూపిటర్ ఇంజనీరింగ్ సొల్యూషన్స్ వద్ద, మేము మా క్లయింట్ల డేటా యొక్క గోప్యత మరియు భద్రతకు ప్రాధాన్యత ఇస్తాము.</p>
+          <p><strong>1. సమాచార సేకరణ:</strong> మేము అనుకూలీకరించిన ఇంజనీరింగ్ సేవలను అందించడానికి సంప్రదింపు సమాచారం మరియు సాంకేతిక రూపకల్పన వివరాలను (CAD డ్రాయింగ్‌లు, ఉష్ణ పారామితులు వంటివి) సేకరిస్తాము.</p>
+          <p><strong>2. డేటా రక్షణ:</strong> అన్ని డ్రాయింగ్‌లు మరియు పారిశ్రామిక నమూనాలు సురక్షితమైన సర్వర్‌లలో ఉంచబడతాయి. అనుమతి పొందిన ఇంజనీరింగ్ సిబ్బందికి మాత్రమే వీటికి యాక్సెస్ ఉంటుంది.</p>
+          <p><strong>3. ASME నిబంధనల అమలు:</strong> ISO 9001 మరియు ASME సెక్షన్ VIII ఆదేశాలకు అనుగుణంగా డిజైన్ పత్రాలు సురక్షితంగా నిల్వ చేయబడతాయి.</p>
+        </>
+      );
+    }
+
+    if (type === "imprint") {
+      return language === "en" ? (
+        <>
+          <p className="font-semibold text-lg text-[#0028FF]">Jupiter Engineering Solutions</p>
+          <p><strong>Registered Office & Factory:</strong> Gat No. 20/5, Besides Caves County Resorts, Mumbai Agra Highway, Villholi, Nashik - 422010, Maharashtra, India.</p>
+          <p><strong>Partners:</strong> Nitish Chincholikar, Viraj Mundada</p>
+          <p><strong>Contact Info:</strong> jupiterengg18@gmail.com | +91 8600031275 / +91 9766963331</p>
+          <p><strong>Certifications:</strong> Design & fabrication facility.</p>
+        </>
+      ) : language === "gu" ? (
+        <>
+          <p className="font-semibold text-lg text-[#0028FF]">જ્યુપિટર એન્જિનિયરિંગ સોલ્યુશન્સ</p>
+          <p><strong>રજિસ્ટર્ડ ઓફિસ અને ફેક્ટરી:</strong> ગેટ નં. ૨૦/૫, કેવ્ઝ કાઉન્ટી રિસોર્ટ્સ પાસે, મુંબઈ આગ્રા હાઇવે, વિલ્હોળી, નાશિક - ૪૨૨૦૧૦, મહારાષ્ટ્ર, ભારત.</p>
+          <p><strong>ભાગીદારો:</strong> નીતિશ ચિંચોલીકર, વિરાજ મુંદડા</p>
+          <p><strong>સંપર્ક:</strong> jupiterengg18@gmail.com | +91 8600031275 / +91 9766963331</p>
+          <p><strong>પ્રમાણપત્ર:</strong> ડિઝાઇન અને ફેબ્રિકેશન સુવિધા.</p>
+        </>
+      ) : (
+        <>
+          <p className="font-semibold text-lg text-[#0028FF]">జూపిటర్ ఇంజనీరింగ్ సొల్యూషన్స్</p>
+          <p><strong>రిజిస్టర్డ్ ఆఫీస్ & ఫ్యాక్టరీ:</strong> గేట్ నం. 20/5, కేవ్స్ కౌంటీ రిసార్ట్స్ పక్కన, ముంబై ఆగ్రా హైవే, విల్హోళీ, నాశిక్ - 422010, మహారాష్ట్ర, భారతదేశం.</p>
+          <p><strong>భాగస్వాములు:</strong> నితీష్ చిం చోలికర్, విరాజ్ ముందాడ</p>
+          <p><strong>సంప్రదించండి:</strong> jupiterengg18@gmail.com | +91 8600031275 / +91 9766963331</p>
+          <p><strong>ధృవీకరణలు:</strong> డిజైన్ & ఫ్యాబ్రికేషన్ ప్లాంట్.</p>
+        </>
+      );
+    }
+
+    return language === "en" ? (
+      <>
+        <p className="font-semibold">Our website uses necessary cookies to optimize functionality, track selected languages, and enhance user experience.</p>
+        <p><strong>1. Essential Cookies:</strong> Required for core site navigation and multi-language preference state. Disabling these may disrupt language toggle capabilities.</p>
+        <p><strong>2. Performance:</strong> We utilize minimal, anonymous traffic analysis to speed up page loads and monitor server health. No personal identifying information is stored.</p>
+        <p><strong>3. Cookie Control:</strong> You can disable cookies via your browser settings, though some translation services may require cookies to function correctly.</p>
+      </>
+    ) : language === "gu" ? (
+      <>
+        <p className="font-semibold">અમારી વેબસાઇટ પ્રદર્શનને ઑપ્ટિમાઇઝ કરવા, પસંદ કરેલી ભાષાઓને ટ્રૅક કરવા અને વપરાશકર્તા અનુભવને વધારવા માટે જરૂરી કૂકીઝનો ઉપયોગ કરે છે.</p>
+        <p><strong>૧. આવશ્યક કૂકીઝ:</strong> મુખ્ય સાઇટ નેવિગેશન અને બહુભાષી પસંદગીઓ માટે જરૂરી છે.</p>
+        <p><strong>૨. પ્રદર્શન કૂકીઝ:</strong> અમે વેબ ટ્રાફિકનું વિશ્લેષણ કરવા અને લોડિંગ સમય સુધારવા માટે ન્યૂનતમ અનામિક કૂકીઝનો ઉપયોગ કરીએ છીએ.</p>
+        <p><strong>૩. નિયંત્રણ:</strong> તમે તમારા બ્રાઉઝર સેટિંગ્સ દ્વારા કૂકીઝને અક્ષમ કરી શકો છો.</p>
+      </>
+    ) : (
+      <>
+        <p className="font-semibold">మా వెబ్‌సైట్ పనితీరును ఆప్టిమైజ్ చేయడానికి, ఎంచుకున్న భాషలను ట్రాక్ చేయడానికి మరియు వినియోగదారు అనుభవాన్ని మెరుగుపరచడానికి అవసరమైన కుకీలను ఉపయోగించుకుంటుంది.</p>
+        <p><strong>1. అవసరమైన కుకీలు:</strong> సైట్ నావిగేషన్ మరియు భాషా ప్రాధాన్యతల కోసం ఇవి తప్పనిసరి.</p>
+        <p><strong>2. నియంత్రణ:</strong> మీరు మీ బ్రౌజర్ సెట్టింగ్‌ల ద్వారా కుకీలను నిలిపివేయవచ్చు.</p>
+      </>
+    );
+  };
+
   return (
     <footer className="relative bg-[#020202] text-white overflow-hidden section-dark pt-0 pb-6 border-t border-white/20">
       {/* Global Vertical line */}
@@ -53,19 +149,19 @@ export default function Footer({ onNavigate }: { onNavigate: () => void }) {
          {/* Content Wrapper */}
          <div className="px-6 md:px-12 relative z-10 flex flex-col lg:flex-row justify-between gap-16 lg:gap-8 h-full">
              {/* Left Side: Brand Graphics */}
-             <div className="w-full lg:w-[45%] relative min-h-[250px] lg:min-h-[300px]">
+             <div className="w-full lg:w-[45%] relative min-h-[200px] lg:min-h-[250px] flex items-end">
                 {/* Small floating star */}
                 <div className="absolute top-[5%] left-[50%] lg:left-[45%] text-white w-4 h-4 opacity-80 z-10">
                    <SmallStar />
                 </div>
 
                 {/* Logo and text */}
-                <div className="absolute bottom-[10%] left-0 lg:left-8 z-10">
-                   <div className="w-[280px] lg:w-[380px] text-white">
-                      <WGBLogoLarge />
-                   </div>
-                   <p className="font-display text-[22px] lg:text-[24px] font-medium mt-3 ml-[100px] lg:ml-[140px] tracking-wide text-white/90">
-                     we go <br /> beyond
+                <div className="absolute bottom-[10%] left-0 lg:left-8 z-10 flex flex-col gap-2">
+                   <span className="font-display font-bold text-[28px] lg:text-[38px] tracking-[-0.02em] leading-[1.1] block text-white">
+                     Jupiter <br className="hidden lg:block" /> Engineering Solutions
+                   </span>
+                   <p className="font-display text-[15px] lg:text-[17px] font-medium tracking-wide text-white/60 leading-relaxed max-w-[320px]">
+                     Engineering excellence, built to last.
                    </p>
                 </div>
              </div>
@@ -78,38 +174,67 @@ export default function Footer({ onNavigate }: { onNavigate: () => void }) {
                 
                 {/* Image Cards Row */}
                 <div className="flex gap-4 md:gap-6 mb-8">
-                    {/* Niklas Card */}
-                    <div className="relative rounded-[12px] overflow-hidden border border-white/10 w-[160px] h-[220px] md:w-[180px] md:h-[260px] bg-[#111] shrink-0">
-                       <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?auto=format&fit=crop&q=80&w=400" alt="Niklas Götz" className="w-full h-full object-cover opacity-90" />
-                       <div className="absolute bottom-0 left-0 right-0 bg-[#1A1A1A] p-3 md:p-4 border-t border-white/10">
-                         <p className="font-display font-medium text-white text-[13px] md:text-[14px] leading-tight">Niklas Götz</p>
-                         <p className="font-display text-white/50 text-[11px] md:text-[12px] leading-tight mt-1">Co-Founder WGB</p>
+                    {/* Nitish Card */}
+                    <div className="relative rounded-[12px] overflow-hidden border border-white/10 w-[160px] h-[220px] md:w-[180px] md:h-[260px] bg-[#111] shrink-0 flex flex-col justify-end">
+                       <div className="absolute inset-0 bg-gradient-to-b from-[#181818] to-[#111] flex items-center justify-center">
+                         <span className="font-display font-bold text-white/10 text-[64px]">NC</span>
+                       </div>
+                       <div className="absolute bottom-0 left-0 right-0 bg-[#1A1A1A] p-3 md:p-4 border-t border-white/10 z-10">
+                         <p className="font-display font-medium text-white text-[13px] md:text-[14px] leading-tight">Nitish Chincholikar</p>
+                         <p className="font-display text-white/50 text-[11px] md:text-[12px] leading-tight mt-1">Co-Founder, Jupiter Engineering Solutions</p>
                        </div>
                     </div>
                     
-                    {/* Joshua Card (Staggered slightly down) */}
-                    <div className="relative mt-12 rounded-[12px] overflow-hidden border border-white/10 w-[160px] h-[220px] md:w-[180px] md:h-[260px] bg-[#111] shrink-0">
-                       <img src="https://images.unsplash.com/photo-1541577141970-eebc83ebe30e?auto=format&fit=crop&q=80&w=400" alt="Joshua Frosch" className="w-full h-full object-cover opacity-90" />
-                       <div className="absolute bottom-0 left-0 right-0 bg-[#1A1A1A] p-3 md:p-4 border-t border-white/10">
-                         <p className="font-display font-medium text-white text-[13px] md:text-[14px] leading-tight">Joshua Frosch</p>
-                         <p className="font-display text-white/50 text-[11px] md:text-[12px] leading-tight mt-1">Co-Founder WGB</p>
+                    {/* Viraj Card (Staggered slightly down) */}
+                    <div className="relative mt-12 rounded-[12px] overflow-hidden border border-white/10 w-[160px] h-[220px] md:w-[180px] md:h-[260px] bg-[#111] shrink-0 flex flex-col justify-end">
+                       <div className="absolute inset-0 bg-gradient-to-b from-[#181818] to-[#111] flex items-center justify-center">
+                         <span className="font-display font-bold text-white/10 text-[64px]">VM</span>
+                       </div>
+                       <div className="absolute bottom-0 left-0 right-0 bg-[#1A1A1A] p-3 md:p-4 border-t border-white/10 z-10">
+                         <p className="font-display font-medium text-white text-[13px] md:text-[14px] leading-tight">Viraj Mundada</p>
+                         <p className="font-display text-white/50 text-[11px] md:text-[12px] leading-tight mt-1">Co-Founder, Jupiter Engineering Solutions</p>
                        </div>
                     </div>
                 </div>
 
                 {/* Headline */}
                 <h2 className="font-display font-medium text-[clamp(2.5rem,4vw,3.8rem)] leading-[1.05] tracking-tight text-white">
-                   Talk to an <em className="font-accent font-normal tracking-normal italic">expert,</em><br />
-                   not sales
+                   {language === "en" ? (
+                     <>
+                       Engineering <em className="font-accent font-normal tracking-normal italic">excellence,</em><br />
+                       without compromise
+                     </>
+                   ) : language === "gu" ? (
+                     <>
+                       <em className="font-accent font-normal tracking-normal italic">એન્જિનિયરિંગ ઉત્કૃષ્ટતા,</em><br />
+                       કોઈ સમાધાન વિના
+                     </>
+                   ) : (
+                     <>
+                       <em className="font-accent font-normal tracking-normal italic">ఇంజనీరింగ్ శ్రేష్ఠత,</em><br />
+                       రాజీ లేకుండా
+                     </>
+                   )}
                 </h2>
             </div>
             
             {/* Links & Button row */}
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-6 ml-2">
                <nav className="flex flex-wrap items-center gap-5 md:gap-6">
-                 {["Manifesto", "Services", "Cases", "Blog", "Growth Assets", "About"].map(link => (
-                    <a key={link} href="#" onClick={(e) => { e.preventDefault(); onNavigate(); }} className="font-display font-bold text-[14px] text-white hover:text-white/70 transition-colors">
-                      {link}
+                 {footerLinks.map(link => (
+                    <a 
+                      key={link.label} 
+                      href="#" 
+                      onClick={(e) => { 
+                        e.preventDefault(); 
+                        if (onViewChange) {
+                          onViewChange(link.view);
+                          window.scrollTo(0, 0);
+                        }
+                      }} 
+                      className="font-display font-bold text-[14px] text-white hover:text-white/70 transition-colors"
+                    >
+                      {link.label}
                     </a>
                  ))}
                </nav>
@@ -118,7 +243,7 @@ export default function Footer({ onNavigate }: { onNavigate: () => void }) {
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                   </svg>
-                  <span className="font-display text-[14px] font-bold">Follow us</span>
+                  <span className="font-display text-[14px] font-bold">{t("footer_follow")}</span>
                </a>
             </div>
          </div>
@@ -127,17 +252,85 @@ export default function Footer({ onNavigate }: { onNavigate: () => void }) {
 
       {/* Bottom Legal / Credits Bar */}
       <div className="md:ml-[max(1.5rem,min(5vw,4rem))] px-6 md:px-12 pt-6 pb-2 flex flex-col md:flex-row items-center justify-between gap-6 font-display text-[12px] text-white/50 font-medium">
-          <p>© 2026 WGB. All rights reserved.</p>
+          <p>{t("footer_rights")}</p>
           <div className="flex items-center gap-6 md:gap-8 ml-0 md:-ml-20">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Imprint</a>
-            <a href="#" className="hover:text-white transition-colors">Cookies</a>
+            <a 
+              id="footer-privacy-link"
+              href="#" 
+              onClick={(e) => { e.preventDefault(); setActiveModal("privacy"); }} 
+              className="hover:text-white transition-colors"
+            >
+              {t("footer_privacy")}
+            </a>
+            <a 
+              id="footer-imprint-link"
+              href="#" 
+              onClick={(e) => { e.preventDefault(); setActiveModal("imprint"); }} 
+              className="hover:text-white transition-colors"
+            >
+              {t("footer_imprint")}
+            </a>
+            <a 
+              id="footer-cookies-link"
+              href="#" 
+              onClick={(e) => { e.preventDefault(); setActiveModal("cookies"); }} 
+              className="hover:text-white transition-colors"
+            >
+              {t("footer_cookies")}
+            </a>
           </div>
           <div className="flex items-center gap-4">
-            <p className="flex items-center gap-1"><span className="text-[10px]">©</span>Branding by Ali</p>
-            <p className="flex items-center gap-1"><span className="text-[10px]">©</span>Design by Dylan</p>
+            <p className="flex items-center gap-1"><span className="text-[10px]">©</span>Design & Developed by Tanmay</p>
           </div>
       </div>
+
+      {/* Modals Popup */}
+      {activeModal && createPortal(
+        <div 
+          className="fixed inset-0 bg-black/80 backdrop-blur-md z-[99999] flex items-center justify-center p-4 cursor-pointer"
+          onClick={() => setActiveModal(null)}
+        >
+          <div 
+            className="bg-[#121212] border border-white/10 rounded-2xl max-w-lg w-full max-h-[85vh] flex flex-col shadow-2xl relative animate-in fade-in zoom-in-95 duration-300 cursor-default"
+            onClick={(e) => e.stopPropagation()}
+          >
+            
+            {/* Header */}
+            <div className="flex items-center justify-between p-6 border-b border-white/10">
+              <h3 className="font-display font-bold text-[18px] text-white tracking-wide">
+                {getModalTitle(activeModal)}
+              </h3>
+              <button 
+                id="modal-close-btn-top"
+                onClick={() => setActiveModal(null)}
+                className="text-white/60 hover:text-white transition-colors p-1"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="currentColor"/>
+                </svg>
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 overflow-y-auto font-display text-[14px] leading-relaxed text-white/80 flex flex-col gap-4">
+              {getModalContent(activeModal)}
+            </div>
+
+            {/* Footer */}
+            <div className="p-4 border-t border-white/10 flex justify-end">
+              <button 
+                id="modal-close-btn-bottom"
+                onClick={() => setActiveModal(null)}
+                className="bg-white/10 text-white rounded-lg px-5 py-2.5 font-display font-semibold text-[13px] hover:bg-white/20 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+
+          </div>
+        </div>,
+        document.body
+      )}
     </footer>
   );
 }

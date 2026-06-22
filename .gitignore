@@ -6,3 +6,15 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Graphs & Reports
+graphify-out/
+.code-review-graph/
+
+# Scratch files & agent utilities
+.agents/
+parse-pdf.js
+parse-pdf.cjs
+pdf-text.txt
+profile-text.txt
+*.mp4

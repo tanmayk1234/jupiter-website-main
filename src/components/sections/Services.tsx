@@ -1,31 +1,32 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslation } from "../providers/LanguageContext";
 
 const panels = [
   {
-    id: "intro",
+    id: "shell-tube",
     dot: null,
-    heading: <>Guiding your <em className="font-accent font-normal tracking-normal">growth</em> beyond the known using our Trust Engine</>,
-    body: "The Trust Engine replaces the chaos of isolated marketing tactics with a holistic system of Content, Ads, and Outreach, earning you the trust of your ideal clients long before you ever make the sale.",
+    heading: <>Shell & Tube <em className="font-accent font-normal tracking-normal">Exchangers</em></>,
+    body: "Engineered for high-pressure and high-temperature processes. We design shell and tube exchangers that deliver optimal thermal performance and maximum durability under extreme industrial conditions.",
   },
   {
-    id: "content",
-    dot: "content",
-    heading: <>Founder&#8209;Led <em className="font-accent font-normal tracking-normal">Content</em></>,
-    body: "We tell your unique story and turn your expertise into content that is worth sharing. This engineers trust at scale, positioning you as a liked and respected authority long before the first contact.",
+    id: "graphite",
+    dot: null,
+    heading: <>Graphite <em className="font-accent font-normal tracking-normal">Technology</em></>,
+    body: "Unmatched corrosion resistance for aggressive chemical processing. Our graphite heat exchangers provide exceptional thermal conductivity, making them ideal for handling highly corrosive acids.",
   },
   {
-    id: "ads",
-    dot: "ads",
-    heading: <>Account&#8209;Based Marketing <em className="font-accent font-normal tracking-normal">Ads</em></>,
-    body: "Stop leaving your growth to the luck of an algorithm. We use Account-Based Marketing to guarantee your best content actually reaches your dream clients, keeping you top-of-mind.",
+    id: "thermal-design",
+    dot: null,
+    heading: <>Precision <em className="font-accent font-normal tracking-normal">Thermal</em> Design</>,
+    body: "Optimized heat transfer using advanced HTRI calculations and CFD flow simulations. We customize tube configurations and baffle spacing to minimize pressure drop and prevent fouling.",
   },
   {
-    id: "outreach",
-    dot: "outreach",
-    heading: <><em className="font-accent font-normal tracking-normal">Outreach</em> based on real data signals</>,
-    body: "We replace generic cold mails with precise and natural outreach based on real data signals. Because the prospect already knows and trusts your brand, the conversation is warm from the start.",
+    id: "performance",
+    dot: null,
+    heading: <>Lifecycle <em className="font-accent font-normal tracking-normal">Performance</em></>,
+    body: "Complete maintenance, refurbishing, and re-tubing services. We ensure your heat transfer systems run continuously at peak performance, minimizing downtime and extending operational life.",
   },
 ];
 
@@ -45,116 +46,129 @@ function PlusIcon() {
   );
 }
 
-// The Trust Engine orbital SVG — 3 rings with labelled dots
-function TrustOrbital({ activeDot }: { activeDot: string | null }) {
-  const isActive = (dot: string) => activeDot === dot;
+// Decorative + marks scattered in the black bg
 
-  const ringStroke = (dot: string) =>
-    isActive(dot) ? "#0028FF" : "rgba(255,255,255,0.3)";
-
-  const dotFill = (dot: string) =>
-    isActive(dot) ? "#0028FF" : "rgba(255,255,255,0.4)";
-
-  return (
-    <svg viewBox="0 0 400 400" className="w-full h-full" style={{ overflow: "visible" }}>
-      {/* Center star */}
-      <path
-        d="M200 188 L202 196 L210 198 L202 200 L200 208 L198 200 L190 198 L198 196 Z"
-        fill="white"
-        opacity={0.9}
-      />
-
-      {/* Ring 1 — outermost (Outreach) */}
-      <path
-        d="M 20 200 a 180 60 0 1 0 360 0 a 180 60 0 1 0 -360 0"
-        transform="rotate(-30 200 200)"
-        fill="none"
-        stroke={ringStroke("outreach")}
-        strokeWidth="1"
-        style={{ transition: "stroke 0.5s" }}
-      />
-
-      {/* Ring 2 — middle (Ads) */}
-      <path
-        d="M 60 200 a 140 46 0 1 0 280 0 a 140 46 0 1 0 -280 0"
-        transform="rotate(20 200 200)"
-        fill="none"
-        stroke={ringStroke("ads")}
-        strokeWidth="1"
-        style={{ transition: "stroke 0.5s" }}
-      />
-
-      {/* Ring 3 — innermost (Content) */}
-      <path
-        d="M 90 200 a 110 36 0 1 0 220 0 a 110 36 0 1 0 -220 0"
-        transform="rotate(70 200 200)"
-        fill="none"
-        stroke={ringStroke("content")}
-        strokeWidth="1"
-        style={{ transition: "stroke 0.5s" }}
-      />
-
-      {/* Outreach dot — top of outer ring */}
-      <g transform="translate(200, 40)" style={{ transition: "all 0.5s" }}>
-        <circle r={isActive("outreach") ? 7 : 4} fill={dotFill("outreach")} style={{ transition: "all 0.5s" }} />
-        {isActive("outreach") && (
-          <circle r="12" fill="none" stroke="#0028FF" strokeWidth="1" opacity="0.5" />
-        )}
-        <text x="14" y="5" fill="white" fontSize="12" fontFamily="Switzer, sans-serif" opacity="0.7">Outreach</text>
-      </g>
-
-      {/* Ads dot — right of middle ring */}
-      <g transform="translate(338, 215)" style={{ transition: "all 0.5s" }}>
-        <circle r={isActive("ads") ? 7 : 4} fill={dotFill("ads")} style={{ transition: "all 0.5s" }} />
-        {isActive("ads") && (
-          <circle r="12" fill="none" stroke="#0028FF" strokeWidth="1" opacity="0.5" />
-        )}
-        <text x="14" y="5" fill="white" fontSize="12" fontFamily="Switzer, sans-serif" opacity="0.7">Ads</text>
-      </g>
-
-      {/* Content dot — bottom-left of inner ring */}
-      <g transform="translate(90, 310)" style={{ transition: "all 0.5s" }}>
-        <circle r={isActive("content") ? 7 : 4} fill={dotFill("content")} style={{ transition: "all 0.5s" }} />
-        {isActive("content") && (
-          <circle r="12" fill="none" stroke="#0028FF" strokeWidth="1" opacity="0.5" />
-        )}
-        <text x="14" y="5" fill="white" fontSize="12" fontFamily="Switzer, sans-serif" opacity="0.7">Content</text>
-      </g>
-    </svg>
-  );
-}
+const FRAME_COUNT = 132;
 
 export default function Services() {
+  const { language, t } = useTranslation();
   const sectionRef  = useRef<HTMLElement>(null);
-  const [activeDot, setActiveDot] = useState<string | null>(null);
+  const canvasRef   = useRef<HTMLCanvasElement>(null);
+  const imagesRef   = useRef<HTMLImageElement[]>([]);
 
+  const localizedPanels = [
+    {
+      id: "shell-tube",
+      heading: language === "en" ? (
+        <>Shell & Tube <em className="font-accent font-normal tracking-normal">Exchangers</em></>
+      ) : language === "gu" ? (
+        <>શેલ અને ટ્યુબ <em className="font-accent font-normal tracking-normal">હીટ એક્સચેન્જર્સ</em></>
+      ) : (
+        <>షెల్ & ట్యూబ్ <em className="font-accent font-normal tracking-normal">హీట్ ఎక్స్ఛేంజర్స్</em></>
+      ),
+      body: t("services_1_body")
+    },
+    {
+      id: "graphite",
+      heading: language === "en" ? (
+        <>Graphite <em className="font-accent font-normal tracking-normal">Technology</em></>
+      ) : language === "gu" ? (
+        <>ગ્રેફાઇટ <em className="font-accent font-normal tracking-normal">ટેકનોલોજી</em></>
+      ) : (
+        <>గ్రాఫైట్ <em className="font-accent font-normal tracking-normal">టెక్నాలజీ</em></>
+      ),
+      body: t("services_2_body")
+    },
+    {
+      id: "thermal-design",
+      heading: language === "en" ? (
+        <>Precision <em className="font-accent font-normal tracking-normal">Thermal</em> Design</>
+      ) : language === "gu" ? (
+        <>ચોક્કસ <em className="font-accent font-normal tracking-normal">થર્મલ</em> ડિઝાઇન</>
+      ) : (
+        <>ఖచ్చితమైన <em className="font-accent font-normal tracking-normal">థర్మల్</em> డిజైన్</>
+      ),
+      body: t("services_3_body")
+    },
+    {
+      id: "performance",
+      heading: language === "en" ? (
+        <>Lifecycle <em className="font-accent font-normal tracking-normal">Performance</em></>
+      ) : language === "gu" ? (
+        <>લાઇફસાયકલ <em className="font-accent font-normal tracking-normal">પર્ફોર્મન્સ</em></>
+      ) : (
+        <>లైఫ్‌సైకిల్ <em className="font-accent font-normal tracking-normal">పెర్ఫార్మెన్స్</em></>
+      ),
+      body: t("services_4_body")
+    }
+  ];
+
+  // --- Scroll-driven frame animation ---
   useEffect(() => {
-    if (!sectionRef.current) return;
-    const ctx = gsap.context(() => {
-      const triggers = [
-        { id: "content",  dot: "content"  },
-        { id: "ads",      dot: "ads"      },
-        { id: "outreach", dot: "outreach" },
-      ];
-      triggers.forEach(({ id, dot }) => {
-        const el = document.getElementById(`te-panel-${id}`);
-        if (!el) return;
-        ScrollTrigger.create({
-          trigger: el,
-          start: "top 55%",
-          end: "bottom 45%",
-          onEnter:     () => setActiveDot(dot),
-          onLeave:     () => setActiveDot(null),
-          onEnterBack: () => setActiveDot(dot),
-          onLeaveBack: () => setActiveDot(null),
-        });
+    const canvas = canvasRef.current;
+    if (!canvas || !sectionRef.current) return;
+    const ctx2d = canvas.getContext("2d");
+    if (!ctx2d) return;
+
+    // Build frame paths & preload images
+    const images: HTMLImageElement[] = [];
+    let loadedCount = 0;
+    let currentFrame = 0;
+    let dimensionsSet = false;
+
+    const renderFrame = (index: number) => {
+      const img = images[index];
+      if (!img || !img.complete) return;
+      if (!dimensionsSet) {
+        // Set canvas internal resolution once from first loaded image
+        canvas.width = img.width;
+        canvas.height = img.height;
+        dimensionsSet = true;
+      }
+      ctx2d.clearRect(0, 0, canvas.width, canvas.height);
+      ctx2d.drawImage(img, 0, 0);
+      currentFrame = index;
+    };
+
+    for (let i = 1; i <= FRAME_COUNT; i++) {
+      const img = new Image();
+      img.src = `/frames/frame_${String(i).padStart(4, "0")}.jpg`;
+      img.onload = () => {
+        loadedCount++;
+        // Show first frame as soon as it loads
+        if (loadedCount === 1 && currentFrame === 0) {
+          renderFrame(0);
+        }
+      };
+      images.push(img);
+    }
+    imagesRef.current = images;
+
+    // GSAP context for ScrollTrigger
+    const gsapCtx = gsap.context(() => {
+      // Frame scrubber — covers the entire black section
+      const obj = { frame: 0 };
+      gsap.to(obj, {
+        frame: FRAME_COUNT - 1,
+        ease: "none",
+        snap: "frame",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.5,
+        },
+        onUpdate: () => {
+          renderFrame(Math.round(obj.frame));
+        },
       });
     }, sectionRef);
-    return () => ctx.revert();
+
+    return () => gsapCtx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative bg-black text-white overflow-hidden section-dark">
+    <section ref={sectionRef} className="relative bg-black text-white section-dark">
       {/* Decorative plus marks */}
       {plusMarks.map((p, i) => (
         <span
@@ -168,7 +182,7 @@ export default function Services() {
 
       {/* Mobile: stacked layout */}
       <div className="md:hidden px-6 py-24 flex flex-col gap-16">
-        {panels.map((p) => (
+        {localizedPanels.map((p) => (
           <div key={p.id} className="flex flex-col gap-5">
             <h3 className="font-display font-medium text-[clamp(1.8rem,5vw,3rem)] leading-[1.05] tracking-[-0.03em]">
               {p.heading}
@@ -178,17 +192,17 @@ export default function Services() {
               <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/10">
                 <PlusIcon />
               </span>
-              Discover our solutions
+              {t("services_discover_btn")}
             </button>
           </div>
         ))}
       </div>
 
-      {/* Desktop: sticky orbital on right, scroll panels on left */}
-      <div className="hidden md:flex min-h-screen">
+      {/* Desktop: sticky video on right, scroll panels on left */}
+      <div className="hidden md:block relative min-h-screen">
         {/* Left — scroll panels */}
-        <div className="flex-1 flex flex-col px-[max(1.5rem,min(5vw,4rem))] pl-[calc(max(1.5rem,min(5vw,4rem))+2rem)]">
-          {panels.map((p) => (
+        <div className="w-[55%] flex flex-col px-[max(1.5rem,min(5vw,4rem))] pl-[calc(max(1.5rem,min(5vw,4rem))+2rem)]">
+          {localizedPanels.map((p) => (
             <div
               key={p.id}
               id={`te-panel-${p.id}`}
@@ -204,16 +218,57 @@ export default function Services() {
                 <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/10">
                   <PlusIcon />
                 </span>
-                Discover our solutions
+                {t("services_discover_btn")}
               </button>
             </div>
           ))}
         </div>
 
-        {/* Right — sticky orbital */}
-        <div className="w-[45%] shrink-0 sticky top-0 h-screen flex items-center justify-center p-12">
-          <div className="w-full max-w-[420px] aspect-square">
-            <TrustOrbital activeDot={activeDot} />
+        {/* Right — sticky scroll-driven video frames (absolutely positioned, sticky inside) */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: '45%',
+          }}
+        >
+          <div
+            style={{
+              position: 'sticky',
+              top: 0,
+              height: '100vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '2rem',
+            }}
+          >
+            {/* Ambient backlight glow container */}
+            <div className="relative w-full max-w-[420px] aspect-[9/16] flex items-center justify-center">
+              {/* Soft radial blue glow */}
+              <div 
+                className="absolute w-[120%] h-[120%] bg-blue-600/20 rounded-full filter blur-[80px] -z-10 animate-pulse pointer-events-none"
+                style={{ animationDuration: '4s' }}
+              />
+              
+              <canvas
+                ref={canvasRef}
+                width={800}
+                height={1422}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '1.5rem',
+                  display: 'block',
+                  boxShadow: '0 25px 50px -12px rgba(0, 40, 255, 0.35), 0 0 50px rgba(0, 40, 255, 0.2)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  position: 'relative',
+                  zIndex: 10,
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>

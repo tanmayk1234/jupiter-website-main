@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { useTranslation } from "../providers/LanguageContext";
 
 function CloseIcon() {
   return (
@@ -24,25 +25,26 @@ function SparkIcon() {
   );
 }
 
-export default function CTASection({ onNavigate }: { onNavigate: () => void }) {
+export default function CTASection({ onNavigate }: { onNavigate?: () => void }) {
+  const { language, t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
 
-  const comparisons = [
+  const localizedComparisons = [
     {
-      bad: "You post content, but the right people never see it — or never reach out.",
-      good: "Strategic content is amplified and targeted directly at your ICP."
+      bad: t("cta_row_1_bad"),
+      good: t("cta_row_1_good")
     },
     {
-      bad: "You run ads, but without trust, people scroll past or ignore them.",
-      good: "Thought Leader Ads build authority and awareness, not just clicks."
+      bad: t("cta_row_2_bad"),
+      good: t("cta_row_2_good")
     },
     {
-      bad: "You do cold outreach, but you're unknown — and untrusted.",
-      good: "Outreach is powered by brand visibility and warm signals."
+      bad: t("cta_row_3_bad"),
+      good: t("cta_row_3_good")
     },
     {
-      bad: "You treat content, ads, and outreach as separate efforts.",
-      good: "The Trust Engine combines all three into a single flywheel system."
+      bad: t("cta_row_4_bad"),
+      good: t("cta_row_4_good")
     }
   ];
 
@@ -65,11 +67,11 @@ export default function CTASection({ onNavigate }: { onNavigate: () => void }) {
           {/* Header */}
           <div className="text-center relative z-10 max-w-[800px] mx-auto mb-16">
             <h2 className="font-display font-medium text-[clamp(2rem,4vw,3.75rem)] text-black leading-[1.05] tracking-tight mb-5">
-              Stop relying <br />
-              on <em className="font-accent font-normal tracking-normal italic">isolated tactics</em>
+              {t("cta_title_1")} <br />
+              <em className="font-accent font-normal tracking-normal italic">{t("cta_title_2")}</em>
             </h2>
             <p className="font-display text-[15px] md:text-[16px] text-black/80 max-w-[560px] mx-auto leading-[1.6] font-medium">
-              You cannot engineer predictable growth with random acts of marketing. To fill your pipeline consistently, you need to replace isolated efforts with a holistic system.
+              {t("cta_subtext")}
             </p>
           </div>
 
@@ -80,8 +82,8 @@ export default function CTASection({ onNavigate }: { onNavigate: () => void }) {
               
               {/* Left Header */}
               <div className="flex flex-col items-center md:items-center text-center">
-                <h3 className="font-display font-semibold text-[20px] md:text-[22px] text-black">Isolated tactics</h3>
-                <p className="font-display text-[13px] md:text-[14px] text-black/50 mt-1">Personal Branding vs. Lead Gen Ads vs. Cold Outreach</p>
+                <h3 className="font-display font-semibold text-[20px] md:text-[22px] text-black">{t("cta_table_isolated_title")}</h3>
+                <p className="font-display text-[13px] md:text-[14px] text-black/50 mt-1">{t("cta_table_isolated_sub")}</p>
               </div>
               
               {/* Right Header */}
@@ -90,15 +92,15 @@ export default function CTASection({ onNavigate }: { onNavigate: () => void }) {
                 <div className="hidden md:block absolute -left-10 lg:-left-12 top-0 w-10 h-10 text-[#0028FF]">
                   <SparkIcon />
                 </div>
-                <h3 className="font-display font-semibold text-[20px] md:text-[22px] text-black">WGB Trust Engine</h3>
-                <p className="font-display text-[13px] md:text-[14px] text-black/50 mt-1">A holistic system for real growth</p>
+                <h3 className="font-display font-semibold text-[20px] md:text-[22px] text-black">{t("cta_table_wgb_title")}</h3>
+                <p className="font-display text-[13px] md:text-[14px] text-black/50 mt-1">{t("cta_table_wgb_sub")}</p>
               </div>
               
             </div>
 
             {/* Table Rows */}
             <div className="flex flex-col gap-3.5">
-              {comparisons.map((item, i) => (
+              {localizedComparisons.map((item, i) => (
                 <div key={i} className="grid grid-cols-1 md:grid-cols-2 gap-3.5 md:gap-12">
                   {/* Bad Card */}
                   <div className="bg-white rounded-2xl p-5 md:p-6 flex items-start gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
@@ -127,10 +129,10 @@ export default function CTASection({ onNavigate }: { onNavigate: () => void }) {
           {/* Bottom CTA Button inside the peach box */}
           <div className="mt-16 flex justify-center relative z-10">
             <button 
-              onClick={onNavigate}
+              onClick={onNavigate || (() => { window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }); })}
               className="bg-[#0028FF] text-white rounded-full px-8 py-3.5 font-display font-medium text-[15px] hover:bg-black transition-colors duration-300 shadow-lg shadow-[#0028FF]/20"
             >
-              Talk to an expert
+              {t("cta_btn")}
             </button>
           </div>
 

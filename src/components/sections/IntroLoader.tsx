@@ -21,6 +21,7 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
   // Lock scroll immediately on mount
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+    window.scrollTo(0, 0);
     return () => {
       document.body.style.overflow = '';
     };
@@ -35,7 +36,7 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
         {/* We use 150vw to ensure the lottie animation drawing covers the screen just like the main website */}
         <div className="w-[150vw] h-[150vh] flex items-center justify-center">
           <DotLottiePlayer
-            src="https://cdn.prod.website-files.com/697c605c74f4a5968ab8d9c6/6996e894cc60581e3809b70b_5e1623f61e8588ecd8933bab16c4e6c5_Comp%201.lottie"
+            src="/assets/lottie/intro-comp.lottie"
             autoplay={true}
             loop={false}
             onEvent={(event) => {

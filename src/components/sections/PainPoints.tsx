@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslation } from "../providers/LanguageContext";
 
 // WGB-style X / cross icon (used per problem card)
 function CrossIcon() {
@@ -38,8 +39,32 @@ const problems = [
 ];
 
 export default function PainPoints() {
+  const { language, t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+
+  const localizedProblems = [
+    {
+      title: t("problem_1_title"),
+      body: t("problem_1_body"),
+    },
+    {
+      title: t("problem_2_title"),
+      body: t("problem_2_body"),
+    },
+    {
+      title: t("problem_3_title"),
+      body: t("problem_3_body"),
+    },
+    {
+      title: t("problem_4_title"),
+      body: t("problem_4_body"),
+    },
+    {
+      title: t("problem_5_title"),
+      body: t("problem_5_body"),
+    },
+  ];
 
   useEffect(() => {
     if (!gridRef.current) return;
@@ -64,14 +89,30 @@ export default function PainPoints() {
       <div className="max-w-[1100px] mx-auto">
         {/* Headline */}
         <h2 className="font-display font-medium text-[clamp(2rem,4.5vw,5rem)] leading-[1.05] tracking-[-0.03em] text-black max-w-[760px] mb-16">
-          Your delivery is world&#8209;class. Your{" "}
-          <em className="font-accent font-normal tracking-normal">sales pipeline</em>{" "}
-          isn't.
+          {language === "en" ? (
+            <>
+              Your processes are world&#8209;class. Your{" "}
+              <em className="font-accent font-normal tracking-normal">thermal equipment</em>{" "}
+              shouldn't hold you back.
+            </>
+          ) : language === "gu" ? (
+            <>
+              તમારી પ્રક્રિયાઓ વર્લ્ડ-ક્લાસ છે. તમારા{" "}
+              <em className="font-accent font-normal tracking-normal">થર્મલ સાધનો</em>{" "}
+              તેમાં અવરોધ ન બનવા જોઈએ.
+            </>
+          ) : (
+            <>
+              మీ ప్రక్రియలు ప్రపంచ స్థాయిలో ఉన్నాయి. మీ{" "}
+              <em className="font-accent font-normal tracking-normal">థర్మల్ పరికరాలు</em>{" "}
+              అవరోధం కాకూడదు.
+            </>
+          )}
         </h2>
 
         {/* 3-col grid on desktop, 1-col on mobile */}
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-px bg-black border border-black rounded-2xl overflow-hidden">
-          {problems.map((p, i) => (
+          {localizedProblems.map((p, i) => (
             <div key={i} className="bg-[#F5F5F0] p-8 flex flex-col gap-5">
               <span className="text-[#FF5A00]">
                 <CrossIcon />
@@ -97,7 +138,7 @@ export default function PainPoints() {
 
             <div>
               <h3 className="font-display font-semibold text-[1.05rem] text-white mb-5 leading-[1.3]">
-                Sounds familiar? Here's what we believe.
+                {t("painpoints_cta_title")}
               </h3>
               <button className="group inline-flex items-center gap-2.5 bg-white text-black rounded-full font-display font-medium text-[14px] pl-1.5 pr-5 py-1.5 hover:bg-black hover:text-white transition-colors duration-300">
                 <span className="flex items-center justify-center w-7 h-7 rounded-full bg-black/10 group-hover:bg-white/20 transition-colors">
@@ -105,7 +146,7 @@ export default function PainPoints() {
                     <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="currentColor"/>
                   </svg>
                 </span>
-                Read our manifesto
+                {t("painpoints_cta_btn")}
               </button>
             </div>
           </div>

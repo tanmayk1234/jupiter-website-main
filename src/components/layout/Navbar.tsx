@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Globe, ChevronDown } from "lucide-react";
+import { useTranslation, Language } from "../providers/LanguageContext";
 
 
 
@@ -11,11 +13,53 @@ const navLinks = [
   { label: "About", href: "#" },
 ];
 
-export default function Navbar({ onNavigate, isLoaded = true }: { onNavigate: () => void; isLoaded?: boolean }) {
+export default function Navbar({ 
+  isLoaded = true,
+  currentView,
+  onViewChange
+}: { 
+  isLoaded?: boolean;
+  currentView: "home" | "order" | "about" | "blog" | "resources" | "sustainability";
+  onViewChange: (view: "home" | "order" | "about" | "blog" | "resources" | "sustainability") => void;
+}) {
+  const { language, setLanguage, t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [resourcesOpen, setResourcesOpen]   = useState(false);
+  const [othersOpen, setOthersOpen]         = useState(false);
+  const [mobileOthersOpen, setMobileOthersOpen] = useState(false);
+  const [langOpen, setLangOpen]             = useState(false);
   const [isDark, setIsDark]                 = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  const currentViewRef = useRef(currentView);
+
+  // Keep ref in sync with prop
+  useEffect(() => {
+    currentViewRef.current = currentView;
+    // Force light mode on any non-home page
+    if (currentView !== "home") {
+      setIsDark(false);
+    }
+  }, [currentView]);
+
+  const navItems = [
+    { label: t("home"), view: "home" as const },
+    { label: t("order"), view: "order" as const },
+    { label: t("products"), view: "products" as const },
+    { label: t("about_us"), view: "about" as const },
+  ];
+
+  const handleItemClick = (view: "home" | "order" | "about" | "products" | "blog" | "resources" | "sustainability") => {
+    if (view === "products") {
+      onViewChange("home");
+      setTimeout(() => {
+        const el = document.getElementById("cases-section");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 150);
+    } else {
+      if (currentView === view) return;
+      onViewChange(view);
+      window.scrollTo(0, 0);
+    }
+  };
 
   useEffect(() => {
     if (!isLoaded) return;
@@ -56,9 +100,9 @@ export default function Navbar({ onNavigate, isLoaded = true }: { onNavigate: ()
         trigger: section,
         start: "top 64px", // When top of section hits bottom of navbar (approx 64px)
         end: "bottom 64px",
-        onEnter: () => setIsDark(true),
+        onEnter: () => { if (currentViewRef.current === "home") setIsDark(true); },
         onLeave: () => setIsDark(false),
-        onEnterBack: () => setIsDark(true),
+        onEnterBack: () => { if (currentViewRef.current === "home") setIsDark(true); },
         onLeaveBack: () => setIsDark(false),
       }));
     });
@@ -131,7 +175,7 @@ export default function Navbar({ onNavigate, isLoaded = true }: { onNavigate: ()
           />
         </div>
 
-        <div className="flex items-stretch h-14 md:h-16">
+        <div className="flex items-stretch h-14 md:h-16 relative">
           {/* Left spacer with NO vertical border (border removed so it doesn't cross the logo) */}
           <div
             className="hidden md:block shrink-0"
@@ -151,67 +195,108 @@ export default function Navbar({ onNavigate, isLoaded = true }: { onNavigate: ()
               Jupiter Engineering Solutions
             </span>
 
-            {/* Desktop links — absolutely centered in the nav */}
-            <ul
-              className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center font-display font-medium"
-              style={{
-                gap: "clamp(12px, 1.5vw, 24px)",
-                fontSize: "clamp(13px, 1vw, 15px)"
-              }}
-            >
-              {navLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    onClick={onNavigate}
-                    className="relative hover:opacity-60 transition-opacity py-1"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-              {/* Resources dropdown */}
-              <li className="relative">
+            {/* Desktop CTA & Language Selection */}
+            <div className="hidden md:flex items-center gap-4 ml-auto">
+              {/* Language Switcher */}
+              <div className="relative">
                 <button
-                  className="flex items-center gap-1 hover:opacity-60 transition-opacity"
-                  onMouseEnter={() => setResourcesOpen(true)}
-                  onMouseLeave={() => setResourcesOpen(false)}
+                  onClick={() => setLangOpen(!langOpen)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-current/25 hover:bg-current/10 transition-colors text-[13px] font-medium"
                 >
-                  Resources
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                    <path d="M7.41 8.58L12 13.17L16.59 8.58L18 10L12 16L6 10L7.41 8.58Z" fill="currentColor"/>
-                  </svg>
+                  <Globe className="w-4 h-4" />
+                  <span>{language === "en" ? "EN" : language === "gu" ? "GU" : "TE"}</span>
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${langOpen ? "rotate-180" : ""}`} />
                 </button>
-                {resourcesOpen && (
-                  <div
-                    className="absolute top-full left-0 mt-2 w-44 bg-white border border-black/10 rounded-xl shadow-lg p-2"
-                    onMouseEnter={() => setResourcesOpen(true)}
-                    onMouseLeave={() => setResourcesOpen(false)}
-                  >
-                    {["Blog", "Growth Assets"].map(item => (
-                      <button
-                        key={item}
-                        onClick={onNavigate}
-                        className="block w-full text-left px-4 py-2.5 text-[14px] hover:bg-black/5 rounded-lg transition-colors"
-                      >
-                        {item}
-                      </button>
-                    ))}
-                  </div>
+                {langOpen && (
+                  <>
+                    <div className="fixed inset-0 z-40" onClick={() => setLangOpen(false)} />
+                    <div className={`absolute right-0 top-full mt-2 w-32 rounded-xl shadow-xl p-1.5 z-50 border ${isDark ? 'bg-zinc-950 border-white/10 text-white' : 'bg-white border-black/10 text-black'}`}>
+                      {(["en", "gu", "te"] as Language[]).map((lang) => (
+                        <button
+                          key={lang}
+                          onClick={() => {
+                            setLanguage(lang);
+                            setLangOpen(false);
+                          }}
+                          className={`w-full text-left px-3 py-2.5 text-[13px] rounded-lg transition-colors hover:bg-current/10 ${
+                            language === lang ? "font-semibold bg-current/5" : "font-normal"
+                          }`}
+                        >
+                          {lang === "en" ? "English" : lang === "gu" ? "ગુજરાતી" : "తెలుగు"}
+                        </button>
+                      ))}
+                    </div>
+                  </>
                 )}
-              </li>
-            </ul>
+              </div>
 
-            {/* Desktop CTA */}
-            <div className="hidden md:block ml-auto">
               <button
-                onClick={onNavigate}
+                onClick={() => { window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }); }}
                 className="group inline-flex items-center gap-2.5 bg-[#0028FF] text-white rounded-full font-display font-medium text-[14px] px-5 py-2 hover:bg-black transition-colors duration-300"
               >
-                Talk to us
+                {t("talk_to_us")}
               </button>
             </div>
           </div>
+
+          {/* Desktop links — absolutely centered in the nav */}
+          <ul
+            className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center font-display font-medium z-50"
+            style={{
+              gap: "clamp(12px, 1.5vw, 24px)",
+              fontSize: "clamp(13px, 1vw, 15px)"
+            }}
+          >
+            {navItems.map((item) => (
+              <li key={item.view}>
+                <button
+                  onClick={() => { handleItemClick(item.view); }}
+                  className={`relative hover:opacity-60 transition-opacity py-1 cursor-pointer ${
+                    currentView === item.view ? "text-[#0028FF] font-semibold" : ""
+                  }`}
+                >
+                  {item.label}
+                </button>
+              </li>
+            ))}
+            {/* Others dropdown */}
+            <li 
+              className="relative text-current py-1 cursor-pointer"
+              onMouseEnter={() => setOthersOpen(true)}
+              onMouseLeave={() => setOthersOpen(false)}
+            >
+              <button
+                className="flex items-center gap-1 hover:opacity-60 transition-opacity cursor-pointer"
+              >
+                {t("others")}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M7.41 8.58L12 13.17L16.59 8.58L18 10L12 16L6 10L7.41 8.58Z" fill="currentColor"/>
+                </svg>
+              </button>
+              {othersOpen && (
+                <div
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-44 bg-white border border-black/10 rounded-xl shadow-lg p-2 text-black"
+                >
+                  {[
+                    { key: "blog", label: t("blog") },
+                    { key: "resources", label: t("resources") },
+                    { key: "sustainability", label: t("sustainability") }
+                  ].map(sub => (
+                    <button
+                      key={sub.key}
+                      onClick={() => {
+                        handleItemClick(sub.key as any);
+                        setOthersOpen(false);
+                      }}
+                      className="block w-full text-left px-4 py-2.5 text-[14px] hover:bg-black/5 rounded-lg transition-colors cursor-pointer"
+                    >
+                      {sub.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </li>
+          </ul>
 
           {/* Mobile burger */}
           <button
@@ -227,24 +312,81 @@ export default function Navbar({ onNavigate, isLoaded = true }: { onNavigate: ()
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-[99] bg-black text-white flex flex-col pt-20 px-6 font-display">
+        <div className="fixed inset-0 z-[99] bg-black text-white flex flex-col pt-20 px-6 font-display overflow-y-auto">
+          {/* Mobile Language Switcher */}
+          <div className="flex items-center justify-around border-b border-white/10 pb-4 mb-2">
+            {(["en", "gu", "te"] as Language[]).map((lang) => (
+              <button
+                key={lang}
+                onClick={() => setLanguage(lang)}
+                className={`px-4 py-2 rounded-full border text-[14px] font-medium transition-all ${
+                  language === lang 
+                    ? "bg-[#0028FF] border-[#0028FF] text-white" 
+                    : "border-white/20 text-white/60 hover:text-white"
+                }`}
+              >
+                {lang === "en" ? "English" : lang === "gu" ? "ગુજરાતી" : "తెలుగు"}
+              </button>
+            ))}
+          </div>
+
           <ul className="flex flex-col gap-0 text-2xl font-medium">
-            {[...navLinks, { label: "Resources", href: "#" }].map(link => (
-              <li key={link.label}>
+            {[
+              { label: t("home"), view: "home" as const },
+              { label: t("order"), view: "order" as const },
+              { label: t("products"), view: "products" as const },
+              { label: t("about_us"), view: "about" as const }
+            ].map(item => (
+              <li key={item.view}>
                 <button
-                  onClick={() => { setMobileMenuOpen(false); onNavigate(); }}
+                  onClick={() => { setMobileMenuOpen(false); handleItemClick(item.view); }}
                   className="w-full text-left py-5 border-b border-white/10 hover:opacity-60 transition-opacity"
                 >
-                  {link.label}
+                  {item.label}
                 </button>
               </li>
             ))}
+            {/* Others mobile toggle */}
+            <li>
+              <button
+                onClick={() => setMobileOthersOpen(!mobileOthersOpen)}
+                className="w-full text-left py-5 border-b border-white/10 flex items-center justify-between hover:opacity-60 transition-opacity"
+              >
+                <span>{t("others")}</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className={`transition-transform duration-200 ${mobileOthersOpen ? "rotate-180" : ""}`}>
+                  <path d="M7.41 8.58L12 13.17L16.59 8.58L18 10L12 16L6 10L7.41 8.58Z" fill="currentColor"/>
+                </svg>
+              </button>
+              {mobileOthersOpen && (
+                <div className="pl-6 bg-white/5 py-2 flex flex-col gap-4 border-b border-white/10">
+                  {[
+                    { key: "blog", label: t("blog") },
+                    { key: "resources", label: t("resources") },
+                    { key: "sustainability", label: t("sustainability") }
+                  ].map(sub => (
+                    <button
+                      key={sub.key}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        handleItemClick(sub.key as any);
+                      }}
+                      className="w-full text-left py-2 text-lg text-white/75 hover:text-white"
+                    >
+                      {sub.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </li>
           </ul>
           <button
-            onClick={() => { setMobileMenuOpen(false); onNavigate(); }}
-            className="mt-8 inline-flex items-center justify-center gap-3 bg-[#0028FF] text-white rounded-full py-4 font-medium text-base w-full"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+            }}
+            className="mt-8 inline-flex items-center justify-center gap-3 bg-[#0028FF] text-white rounded-full py-4 font-medium text-base w-full shrink-0"
           >
-            Talk to us
+            {t("talk_to_us")}
           </button>
         </div>
       )}
