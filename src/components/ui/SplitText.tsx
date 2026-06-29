@@ -27,6 +27,10 @@ export default function SplitText({
     // Split text into words (and optionally lines) before it is painted
     const split = new SplitType(textRef.current, { types: types as any });
     
+    // SplitType sets inline styles on .word elements that can override CSS line-height.
+    // Force tight line-height directly so headline lines stack closely.
+    split.words?.forEach(w => { w.style.lineHeight = '0.92'; });
+
     // Hide all words initially so they don't flash
     gsap.set(split.words, { opacity: 0 });
     

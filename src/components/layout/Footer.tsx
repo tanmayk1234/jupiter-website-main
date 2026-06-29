@@ -149,14 +149,14 @@ export default function Footer({ onViewChange }: FooterProps) {
          {/* Content Wrapper */}
          <div className="px-6 md:px-12 relative z-10 flex flex-col lg:flex-row justify-between gap-16 lg:gap-8 h-full">
              {/* Left Side: Brand Graphics */}
-             <div className="w-full lg:w-[45%] relative min-h-[200px] lg:min-h-[250px] flex items-end">
+             <div className="w-full lg:w-[45%] relative min-h-[200px] lg:min-h-[250px] flex items-start">
                 {/* Small floating star */}
                 <div className="absolute top-[5%] left-[50%] lg:left-[45%] text-white w-4 h-4 opacity-80 z-10">
                    <SmallStar />
                 </div>
 
                 {/* Logo and text */}
-                <div className="absolute bottom-[10%] left-0 lg:left-8 z-10 flex flex-col gap-2">
+                <div className="absolute top-[8%] left-0 z-10 flex flex-col gap-2">
                    <span className="font-display font-bold text-[28px] lg:text-[38px] tracking-[-0.02em] leading-[1.1] block text-white">
                      Jupiter <br className="hidden lg:block" /> Engineering Solutions
                    </span>

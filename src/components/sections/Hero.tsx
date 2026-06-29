@@ -143,34 +143,31 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[1100px]">
+      <div className="relative z-10 w-full max-w-[1100px] md:pl-10">
         {/* Headline */}
         <div>
           <SplitText
             key={language}
             startTrigger={isLoaded}
             delay={2.6}
-            className="font-display font-medium text-[clamp(3rem,5.8vw,8rem)] leading-[0.98] tracking-[-0.04em] m-0 text-black mb-8"
+            className="hero-headline font-display font-medium text-[clamp(3rem,5.8vw,8rem)] leading-[0.92] tracking-[-0.04em] m-0 text-black mb-8"
             text={
               <>
-                {t("hero_headline_1")}<br /> {t("hero_headline_2")}<br /> <em className="font-accent font-normal tracking-normal">{t("hero_headline_3")}</em>
+                {t("hero_headline_1")}<br />{t("hero_headline_2")}<br /><em className="font-accent font-normal tracking-normal">{t("hero_headline_3")}</em>
               </>
             }
           />
         </div>
 
-        {/* Subtext + buttons — indented ~88px on desktop to match WGB layout */}
-        <div className="flex items-start gap-0">
-          <div className="hidden md:block shrink-0" style={{ width: "clamp(0px, 5.5vw, 88px)" }} />
-          <div className="flex flex-col gap-6">
-            <p ref={subtextRef} className="opacity-0 font-display text-black/60 text-[clamp(13px,1vw,16px)] max-w-[55ch]">
-              {t("hero_subtext")}
-            </p>
-            <div ref={btnsRef} className="flex flex-wrap items-center gap-3">
-              <span className="opacity-0">
-                <WGBButton label={t("hero_cta")} variant="mono" />
-              </span>
-            </div>
+        {/* Subtext + buttons */}
+        <div className="flex flex-col gap-6">
+          <p ref={subtextRef} className="opacity-0 font-display text-black/60 text-[clamp(13px,1vw,16px)] max-w-[55ch]">
+            {t("hero_subtext")}
+          </p>
+          <div ref={btnsRef} className="flex flex-wrap items-center gap-3">
+            <span className="opacity-0">
+              <WGBButton label={t("hero_cta")} variant="mono" />
+            </span>
           </div>
         </div>
       </div>

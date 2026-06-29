@@ -36,6 +36,16 @@ body {
 .font-accent { font-family: var(--font-tiro); font-style: italic; }
 .font-friz { font-family: var(--font-friz); }
 
+/* Hero headline — force SplitType word wrappers back to inline so
+   line-height is honoured and <br> doesn't create extra gaps */
+.hero-headline .word {
+  display: inline !important;
+}
+.hero-headline {
+  line-height: 0.92 !important;
+  word-spacing: -0.02em;
+}
+
 @media (pointer: coarse) {
   .custom-cursor {
     display: none !important;
