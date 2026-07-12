@@ -69,7 +69,7 @@ export default function Footer({ onViewChange }: FooterProps) {
         <>
           <p className="font-semibold text-lg text-[#0028FF]">Jupiter Engineering Solutions</p>
           <p><strong>Registered Office & Factory:</strong> Gat No. 20/5, Besides Caves County Resorts, Mumbai Agra Highway, Villholi, Nashik - 422010, Maharashtra, India.</p>
-          <p><strong>Partners:</strong> Nitish Chincholikar, Viraj Mundada</p>
+          <p><strong>Partners:</strong> Ravindra Mundada, Viraj Mundada</p>
           <p><strong>Contact Info:</strong> jupiterengg18@gmail.com | +91 8600031275 / +91 9766963331</p>
           <p><strong>Certifications:</strong> Design & fabrication facility.</p>
         </>
@@ -77,7 +77,7 @@ export default function Footer({ onViewChange }: FooterProps) {
         <>
           <p className="font-semibold text-lg text-[#0028FF]">જ્યુપિટર એન્જિનિયરિંગ સોલ્યુશન્સ</p>
           <p><strong>રજિસ્ટર્ડ ઓફિસ અને ફેક્ટરી:</strong> ગેટ નં. ૨૦/૫, કેવ્ઝ કાઉન્ટી રિસોર્ટ્સ પાસે, મુંબઈ આગ્રા હાઇવે, વિલ્હોળી, નાશિક - ૪૨૨૦૧૦, મહારાષ્ટ્ર, ભારત.</p>
-          <p><strong>ભાગીદારો:</strong> નીતિશ ચિંચોલીકર, વિરાજ મુંદડા</p>
+          <p><strong>ભાગીદારો:</strong> રવિન્દ્ર મુંદડા, વિરાજ મુંદડા</p>
           <p><strong>સંપર્ક:</strong> jupiterengg18@gmail.com | +91 8600031275 / +91 9766963331</p>
           <p><strong>પ્રમાણપત્ર:</strong> ડિઝાઇન અને ફેબ્રિકેશન સુવિધા.</p>
         </>
@@ -85,7 +85,7 @@ export default function Footer({ onViewChange }: FooterProps) {
         <>
           <p className="font-semibold text-lg text-[#0028FF]">జూపిటర్ ఇంజనీరింగ్ సొల్యూషన్స్</p>
           <p><strong>రిజిస్టర్డ్ ఆఫీస్ & ఫ్యాక్టరీ:</strong> గేట్ నం. 20/5, కేవ్స్ కౌంటీ రిసార్ట్స్ పక్కన, ముంబై ఆగ్రా హైవే, విల్హోళీ, నాశిక్ - 422010, మహారాష్ట్ర, భారతదేశం.</p>
-          <p><strong>భాగస్వాములు:</strong> నితీష్ చిం చోలికర్, విరాజ్ ముందాడ</p>
+          <p><strong>భాగస్వాములు:</strong> రవీంద్ర ముందాడ, విరాజ్ ముందాడ</p>
           <p><strong>సంప్రదించండి:</strong> jupiterengg18@gmail.com | +91 8600031275 / +91 9766963331</p>
           <p><strong>ధృవీకరణలు:</strong> డిజైన్ & ఫ్యాబ్రికేషన్ ప్లాంట్.</p>
         </>
@@ -125,13 +125,20 @@ export default function Footer({ onViewChange }: FooterProps) {
          
          {/* Background Graphics Container (Strictly contained right of the vertical line) */}
          <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-            {/* Sharp diagonal blue beam with feathered edges (glowing slash effect) */}
+            {/* Sharp diagonal silver beam with feathered edges (glowing slash effect) */}
             <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" className="absolute inset-0 w-full h-[150%]">
               <defs>
+                 <linearGradient id="silverBeam" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#ffffff" stopOpacity="0.03" />
+                    <stop offset="50%" stopColor="#ffffff" stopOpacity="0.08" />
+                    <stop offset="100%" stopColor="#ffffff" stopOpacity="0.03" />
+                 </linearGradient>
+                 {/* Revert to original blue beam by switching stroke="url(#silverBeam)" to stroke="url(#blueBeam)" below:
                  <linearGradient id="blueBeam" x1="0%" y1="100%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="#0a1aff" />
                     <stop offset="100%" stopColor="#1a3fff" />
                  </linearGradient>
+                 */}
                  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
                     <feGaussianBlur stdDeviation="60" />
                  </filter>
@@ -139,7 +146,7 @@ export default function Footer({ onViewChange }: FooterProps) {
               <path 
                 d="M -100,1100 L 700,-200" 
                 fill="none"
-                stroke="url(#blueBeam)" 
+                stroke="url(#silverBeam)" 
                 strokeWidth="120" 
                 filter="url(#glow)"
               />
@@ -158,10 +165,10 @@ export default function Footer({ onViewChange }: FooterProps) {
                 {/* Logo and text */}
                 <div className="absolute top-[8%] left-0 z-10 flex flex-col gap-2">
                    <span className="font-display font-bold text-[28px] lg:text-[38px] tracking-[-0.02em] leading-[1.1] block text-white">
-                     Jupiter <br className="hidden lg:block" /> Engineering Solutions
+                     {t("jupiter_title")}
                    </span>
                    <p className="font-display text-[15px] lg:text-[17px] font-medium tracking-wide text-white/60 leading-relaxed max-w-[320px]">
-                     Engineering excellence, built to last.
+                     {t("footer_eng_excellence")}
                    </p>
                 </div>
              </div>
@@ -174,14 +181,18 @@ export default function Footer({ onViewChange }: FooterProps) {
                 
                 {/* Image Cards Row */}
                 <div className="flex gap-4 md:gap-6 mb-8">
-                    {/* Nitish Card */}
+                    {/* Ravindra Card */}
                     <div className="relative rounded-[12px] overflow-hidden border border-white/10 w-[160px] h-[220px] md:w-[180px] md:h-[260px] bg-[#111] shrink-0 flex flex-col justify-end">
-                       <div className="absolute inset-0 bg-gradient-to-b from-[#181818] to-[#111] flex items-center justify-center">
-                         <span className="font-display font-bold text-white/10 text-[64px]">NC</span>
+                       <div className="absolute inset-0 bg-[#111] flex items-center justify-center">
+                         <img 
+                           src="/assets/images/team/ravindra.png" 
+                           alt="Ravindra Mundada"
+                           className="w-full h-full object-cover object-[center_20%]"
+                         />
                        </div>
                        <div className="absolute bottom-0 left-0 right-0 bg-[#1A1A1A] p-3 md:p-4 border-t border-white/10 z-10">
-                         <p className="font-display font-medium text-white text-[13px] md:text-[14px] leading-tight">Nitish Chincholikar</p>
-                         <p className="font-display text-white/50 text-[11px] md:text-[12px] leading-tight mt-1">Co-Founder, Jupiter Engineering Solutions</p>
+                         <p className="font-display font-medium text-white text-[13px] md:text-[14px] leading-tight">Ravindra Mundada</p>
+                         <p className="font-display text-white/50 text-[11px] md:text-[12px] leading-tight mt-1">{t("footer_ravindra_title")}</p>
                        </div>
                     </div>
                     
@@ -192,29 +203,15 @@ export default function Footer({ onViewChange }: FooterProps) {
                        </div>
                        <div className="absolute bottom-0 left-0 right-0 bg-[#1A1A1A] p-3 md:p-4 border-t border-white/10 z-10">
                          <p className="font-display font-medium text-white text-[13px] md:text-[14px] leading-tight">Viraj Mundada</p>
-                         <p className="font-display text-white/50 text-[11px] md:text-[12px] leading-tight mt-1">Co-Founder, Jupiter Engineering Solutions</p>
+                         <p className="font-display text-white/50 text-[11px] md:text-[12px] leading-tight mt-1">{t("footer_viraj_title")}</p>
                        </div>
                     </div>
                 </div>
 
                 {/* Headline */}
                 <h2 className="font-display font-medium text-[clamp(2.5rem,4vw,3.8rem)] leading-[1.05] tracking-tight text-white">
-                   {language === "en" ? (
-                     <>
-                       Engineering <em className="font-accent font-normal tracking-normal italic">excellence,</em><br />
-                       without compromise
-                     </>
-                   ) : language === "gu" ? (
-                     <>
-                       <em className="font-accent font-normal tracking-normal italic">એન્જિનિયરિંગ ઉત્કૃષ્ટતા,</em><br />
-                       કોઈ સમાધાન વિના
-                     </>
-                   ) : (
-                     <>
-                       <em className="font-accent font-normal tracking-normal italic">ఇంజనీరింగ్ శ్రేష్ఠత,</em><br />
-                       రాజీ లేకుండా
-                     </>
-                   )}
+                   {t("footer_eng_excellence_headline")} <em className="font-accent font-normal tracking-normal italic">{t("footer_eng_excellence_headline_italic")}</em><br />
+                   {t("footer_eng_excellence_headline_2")}
                 </h2>
             </div>
             
@@ -280,7 +277,7 @@ export default function Footer({ onViewChange }: FooterProps) {
             </a>
           </div>
           <div className="flex items-center gap-4">
-            <p className="flex items-center gap-1"><span className="text-[10px]">©</span>Design & Developed by Tanmay</p>
+            <p className="flex items-center gap-1"><span className="text-[10px]">©</span>{t("footer_developed_by")}</p>
           </div>
       </div>
 
@@ -323,7 +320,7 @@ export default function Footer({ onViewChange }: FooterProps) {
                 onClick={() => setActiveModal(null)}
                 className="bg-white/10 text-white rounded-lg px-5 py-2.5 font-display font-semibold text-[13px] hover:bg-white/20 transition-colors"
               >
-                Close
+                {t("footer_close")}
               </button>
             </div>
 

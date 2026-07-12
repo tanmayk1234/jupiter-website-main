@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import LenisProvider from "./components/providers/LenisProvider";
 import CustomCursor from "./components/ui/CustomCursor";
 import Navbar from "./components/layout/Navbar";
@@ -52,6 +53,10 @@ export default function App() {
   const handleLoaderComplete = useCallback(() => {
     window.scrollTo(0, 0);
     setLoaderComplete(true);
+    // Recalculate ScrollTrigger markers now that DOM loader is gone and page layout shifts
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 200);
   }, []);
 
   return (

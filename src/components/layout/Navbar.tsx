@@ -54,6 +54,13 @@ export default function Navbar({
         const el = document.getElementById("cases-section");
         if (el) el.scrollIntoView({ behavior: "smooth" });
       }, 150);
+    } else if (view === "home") {
+      if (currentView !== "home") {
+        onViewChange("home");
+        window.scrollTo(0, 0);
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     } else {
       if (currentView === view) return;
       onViewChange(view);
@@ -231,9 +238,14 @@ export default function Navbar({
               </div>
 
               <button
-                onClick={() => { window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }); }}
-                className="group inline-flex items-center gap-2.5 bg-[#0028FF] text-white rounded-full font-display font-medium text-[14px] px-5 py-2 hover:bg-black transition-colors duration-300"
+                onClick={() => { onViewChange("order"); window.scrollTo(0, 0); }}
+                className="group inline-flex items-center gap-2 bg-black text-white rounded-full font-display font-medium text-[13px] pl-1.5 pr-4 py-1 hover:bg-neutral-800 transition-colors duration-300"
               >
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white transition-all duration-500 ease-out group-hover:scale-110">
+                  <svg width="10" height="10" viewBox="0 0 14 14" fill="none" className="transition-transform duration-500 ease-out group-hover:rotate-180">
+                    <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="black"/>
+                  </svg>
+                </span>
                 {t("talk_to_us")}
               </button>
             </div>
@@ -252,7 +264,7 @@ export default function Navbar({
                 <button
                   onClick={() => { handleItemClick(item.view); }}
                   className={`relative hover:opacity-60 transition-opacity py-1 cursor-pointer ${
-                    currentView === item.view ? "text-[#0028FF] font-semibold" : ""
+                    currentView === item.view ? "text-black font-semibold border-b border-black pb-0.5" : ""
                   }`}
                 >
                   {item.label}
@@ -321,7 +333,7 @@ export default function Navbar({
                 onClick={() => setLanguage(lang)}
                 className={`px-4 py-2 rounded-full border text-[14px] font-medium transition-all ${
                   language === lang 
-                    ? "bg-[#0028FF] border-[#0028FF] text-white" 
+                    ? "bg-black border-black text-white" 
                     : "border-white/20 text-white/60 hover:text-white"
                 }`}
               >
@@ -382,9 +394,10 @@ export default function Navbar({
           <button
             onClick={() => {
               setMobileMenuOpen(false);
-              window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+              onViewChange("order");
+              window.scrollTo(0, 0);
             }}
-            className="mt-8 inline-flex items-center justify-center gap-3 bg-[#0028FF] text-white rounded-full py-4 font-medium text-base w-full shrink-0"
+            className="mt-8 inline-flex items-center justify-center gap-3 bg-black text-white hover:bg-neutral-800 rounded-full py-4 font-medium text-base w-full shrink-0"
           >
             {t("talk_to_us")}
           </button>

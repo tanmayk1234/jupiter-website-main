@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import SplitText from "../ui/SplitText";
 import { DotLottiePlayer, PlayerEvents } from "@dotlottie/react-player";
@@ -12,21 +12,11 @@ function WGBButton({ label, variant, onClick }: { label: string; variant: "dark"
     <button
       ref={btnRef}
       onClick={onClick}
-      className={`group inline-flex items-center gap-3 rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl ${
-        variant === "dark"
-          ? "bg-black text-white hover:bg-[#0028FF]"
-          : variant === "blue"
-          ? "bg-[#0028FF] text-white hover:bg-black"
-          : "bg-black text-white hover:bg-neutral-800"
-      }`}
+      className="group inline-flex items-center gap-3 rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl bg-black text-white hover:bg-neutral-800"
     >
-      <span className={`flex items-center justify-center w-8 h-8 rounded-full transition-all duration-500 ease-out ${
-        variant === "dark" ? "bg-[#0028FF] group-hover:bg-black" 
-        : variant === "blue" ? "bg-black group-hover:bg-[#0028FF]"
-        : "bg-white group-hover:scale-110"
-      }`}>
+      <span className="flex items-center justify-center w-8 h-8 rounded-full transition-all duration-500 ease-out bg-white group-hover:scale-110">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-500 ease-out group-hover:rotate-180">
-          <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill={variant === "mono" ? "black" : "white"}/>
+          <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="black"/>
         </svg>
       </span>
       {label}
@@ -36,6 +26,7 @@ function WGBButton({ label, variant, onClick }: { label: string; variant: "dark"
 
 export default function Hero({ isLoaded }: { isLoaded: boolean }) {
   const { language, t } = useTranslation();
+  const [hasAnimated, setHasAnimated] = useState(false);
   const containerRef  = useRef<HTMLElement>(null);
   const subtextRef    = useRef<HTMLParagraphElement>(null);
   const btnsRef       = useRef<HTMLDivElement>(null);
@@ -77,6 +68,13 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
         { opacity: 1, duration: 1.5, delay: 3.2, ease: "power2.out" }
       );
     }
+
+    // Set hasAnimated to true after the entrance animations complete so subsequent language switches render text immediately
+    const timer = setTimeout(() => {
+      setHasAnimated(true);
+    }, 3800);
+
+    return () => clearTimeout(timer);
   }, [isLoaded]);
 
   return (
@@ -97,6 +95,7 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
               src="/assets/lottie/preloader-orbit.lottie"
               autoplay={false}
               loop={false}
+              rendererSettings={{ glyphs: false }}
               onEvent={(event) => {
                 if (event === PlayerEvents.Complete) {
                   // Reset loop to frame 0 and start it just as crossfade begins
@@ -125,6 +124,7 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
               src="/assets/lottie/loop-circles.lottie"
               autoplay={false}
               loop
+              rendererSettings={{ glyphs: false }}
               className="absolute inset-0 w-full h-full"
               style={{ objectFit: "contain" }}
             />
@@ -136,6 +136,7 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
             src="/assets/lottie/mobile-loop.lottie"
             autoplay={false}
             loop
+            rendererSettings={{ glyphs: false }}
             className="absolute inset-0 w-full h-full"
             style={{ objectFit: "contain" }}
           />
@@ -149,7 +150,7 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
           <SplitText
             key={language}
             startTrigger={isLoaded}
-            delay={2.6}
+            delay={hasAnimated ? 0.05 : 2.6}
             className="hero-headline font-display font-medium text-[clamp(3rem,5.8vw,8rem)] leading-[0.92] tracking-[-0.04em] m-0 text-black mb-8"
             text={
               <>

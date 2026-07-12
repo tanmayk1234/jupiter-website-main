@@ -16,7 +16,7 @@ const clientLogos = [
 ];
 
 export default function ClientLogos() {
-  const { language } = useTranslation();
+  const { t } = useTranslation();
   // Exactly 2 copies for seamless infinite loop (translateX(-50%) wraps perfectly)
   const loopLogos = [...clientLogos, ...clientLogos];
 
@@ -28,7 +28,7 @@ export default function ClientLogos() {
       <div className="md:ml-[max(1.5rem,min(5vw,4rem))] flex flex-col md:flex-row items-center gap-8 px-6 md:px-12">
         {/* Label on the left */}
         <div className="shrink-0 font-display font-semibold text-[14px] md:text-[15px] uppercase tracking-widest text-black/50 md:w-[180px] text-center md:text-left mb-2 md:mb-0">
-          {language === "en" ? "Trusted Partners" : language === "gu" ? "વિશ્વસનીય ભાગીદારો" : "నమ్మకమైన భాగస్వాములు"}
+          {t("trusted_partners")}
         </div>
         
         {/* Scrolling Marquee */}

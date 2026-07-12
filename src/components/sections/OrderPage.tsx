@@ -52,7 +52,7 @@ export default function OrderPage() {
         <div className="bg-white rounded-3xl border border-black/10 shadow-sm p-6 md:p-10 max-w-[900px] relative">
           {submitted ? (
             <div className="py-16 text-center flex flex-col items-center justify-center gap-6">
-              <div className="w-16 h-16 rounded-full bg-[#E5E9FF] text-[#0028FF] flex items-center justify-center animate-bounce">
+              <div className="w-16 h-16 rounded-full bg-black text-white flex items-center justify-center animate-bounce">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
@@ -71,7 +71,7 @@ export default function OrderPage() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="border border-black/10 hover:border-black/30 focus:border-[#0028FF] rounded-xl px-4 py-3 text-[14px] bg-transparent outline-none transition-colors"
+                    className="border border-black/10 hover:border-black/30 focus:border-black rounded-xl px-4 py-3 text-[14px] bg-transparent outline-none transition-colors"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
@@ -81,7 +81,7 @@ export default function OrderPage() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="border border-black/10 hover:border-black/30 focus:border-[#0028FF] rounded-xl px-4 py-3 text-[14px] bg-transparent outline-none transition-colors"
+                    className="border border-black/10 hover:border-black/30 focus:border-black rounded-xl px-4 py-3 text-[14px] bg-transparent outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -94,7 +94,7 @@ export default function OrderPage() {
                   required
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="border border-black/10 hover:border-black/30 focus:border-[#0028FF] rounded-xl px-4 py-3 text-[14px] bg-transparent outline-none transition-colors resize-none font-sans"
+                  className="border border-black/10 hover:border-black/30 focus:border-black rounded-xl px-4 py-3 text-[14px] bg-transparent outline-none transition-colors resize-none font-sans"
                 />
               </div>
 
@@ -110,7 +110,7 @@ export default function OrderPage() {
                       { id: "ss316l", label: "Stainless Steel 316L" }
                     ].map(mat => (
                       <label key={mat.id} className={`flex items-center gap-3 border rounded-xl p-3.5 cursor-pointer transition-all ${
-                        formData.material === mat.id ? "border-[#0028FF] bg-[#0028FF]/5" : "border-black/10 hover:border-black/20"
+                        formData.material === mat.id ? "border-black bg-black/[0.03]" : "border-black/10 hover:border-black/20"
                       }`}>
                         <input
                           type="radio"
@@ -118,7 +118,7 @@ export default function OrderPage() {
                           value={mat.id}
                           checked={formData.material === mat.id}
                           onChange={() => setFormData({ ...formData, material: mat.id })}
-                          className="w-4.5 h-4.5 accent-[#0028FF]"
+                          className="w-4.5 h-4.5 accent-black"
                         />
                         <span className="text-[14px] font-medium">{mat.label}</span>
                       </label>
@@ -136,7 +136,7 @@ export default function OrderPage() {
                       { id: "plate", label: "Plate & Frame Exchanger" }
                     ].map(type => (
                       <label key={type.id} className={`flex items-center gap-3 border rounded-xl p-3.5 cursor-pointer transition-all ${
-                        formData.type === type.id ? "border-[#0028FF] bg-[#0028FF]/5" : "border-black/10 hover:border-black/20"
+                        formData.type === type.id ? "border-black bg-black/[0.03]" : "border-black/10 hover:border-black/20"
                       }`}>
                         <input
                           type="radio"
@@ -144,7 +144,7 @@ export default function OrderPage() {
                           value={type.id}
                           checked={formData.type === type.id}
                           onChange={() => setFormData({ ...formData, type: type.id })}
-                          className="w-4.5 h-4.5 accent-[#0028FF]"
+                          className="w-4.5 h-4.5 accent-black"
                         />
                         <span className="text-[14px] font-medium">{type.label}</span>
                       </label>
@@ -156,8 +156,13 @@ export default function OrderPage() {
               {/* Submit button */}
               <button
                 type="submit"
-                className="mt-4 bg-[#0028FF] text-white hover:bg-black text-[14px] font-semibold py-4 px-8 rounded-full shadow-lg shadow-[#0028FF]/20 transition-all duration-300 self-start"
+                className="group inline-flex items-center gap-3 bg-black text-white rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-800 self-start"
               >
+                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black transition-all duration-500 ease-out group-hover:scale-110">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-500 ease-out group-hover:rotate-180">
+                    <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="black"/>
+                  </svg>
+                </span>
                 {t("order_form_submit")}
               </button>
 

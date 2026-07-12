@@ -41,15 +41,15 @@ export default function AboutPage() {
             </p>
             <ul className="flex flex-col gap-4 text-[14px] font-semibold">
               <li className="flex items-center gap-3">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#0028FF]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-black" />
                 <span>{t("about_value_1")}</span>
               </li>
               <li className="flex items-center gap-3">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#0028FF]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-black" />
                 <span>{t("about_value_2")}</span>
               </li>
               <li className="flex items-center gap-3">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#0028FF]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-black" />
                 <span>{t("about_value_3")}</span>
               </li>
             </ul>
@@ -65,7 +65,7 @@ export default function AboutPage() {
         {/* Brand Showcase Block */}
         <div className="bg-black text-white rounded-3xl p-8 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative overflow-hidden">
           {/* Subtle glow background */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#0028FF]/15 rounded-full filter blur-[100px] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-white/5 rounded-full filter blur-[100px] pointer-events-none" />
           
           <div className="relative z-10 max-w-[500px]">
             <h3 className="font-semibold text-2xl md:text-3xl mb-4 tracking-tight">{t("about_cta_title")}</h3>
@@ -74,7 +74,7 @@ export default function AboutPage() {
             </p>
           </div>
           
-          <button className="relative z-10 bg-[#0028FF] hover:bg-white hover:text-black text-white font-medium text-[14px] px-6 py-3.5 rounded-full transition-colors duration-300">
+          <button className="relative z-10 bg-white hover:bg-neutral-200 text-black font-semibold text-[14px] px-6 py-3.5 rounded-full transition-colors duration-300">
             {t("about_cta_btn")}
           </button>
         </div>

@@ -21,53 +21,53 @@ export default function PlaceholderPage({ type }: PlaceholderPageProps) {
     switch (type) {
       case "blog":
         return {
-          titleMain: "Insights & ",
-          titleItalic: "Engineering",
-          sub: "Technical articles, industry standards, and guides on heat transfer efficiency.",
+          titleMain: t("blog_title_main"),
+          titleItalic: t("blog_title_italic"),
+          sub: t("blog_sub"),
           items: [
             {
-              tag: "Case Study",
-              title: "Optimizing Thermal Performance in Tube & Shell Exchangers",
-              desc: "How HTRI calculations and baffle design spacing minimized pressure drops in critical process plants.",
-              date: "June 2026"
+              tag: t("blog_item_1_tag"),
+              title: t("blog_item_1_title"),
+              desc: t("blog_item_1_desc"),
+              date: t("blog_item_1_date")
             },
             {
-              tag: "Materials",
-              title: "Corrosion Resistance: Graphite vs. Hastelloy Alloys",
-              desc: "A comparative review of materials under highly acidic conditions, including HCl and sulfuric acid processing.",
-              date: "May 2026"
+              tag: t("blog_item_2_tag"),
+              title: t("blog_item_2_title"),
+              desc: t("blog_item_2_desc"),
+              date: t("blog_item_2_date")
             },
             {
-              tag: "Compliance",
-              title: "Understanding ASME & TEMA Standards",
-              desc: "Key considerations for thermal design engineers when manufacturing pressure vessels for global chemical plants.",
-              date: "April 2026"
+              tag: t("blog_item_3_tag"),
+              title: t("blog_item_3_title"),
+              desc: t("blog_item_3_desc"),
+              date: t("blog_item_3_date")
             }
           ]
         };
       case "resources":
         return {
-          titleMain: "Knowledge & ",
-          titleItalic: "Resources",
-          sub: "Download calculators, engineering catalogs, and design guides for your processing systems.",
+          titleMain: t("res_title_main"),
+          titleItalic: t("res_title_italic"),
+          sub: t("res_sub"),
           items: [
             {
-              tag: "PDF Guide",
-              title: "HTRI Calculation Parameters Checklist",
-              desc: "A comprehensive reference sheet for defining hot and cold side temperatures, flow rates, and material limits.",
-              date: "Download (2.4 MB)"
+              tag: t("res_item_1_tag"),
+              title: t("res_item_1_title"),
+              desc: t("res_item_1_desc"),
+              date: t("res_item_1_date")
             },
             {
-              tag: "Chemical Chart",
-              title: "Graphite Chemical Compatibility Catalog",
-              desc: "Detailed chart listing acid concentrations and operating temperature bounds for graphite exchangers.",
-              date: "Download (1.8 MB)"
+              tag: t("res_item_2_tag"),
+              title: t("res_item_2_title"),
+              desc: t("res_item_2_desc"),
+              date: t("res_item_2_date")
             },
             {
-              tag: "Manual",
-              title: "Operations & Maintenance Handbook",
-              desc: "Standard operating procedures for commissioning, re-tubing, and cleaning heat transfer systems.",
-              date: "Download (4.1 MB)"
+              tag: t("res_item_3_tag"),
+              title: t("res_item_3_title"),
+              desc: t("res_item_3_desc"),
+              date: t("res_item_3_date")
             }
           ]
         };

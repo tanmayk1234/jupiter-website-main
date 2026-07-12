@@ -19,7 +19,7 @@ function PlusIcon() {
 
 function SparkIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-[#0028FF]">
+    <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-black">
       <path d="M12 0C12 6.62742 17.3726 12 24 12C17.3726 12 12 17.3726 12 24C12 17.3726 6.62742 12 0 12C6.62742 12 12 6.62742 12 0Z" fill="currentColor"/>
     </svg>
   );
@@ -61,8 +61,8 @@ export default function CTASection({ onNavigate }: { onNavigate?: () => void }) 
         {/* The Peach Box */}
         <div className="bg-[#FFF3ED] rounded-[2rem] p-8 md:p-12 lg:p-16 relative overflow-hidden">
           
-          {/* Blue Swoosh Background Graphic */}
-          <div className="absolute top-[15%] right-[-15%] w-[800px] h-[1000px] border-[1px] border-[#0028FF]/40 rounded-[50%] -rotate-[15deg] pointer-events-none z-0" />
+          {/* Black Swoosh Background Graphic */}
+          <div className="absolute top-[15%] right-[-15%] w-[800px] h-[1000px] border-[1px] border-black/10 rounded-[50%] -rotate-[15deg] pointer-events-none z-0" />
 
           {/* Header */}
           <div className="text-center relative z-10 max-w-[800px] mx-auto mb-16">
@@ -89,7 +89,7 @@ export default function CTASection({ onNavigate }: { onNavigate?: () => void }) 
               {/* Right Header */}
               <div className="flex flex-col items-center md:items-center text-center relative">
                 {/* Spark Icon */}
-                <div className="hidden md:block absolute -left-10 lg:-left-12 top-0 w-10 h-10 text-[#0028FF]">
+                <div className="hidden md:block absolute -left-10 lg:-left-12 top-0 w-10 h-10 text-black">
                   <SparkIcon />
                 </div>
                 <h3 className="font-display font-semibold text-[20px] md:text-[22px] text-black">{t("cta_table_wgb_title")}</h3>
@@ -114,7 +114,7 @@ export default function CTASection({ onNavigate }: { onNavigate?: () => void }) 
 
                   {/* Good Card */}
                   <div className="bg-white rounded-2xl p-5 md:p-6 flex items-start gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-                    <div className="w-8 h-8 rounded-xl bg-[#E5E9FF] text-[#0028FF] flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-black text-white flex items-center justify-center shrink-0">
                       <PlusIcon />
                     </div>
                     <p className="font-display text-[14px] md:text-[15px] text-black/90 leading-[1.5] mt-1 font-medium">
@@ -126,12 +126,14 @@ export default function CTASection({ onNavigate }: { onNavigate?: () => void }) 
             </div>
           </div>
           
-          {/* Bottom CTA Button inside the peach box */}
           <div className="mt-16 flex justify-center relative z-10">
             <button 
               onClick={onNavigate || (() => { window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }); })}
-              className="bg-[#0028FF] text-white rounded-full px-8 py-3.5 font-display font-medium text-[15px] hover:bg-black transition-colors duration-300 shadow-lg shadow-[#0028FF]/20"
+              className="group inline-flex items-center gap-3 bg-black text-white rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-800 shadow-lg shadow-black/10"
             >
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black transition-all duration-500 ease-out group-hover:scale-110">
+                <PlusIcon />
+              </span>
               {t("cta_btn")}
             </button>
           </div>

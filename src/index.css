@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-blue: #0028FF;
+  --color-blue: #000000;
   --color-cream: #F5F5F0;
   --color-orange: #FF5A00;
   --color-pale-orange: #FFEEE5;
-  --color-pale-blue: #E5E9FF;
+  --color-pale-blue: #F5F5F5;
   --color-grey: #807B78;
   
   --font-sans: "Switzer", ui-sans-serif, system-ui, sans-serif;
@@ -15,13 +15,13 @@
 }
 
 :root {
-  --blue: #0028FF;
+  --blue: #000000;
   --black: #000000;
   --cream: #F5F5F0;
   --white: #FFFFFF;
   --orange: #FF5A00;
   --pale-orange: #FFEEE5;
-  --pale-blue: #E5E9FF;
+  --pale-blue: #F5F5F5;
   --grey: #807B78;
 }
 

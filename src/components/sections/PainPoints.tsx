@@ -3,6 +3,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "../providers/LanguageContext";
 
+gsap.registerPlugin(ScrollTrigger);
+
 // WGB-style X / cross icon (used per problem card)
 function CrossIcon() {
   return (
@@ -126,24 +128,35 @@ export default function PainPoints() {
             </div>
           ))}
 
-          {/* 6th card — blue CTA */}
-          <div className="bg-[#0028FF] p-8 flex flex-col justify-between gap-8 rounded-br-2xl">
-            {/* Orbit ring decorative SVG */}
-            <svg width="72" height="72" viewBox="0 0 100 100" fill="none" className="opacity-40">
-              <ellipse cx="50" cy="50" rx="45" ry="18" stroke="white" strokeWidth="1.5" transform="rotate(-25 50 50)" />
-              <ellipse cx="50" cy="50" rx="35" ry="14" stroke="white" strokeWidth="1.5" transform="rotate(20 50 50)" />
-              <ellipse cx="50" cy="50" rx="22" ry="10" stroke="white" strokeWidth="1.5" transform="rotate(70 50 50)" />
-              <path d="M50 44 L51 49 L56 50 L51 51 L50 56 L49 51 L44 50 L49 49 Z" fill="white" />
-            </svg>
+          {/* 6th card — premium dark CTA */}
+          <div className="group/card bg-gradient-to-b from-[#141416] to-[#0A0A0B] p-8 flex flex-col justify-between gap-8 rounded-br-2xl border border-white/10 relative overflow-hidden hover:border-white/25 hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
+            {/* Soft glowing mesh background */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.03),transparent_50%)] pointer-events-none z-0" />
+            
+            {/* Large elegant orbital paths in the background */}
+            <div className="absolute -right-16 -top-16 w-52 h-52 opacity-[0.08] pointer-events-none z-0 group-hover/card:scale-105 group-hover/card:opacity-[0.12] transition-all duration-700 ease-out">
+              <svg viewBox="0 0 100 100" fill="none" className="w-full h-full text-white">
+                <ellipse cx="50" cy="50" rx="45" ry="18" stroke="currentColor" strokeWidth="0.8" transform="rotate(-25 50 50)" />
+                <ellipse cx="50" cy="50" rx="35" ry="14" stroke="currentColor" strokeWidth="0.8" transform="rotate(20 50 50)" />
+                <ellipse cx="50" cy="50" rx="22" ry="10" stroke="currentColor" strokeWidth="0.8" transform="rotate(70 50 50)" />
+              </svg>
+            </div>
 
-            <div>
-              <h3 className="font-display font-semibold text-[1.05rem] text-white mb-5 leading-[1.3]">
+            {/* Glowing brand spark motif */}
+            <div className="w-10 h-10 text-white relative z-10 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl group-hover/card:bg-white/10 group-hover/card:border-white/20 transition-all duration-500 ease-out">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 animate-pulse">
+                <path d="M12 0C12 6.62742 17.3726 12 24 12C17.3726 12 12 17.3726 12 24C12 17.3726 6.62742 12 0 12C6.62742 12 12 6.62742 12 0Z" />
+              </svg>
+            </div>
+
+            <div className="relative z-10">
+              <h3 className="font-display font-semibold text-[1.1rem] text-white/90 mb-6 leading-[1.3] max-w-[20ch]">
                 {t("painpoints_cta_title")}
               </h3>
-              <button className="group inline-flex items-center gap-2.5 bg-white text-black rounded-full font-display font-medium text-[14px] pl-1.5 pr-5 py-1.5 hover:bg-black hover:text-white transition-colors duration-300">
-                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-black/10 group-hover:bg-white/20 transition-colors">
-                  <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-                    <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="currentColor"/>
+              <button className="group inline-flex items-center gap-3 bg-white text-black rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-200">
+                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-black transition-all duration-500 ease-out group-hover:scale-110">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-500 ease-out group-hover:rotate-180">
+                    <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="white"/>
                   </svg>
                 </span>
                 {t("painpoints_cta_btn")}

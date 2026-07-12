@@ -152,7 +152,7 @@ export default function SustainabilityPage() {
       {/* ═══ HERO ═══ */}
       <section ref={heroRef} className="relative pt-32 md:pt-40 pb-20 md:pb-28 px-6 md:px-[max(1.5rem,min(5vw,4rem))] overflow-hidden">
         <div className="max-w-[1100px] mx-auto md:pl-16 relative z-10">
-          <span className="hero-reveal inline-block text-[#0028FF] font-semibold text-[13px] tracking-widest uppercase mb-6">
+          <span className="hero-reveal inline-block text-black font-semibold text-[13px] tracking-widest uppercase mb-6">
             {t("sust_commitment")}
           </span>
           <h1 className="hero-reveal font-medium text-[clamp(2.8rem,6vw,6.5rem)] leading-[0.95] tracking-[-0.04em] mb-8 max-w-[900px]">
@@ -164,8 +164,8 @@ export default function SustainabilityPage() {
           <p className="hero-reveal text-black/60 text-[clamp(15px,1.2vw,18px)] leading-[1.7] max-w-[60ch] mb-10">
             {t("sust_hero_desc")}
           </p>
-          <button className="hero-reveal inline-flex items-center gap-2.5 bg-black text-white rounded-full font-display font-medium text-[14px] pl-2.5 pr-5 py-2 hover:bg-[#0028FF] transition-colors duration-300">
-            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white/20">
+          <button className="group hero-reveal inline-flex items-center gap-3 bg-black text-white rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-800">
+            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black transition-all duration-500 ease-out group-hover:scale-110">
               <PlusIcon />
             </span>
             {t("sust_hero_btn")}
@@ -187,7 +187,7 @@ export default function SustainabilityPage() {
       {/* ═══ GREEN SCHEME BANNER ═══ */}
       <section className="md:ml-[max(1.5rem,min(5vw,4rem))] border-t border-b border-black">
         <div className="max-w-[1100px] mx-auto px-6 md:px-16 py-14 md:py-20 text-center">
-          <h2 className="text-[#0028FF] font-semibold text-[15px] tracking-widest uppercase mb-4">{t("sust_green_scheme_title")}</h2>
+          <h2 className="text-black font-semibold text-[15px] tracking-widest uppercase mb-4">{t("sust_green_scheme_title")}</h2>
           <p className="text-black/70 text-[clamp(14px,1.1vw,17px)] leading-[1.7] max-w-[70ch] mx-auto">
             {t("sust_green_scheme_desc")}
           </p>
@@ -225,7 +225,7 @@ export default function SustainabilityPage() {
                   <h3 className="font-semibold text-[18px] tracking-tight leading-snug">{card.title}</h3>
                 </div>
                 <p className="text-[14px] text-black/60 leading-[1.65]">{card.desc}</p>
-                <div className="mt-auto pt-4 border-t border-black/5 flex items-center gap-2 text-[#0028FF] text-[13px] font-semibold group-hover:gap-3 transition-all duration-300">
+                <div className="mt-auto pt-4 border-t border-black/5 flex items-center gap-2 text-black text-[13px] font-semibold group-hover:gap-3 transition-all duration-300">
                   {t("sust_learn_more")}
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="M5 12h14M12 5l7 7-7 7" />
@@ -260,7 +260,7 @@ export default function SustainabilityPage() {
             <ul className="flex flex-col gap-4">
               {envInitiatives.map((item, i) => (
                 <li key={i} className="env-item flex items-start gap-3 text-[14px] md:text-[15px] text-black/75 leading-[1.6]">
-                  <LeafIcon className="text-[#0028FF] shrink-0 mt-0.5" />
+                  <LeafIcon className="text-black shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -284,21 +284,23 @@ export default function SustainabilityPage() {
 
         {/* Content */}
         <div className="relative z-10 text-white text-center max-w-[800px] px-6">
-          <span className="text-[#0028FF] font-semibold text-[13px] tracking-widest uppercase mb-4 block">{t("sust_safety_label")}</span>
+          <span className="text-black font-semibold text-[13px] tracking-widest uppercase mb-4 block">{t("sust_safety_label")}</span>
           <h2 className="font-medium text-[clamp(2rem,4vw,3.8rem)] leading-[1.1] tracking-[-0.02em] mb-8">
             {t("sust_safety_title_1")} <em className="font-accent font-normal tracking-normal italic">{t("sust_safety_title_italic")}</em>
           </h2>
           <ul className="text-left max-w-[650px] mx-auto flex flex-col gap-4 text-[14px] md:text-[15px] text-white/80 leading-[1.6]">
             {safetyPoints.map((point, i) => (
               <li key={i} className="flex items-start gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#0028FF] shrink-0 mt-2" />
+                <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0 mt-2" />
                 <span>{point}</span>
               </li>
             ))}
           </ul>
-          <button className="mt-10 inline-flex items-center gap-2.5 bg-white text-black rounded-full font-display font-medium text-[14px] pl-2.5 pr-5 py-2 hover:bg-[#0028FF] hover:text-white transition-colors duration-300">
-            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-black/10">
-              <PlusIcon />
+          <button className="group mt-10 inline-flex items-center gap-3 bg-white text-black border border-black/10 rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-100 shrink-0">
+            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-black text-white transition-all duration-500 ease-out group-hover:scale-110">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-500 ease-out group-hover:rotate-180">
+                <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="white"/>
+              </svg>
             </span>
             {t("sust_safety_btn")}
           </button>
@@ -308,7 +310,7 @@ export default function SustainabilityPage() {
       {/* ═══ HEALTH — Orbital Diagram ═══ */}
       <section ref={healthRef} className="py-24 md:py-32 px-6 md:px-[max(1.5rem,min(5vw,4rem))]">
         <div className="max-w-[1100px] mx-auto md:pl-16 text-center">
-          <span className="text-[#0028FF] font-semibold text-[13px] tracking-widest uppercase mb-4 block">{t("sust_health_label")}</span>
+          <span className="text-black font-semibold text-[13px] tracking-widest uppercase mb-4 block">{t("sust_health_label")}</span>
           <h2 className="font-medium text-[clamp(2rem,4vw,3.8rem)] leading-[1.1] tracking-[-0.02em] mb-4">
             {t("sust_health_title_1")} <em className="font-accent font-normal tracking-normal italic">{t("sust_health_title_italic")}</em>
           </h2>
@@ -336,7 +338,7 @@ export default function SustainabilityPage() {
 
             {/* Center icon */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 rounded-full bg-white border-2 border-black/10 flex items-center justify-center shadow-lg z-10">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0028FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
               </svg>
             </div>
@@ -368,7 +370,7 @@ export default function SustainabilityPage() {
       <section className="md:ml-[max(1.5rem,min(5vw,4rem))] px-6 md:px-16 pb-20">
         <div className="max-w-[1100px] mx-auto bg-black text-white rounded-3xl p-8 md:p-14 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative overflow-hidden">
           {/* Glow */}
-          <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#0028FF]/12 rounded-full filter blur-[120px] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/5 rounded-full filter blur-[120px] pointer-events-none" />
 
           <div className="relative z-10 max-w-[520px]">
             <h3 className="font-semibold text-2xl md:text-3xl mb-3 tracking-tight">
@@ -379,7 +381,12 @@ export default function SustainabilityPage() {
             </p>
           </div>
 
-          <button className="relative z-10 bg-[#0028FF] hover:bg-white hover:text-black text-white font-medium text-[14px] px-7 py-3.5 rounded-full transition-colors duration-300 shrink-0">
+          <button className="group relative z-10 inline-flex items-center gap-3 bg-white text-black rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-200 shrink-0">
+            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-black text-white transition-all duration-500 ease-out group-hover:scale-110">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-500 ease-out group-hover:rotate-180">
+                <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="white"/>
+              </svg>
+            </span>
             {t("sust_cta_btn")}
           </button>
         </div>
