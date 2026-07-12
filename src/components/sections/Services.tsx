@@ -134,11 +134,12 @@ export default function Services() {
     for (let i = 1; i <= FRAME_COUNT; i++) {
       const img = new Image();
       img.src = `/frames/frame_${String(i).padStart(4, "0")}.jpg`;
+      const frameIndex = i - 1;
       img.onload = () => {
         loadedCount++;
-        // Show first frame as soon as it loads
-        if (loadedCount === 1 && currentFrame === 0) {
-          renderFrame(0);
+        // Draw the frame immediately if it is the currently active frame, or the very first loaded frame
+        if (frameIndex === currentFrame || (loadedCount === 1 && currentFrame === 0)) {
+          renderFrame(frameIndex);
         }
       };
       images.push(img);
