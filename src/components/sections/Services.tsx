@@ -54,6 +54,7 @@ export default function Services() {
   const { language, t } = useTranslation();
   const sectionRef  = useRef<HTMLElement>(null);
   const canvasRef   = useRef<HTMLCanvasElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
   const imagesRef   = useRef<HTMLImageElement[]>([]);
 
   const localizedPanels = [
@@ -162,6 +163,32 @@ export default function Services() {
           renderFrame(Math.round(obj.frame));
         },
       });
+      // Fade in video container as section enters viewport
+      gsap.fromTo(videoContainerRef.current,
+        { opacity: 0, scale: 0.9 },
+        {
+          opacity: 1,
+          scale: 1,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "top top",
+            scrub: true,
+          }
+        }
+      );
+
+      // Fade out video container as section leaves viewport
+      gsap.to(videoContainerRef.current, {
+        opacity: 0,
+        scale: 0.9,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "bottom bottom",
+          end: "bottom top",
+          scrub: true,
+        }
+      });
     }, sectionRef);
 
     return () => gsapCtx.revert();
@@ -246,7 +273,7 @@ export default function Services() {
             }}
           >
             {/* Ambient backlight glow container */}
-            <div className="relative w-full max-w-[420px] aspect-[9/16] flex items-center justify-center">
+            <div ref={videoContainerRef} className="relative w-full max-w-[420px] aspect-[9/16] flex items-center justify-center">
               {/* Soft radial blue glow */}
               <div 
                 className="absolute w-[120%] h-[120%] bg-blue-600/20 rounded-full filter blur-[80px] -z-10 animate-pulse pointer-events-none"

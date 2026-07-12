@@ -49,7 +49,8 @@ export default function SplitText({
     return () => {
       split.revert();
     };
-  }, [startTrigger, delay]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startTrigger]);
 
   return (
     <div 
