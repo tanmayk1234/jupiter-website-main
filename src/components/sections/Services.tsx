@@ -164,32 +164,26 @@ export default function Services() {
           renderFrame(Math.round(obj.frame));
         },
       });
-      // Fade in video container as section enters viewport
-      gsap.fromTo(videoContainerRef.current,
-        { opacity: 0, scale: 0.9 },
-        {
-          opacity: 1,
-          scale: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "top top",
-            scrub: true,
-          }
-        }
-      );
-
-      // Fade out video container as section leaves viewport
-      gsap.to(videoContainerRef.current, {
-        opacity: 0,
-        scale: 0.9,
+      // Conflict-free timeline to handle entrance fade-in, hold, and exit fade-out smoothly
+      const containerTl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "bottom bottom",
+          start: "top bottom",
           end: "bottom top",
           scrub: true,
         }
       });
+
+      containerTl.fromTo(videoContainerRef.current,
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, duration: 2, ease: "none" }
+      )
+      .to(videoContainerRef.current,
+        { opacity: 1, scale: 1, duration: 6, ease: "none" }
+      )
+      .to(videoContainerRef.current,
+        { opacity: 0, scale: 0.9, duration: 2, ease: "none" }
+      );
     }, sectionRef);
 
     return () => gsapCtx.revert();
