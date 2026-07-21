@@ -34,6 +34,7 @@ export default function App() {
   }, []);
 
   const handleSpaceComplete = useCallback(() => {
+    window.scrollTo(0, 0);
     setSpaceComplete(true);
   }, []);
 
