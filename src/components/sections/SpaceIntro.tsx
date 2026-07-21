@@ -21,8 +21,9 @@ const SpaceIntro = React.memo(function SpaceIntro({ onHeroStart, onComplete }: S
   useEffect(() => { onHeroStartRef.current = onHeroStart; }, [onHeroStart]);
   useEffect(() => { onCompleteRef.current = onComplete; }, [onComplete]);
 
-  // Lock scroll position on mount
+  // Lock scroll position on mount & hide scrollbar during jupiter 1
   useEffect(() => {
+    document.documentElement.classList.add("no-scrollbar");
     document.body.style.overflow = "hidden";
     window.scrollTo(0, 0);
 
@@ -33,6 +34,7 @@ const SpaceIntro = React.memo(function SpaceIntro({ onHeroStart, onComplete }: S
 
     return () => {
       clearTimeout(t);
+      document.documentElement.classList.remove("no-scrollbar");
       document.body.style.overflow = "";
     };
   }, []);
