@@ -50,7 +50,7 @@ function PlusIcon() {
 
 const FRAME_COUNT = 132;
 
-export default function Services() {
+export default function Services({ onViewChange }: { onViewChange?: (view: "home" | "order" | "about" | "blog" | "resources" | "sustainability") => void }) {
   const { language, t } = useTranslation();
   const sectionRef  = useRef<HTMLElement>(null);
   const canvasRef   = useRef<HTMLCanvasElement>(null);
@@ -164,25 +164,25 @@ export default function Services() {
           renderFrame(Math.round(obj.frame));
         },
       });
-      // Conflict-free timeline to handle entrance fade-in, hold, and exit fade-out smoothly
+      // Timeline to handle entrance fade-in, hold, and exit fade-out smoothly
       const containerTl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
+          start: "top 80%",
+          end: "bottom bottom",
           scrub: true,
         }
       });
 
       containerTl.fromTo(videoContainerRef.current,
-        { opacity: 0, scale: 0.9 },
-        { opacity: 1, scale: 1, duration: 2, ease: "none" }
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 1, ease: "none" }
       )
       .to(videoContainerRef.current,
-        { opacity: 1, scale: 1, duration: 6, ease: "none" }
+        { opacity: 1, scale: 1, duration: 8, ease: "none" }
       )
       .to(videoContainerRef.current,
-        { opacity: 0, scale: 0.9, duration: 2, ease: "none" }
+        { opacity: 0, scale: 0.95, duration: 1, ease: "none" }
       );
     }, sectionRef);
 
@@ -210,7 +210,10 @@ export default function Services() {
               {p.heading}
             </h3>
             <p className="font-display text-[15px] text-white/70 leading-[1.7]">{p.body}</p>
-            <button className="self-start inline-flex items-center gap-2.5 border border-white/20 text-white rounded-full font-display font-medium text-[14px] pl-1.5 pr-5 py-1.5 hover:bg-white hover:text-black transition-colors duration-300">
+            <button 
+              onClick={() => { onViewChange?.("order"); window.scrollTo(0, 0); }}
+              className="self-start inline-flex items-center gap-2.5 border border-white/20 text-white rounded-full font-display font-medium text-[14px] pl-1.5 pr-5 py-1.5 hover:bg-white hover:text-black transition-colors duration-300"
+            >
               <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/10">
                 <PlusIcon />
               </span>
@@ -236,7 +239,10 @@ export default function Services() {
               <p className="font-display text-[16px] text-white/70 leading-[1.7] mb-8 max-w-[48ch]">
                 {p.body}
               </p>
-              <button className="self-start inline-flex items-center gap-2.5 border border-white/20 text-white rounded-full font-display font-medium text-[14px] pl-1.5 pr-5 py-1.5 hover:bg-white hover:text-black transition-colors duration-300">
+              <button 
+                onClick={() => { onViewChange?.("order"); window.scrollTo(0, 0); }}
+                className="self-start inline-flex items-center gap-2.5 border border-white/20 text-white rounded-full font-display font-medium text-[14px] pl-1.5 pr-5 py-1.5 hover:bg-white hover:text-black transition-colors duration-300"
+              >
                 <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/10">
                   <PlusIcon />
                 </span>

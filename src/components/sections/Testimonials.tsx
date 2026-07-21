@@ -9,7 +9,7 @@ function PlusIconSm() {
   );
 }
 
-export default function Testimonials() {
+export default function Testimonials({ onViewChange }: { onViewChange?: (view: "home" | "order" | "about" | "blog" | "resources" | "sustainability") => void }) {
   const { language, t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -83,13 +83,10 @@ export default function Testimonials() {
             {t("testimonials_subtext")}
           </p>
           <div className="flex flex-wrap items-center gap-4">
-            <button className="group inline-flex items-center gap-3 bg-black text-white rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-800 shrink-0">
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black transition-all duration-500 ease-out group-hover:scale-110">
-                <PlusIconSm />
-              </span>
-              {t("cases_explore_btn")}
-            </button>
-            <button className="group inline-flex items-center gap-3 bg-black text-white rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-800 shrink-0">
+            <button 
+              onClick={() => { onViewChange?.("order"); window.scrollTo(0, 0); }}
+              className="group inline-flex items-center gap-3 bg-black text-white rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-800 shrink-0"
+            >
               <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black transition-all duration-500 ease-out group-hover:scale-110">
                 <PlusIconSm />
               </span>

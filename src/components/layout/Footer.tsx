@@ -182,28 +182,39 @@ export default function Footer({ onViewChange }: FooterProps) {
                 {/* Image Cards Row */}
                 <div className="flex gap-4 md:gap-6 mb-8">
                     {/* Ravindra Card */}
-                    <div className="relative rounded-[12px] overflow-hidden border border-white/10 w-[160px] h-[220px] md:w-[180px] md:h-[260px] bg-[#111] shrink-0 flex flex-col justify-end">
-                       <div className="absolute inset-0 bg-[#111] flex items-center justify-center">
+                    <a 
+                      href="https://www.linkedin.com/in/ravindra-mundada-91044323/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative rounded-[12px] overflow-hidden border border-white/10 w-[160px] h-[220px] md:w-[180px] md:h-[260px] bg-[#111] shrink-0 flex flex-col justify-end cursor-pointer group/card hover:border-white/30 transition-all duration-300"
+                    >
+                       <div className="absolute inset-0 bg-[#111] flex items-center justify-center overflow-hidden">
                          <img 
                            src="/assets/images/team/ravindra.png" 
                            alt="Ravindra Mundada"
-                           className="w-full h-full object-cover object-[center_20%]"
+                           className="w-full h-full object-cover object-[center_20%] group-hover/card:scale-105 transition-transform duration-500"
                          />
                        </div>
                        <div className="absolute bottom-0 left-0 right-0 bg-[#1A1A1A] p-3 md:p-4 border-t border-white/10 z-10">
-                         <p className="font-display font-medium text-white text-[13px] md:text-[14px] leading-tight">Ravindra Mundada</p>
+                         <p className="font-display font-medium text-white text-[13px] md:text-[14px] leading-tight group-hover/card:text-[#0077b5] transition-colors">Ravindra Mundada</p>
                          <p className="font-display text-white/50 text-[11px] md:text-[12px] leading-tight mt-1">{t("footer_ravindra_title")}</p>
+                         <p className="font-display text-white/40 text-[10px] md:text-[11px] leading-tight mt-0.5">{t("jupiter_title")}</p>
                        </div>
-                    </div>
+                    </a>
                     
                     {/* Viraj Card (Staggered slightly down) */}
-                    <div className="relative mt-12 rounded-[12px] overflow-hidden border border-white/10 w-[160px] h-[220px] md:w-[180px] md:h-[260px] bg-[#111] shrink-0 flex flex-col justify-end">
-                       <div className="absolute inset-0 bg-gradient-to-b from-[#181818] to-[#111] flex items-center justify-center">
-                         <span className="font-display font-bold text-white/10 text-[64px]">VM</span>
+                    <div className="relative mt-12 rounded-[12px] overflow-hidden border border-white/10 w-[160px] h-[220px] md:w-[180px] md:h-[260px] bg-[#111] shrink-0 flex flex-col justify-end group/card hover:border-white/30 transition-all duration-300">
+                       <div className="absolute inset-0 bg-[#111] flex items-center justify-center overflow-hidden">
+                         <img 
+                           src="/assets/images/team/viraj.png" 
+                           alt="Viraj Mundada"
+                           className="w-full h-full object-cover object-[center_20%] group-hover/card:scale-105 transition-transform duration-500"
+                         />
                        </div>
                        <div className="absolute bottom-0 left-0 right-0 bg-[#1A1A1A] p-3 md:p-4 border-t border-white/10 z-10">
                          <p className="font-display font-medium text-white text-[13px] md:text-[14px] leading-tight">Viraj Mundada</p>
                          <p className="font-display text-white/50 text-[11px] md:text-[12px] leading-tight mt-1">{t("footer_viraj_title")}</p>
+                         <p className="font-display text-white/40 text-[10px] md:text-[11px] leading-tight mt-0.5">{t("jupiter_title")}</p>
                        </div>
                     </div>
                 </div>

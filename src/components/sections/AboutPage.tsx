@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useTranslation } from "../providers/LanguageContext";
 
-export default function AboutPage() {
+export default function AboutPage({ onViewChange }: { onViewChange?: (view: "home" | "order" | "about" | "blog" | "resources" | "sustainability") => void }) {
   const { t } = useTranslation();
   const pageRef = useRef<HTMLDivElement>(null);
 
@@ -74,7 +74,10 @@ export default function AboutPage() {
             </p>
           </div>
           
-          <button className="relative z-10 bg-white hover:bg-neutral-200 text-black font-semibold text-[14px] px-6 py-3.5 rounded-full transition-colors duration-300">
+          <button 
+            onClick={() => { onViewChange?.("order"); window.scrollTo(0, 0); }}
+            className="relative z-10 bg-white hover:bg-neutral-200 text-black font-semibold text-[14px] px-6 py-3.5 rounded-full transition-colors duration-300"
+          >
             {t("about_cta_btn")}
           </button>
         </div>

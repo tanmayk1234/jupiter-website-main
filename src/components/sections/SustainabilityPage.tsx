@@ -25,14 +25,12 @@ function LeafIcon({ className = "" }: { className?: string }) {
 }
 
 /* ─── Component ─── */
-export default function SustainabilityPage() {
+export default function SustainabilityPage({ onViewChange }: { onViewChange?: (view: "home" | "order" | "about" | "blog" | "resources" | "sustainability") => void }) {
   const { t } = useTranslation();
   const pageRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const envRef = useRef<HTMLDivElement>(null);
-  const safetyRef = useRef<HTMLDivElement>(null);
-  const healthRef = useRef<HTMLDivElement>(null);
 
   const greenCards = [
     {
@@ -64,20 +62,9 @@ export default function SustainabilityPage() {
     t("sust_env_9"),
   ];
 
-  const safetyPoints = [
-    t("sust_safety_1"),
-    t("sust_safety_2"),
-    t("sust_safety_3"),
-    t("sust_safety_4"),
-    t("sust_safety_5"),
-  ];
 
-  const healthPoints = [
-    { text: t("sust_health_1"), pos: "top-left" },
-    { text: t("sust_health_2"), pos: "top-right" },
-    { text: t("sust_health_3"), pos: "bottom-left" },
-    { text: t("sust_health_4"), pos: "bottom-right" },
-  ];
+
+
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -113,32 +100,9 @@ export default function SustainabilityPage() {
         }
       );
 
-      // Safety parallax
-      gsap.fromTo(
-        safetyRef.current?.querySelector(".safety-img") || [],
-        { yPercent: -10 },
-        {
-          yPercent: 10, ease: "none",
-          scrollTrigger: { trigger: safetyRef.current, start: "top bottom", end: "bottom top", scrub: true },
-        }
-      );
 
-      // Health orbital spin
-      const orbit = healthRef.current?.querySelector(".orbit-ring");
-      if (orbit) {
-        gsap.to(orbit, { rotation: 360, duration: 30, repeat: -1, ease: "none" });
-      }
 
-      // Health items fade
-      gsap.fromTo(
-        healthRef.current?.querySelectorAll(".health-item") || [],
-        { y: 30, opacity: 0 },
-        {
-          y: 0, opacity: 1,
-          duration: 0.7, stagger: 0.12, ease: "power2.out",
-          scrollTrigger: { trigger: healthRef.current, start: "top 75%" },
-        }
-      );
+
     }, pageRef);
 
     return () => ctx.revert();
@@ -164,7 +128,10 @@ export default function SustainabilityPage() {
           <p className="hero-reveal text-black/60 text-[clamp(15px,1.2vw,18px)] leading-[1.7] max-w-[60ch] mb-10">
             {t("sust_hero_desc")}
           </p>
-          <button className="group hero-reveal inline-flex items-center gap-3 bg-black text-white rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-800">
+          <button 
+            onClick={() => { onViewChange?.("order"); window.scrollTo(0, 0); }}
+            className="group hero-reveal inline-flex items-center gap-3 bg-black text-white rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-800"
+          >
             <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black transition-all duration-500 ease-out group-hover:scale-110">
               <PlusIcon />
             </span>
@@ -225,12 +192,6 @@ export default function SustainabilityPage() {
                   <h3 className="font-semibold text-[18px] tracking-tight leading-snug">{card.title}</h3>
                 </div>
                 <p className="text-[14px] text-black/60 leading-[1.65]">{card.desc}</p>
-                <div className="mt-auto pt-4 border-t border-black/5 flex items-center gap-2 text-black text-[13px] font-semibold group-hover:gap-3 transition-all duration-300">
-                  {t("sust_learn_more")}
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </div>
               </div>
             ))}
           </div>
@@ -269,126 +230,37 @@ export default function SustainabilityPage() {
         </div>
       </section>
 
-      {/* ═══ SAFETY — Dark Parallax Section ═══ */}
-      <section ref={safetyRef} className="relative h-[600px] md:h-[700px] overflow-hidden flex items-center justify-center">
-        {/* Parallax background */}
-        <div className="absolute inset-0 overflow-hidden">
-          <img
-            src="/assets/images/sustainability/safety.png"
-            alt="Workers with safety equipment"
-            className="safety-img w-full h-[120%] object-cover"
-            style={{ objectPosition: "center 30%" }}
-          />
-          <div className="absolute inset-0 bg-black/65" />
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 text-white text-center max-w-[800px] px-6">
-          <span className="text-black font-semibold text-[13px] tracking-widest uppercase mb-4 block">{t("sust_safety_label")}</span>
-          <h2 className="font-medium text-[clamp(2rem,4vw,3.8rem)] leading-[1.1] tracking-[-0.02em] mb-8">
-            {t("sust_safety_title_1")} <em className="font-accent font-normal tracking-normal italic">{t("sust_safety_title_italic")}</em>
-          </h2>
-          <ul className="text-left max-w-[650px] mx-auto flex flex-col gap-4 text-[14px] md:text-[15px] text-white/80 leading-[1.6]">
-            {safetyPoints.map((point, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0 mt-2" />
-                <span>{point}</span>
-              </li>
-            ))}
-          </ul>
-          <button className="group mt-10 inline-flex items-center gap-3 bg-white text-black border border-black/10 rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-100 shrink-0">
-            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-black text-white transition-all duration-500 ease-out group-hover:scale-110">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-500 ease-out group-hover:rotate-180">
-                <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="white"/>
-              </svg>
-            </span>
-            {t("sust_safety_btn")}
-          </button>
-        </div>
-      </section>
-
-      {/* ═══ HEALTH — Orbital Diagram ═══ */}
-      <section ref={healthRef} className="py-24 md:py-32 px-6 md:px-[max(1.5rem,min(5vw,4rem))]">
-        <div className="max-w-[1100px] mx-auto md:pl-16 text-center">
-          <span className="text-black font-semibold text-[13px] tracking-widest uppercase mb-4 block">{t("sust_health_label")}</span>
-          <h2 className="font-medium text-[clamp(2rem,4vw,3.8rem)] leading-[1.1] tracking-[-0.02em] mb-4">
-            {t("sust_health_title_1")} <em className="font-accent font-normal tracking-normal italic">{t("sust_health_title_italic")}</em>
-          </h2>
-          <p className="text-black/60 text-[15px] leading-[1.6] max-w-[60ch] mx-auto mb-16">
-            {t("sust_health_desc")}
-          </p>
-
-          {/* Orbital layout */}
-          <div className="relative w-full max-w-[700px] mx-auto h-[480px] md:h-[500px]">
-            {/* Outer orbit ring */}
-            <div className="orbit-ring absolute inset-[10%] border-2 border-dashed border-black/10 rounded-full">
-              {/* Orbital dots */}
-              {[0, 60, 120, 180, 240, 300].map((deg) => (
-                <div
-                  key={deg}
-                  className="absolute w-3 h-3 rounded-full bg-black/10"
-                  style={{
-                    top: `${50 - 48 * Math.cos((deg * Math.PI) / 180)}%`,
-                    left: `${50 + 48 * Math.sin((deg * Math.PI) / 180)}%`,
-                    transform: "translate(-50%, -50%)",
-                  }}
-                />
-              ))}
-            </div>
-
-            {/* Center icon */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 rounded-full bg-white border-2 border-black/10 flex items-center justify-center shadow-lg z-10">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-              </svg>
-            </div>
-
-            {/* Health items positioned around the circle */}
-            {healthPoints.map((item, i) => {
-              const positions = [
-                "top-0 left-0 text-left",
-                "top-0 right-0 text-right",
-                "bottom-0 left-0 text-left",
-                "bottom-0 right-0 text-right",
-              ];
-              return (
-                <div
-                  key={i}
-                  className={`health-item absolute ${positions[i]} w-[45%] md:w-[40%]`}
-                >
-                  <p className="text-[14px] md:text-[15px] text-black/70 leading-[1.6] font-medium">
-                    {item.text}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* ═══ CTA BANNER ═══ */}
-      <section className="md:ml-[max(1.5rem,min(5vw,4rem))] px-6 md:px-16 pb-20">
-        <div className="max-w-[1100px] mx-auto bg-black text-white rounded-3xl p-8 md:p-14 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative overflow-hidden">
-          {/* Glow */}
-          <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/5 rounded-full filter blur-[120px] pointer-events-none" />
+      <section className="relative bg-[#F5F5F0] pb-20">
+        {/* Vertical separator line matching the page theme */}
+        <div className="hidden md:block absolute top-0 bottom-0 w-px bg-black/20 z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
 
-          <div className="relative z-10 max-w-[520px]">
-            <h3 className="font-semibold text-2xl md:text-3xl mb-3 tracking-tight">
-              {t("sust_cta_title")}
-            </h3>
-            <p className="text-white/50 text-[14px] leading-[1.6]">
-              {t("sust_cta_desc")}
-            </p>
+        <div className="md:ml-[max(1.5rem,min(5vw,4rem))] px-6 md:px-16 relative z-10">
+          <div className="max-w-[1100px] mx-auto bg-black text-white rounded-3xl p-8 md:p-14 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative overflow-hidden">
+            {/* Glow */}
+            <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/5 rounded-full filter blur-[120px] pointer-events-none" />
+
+            <div className="relative z-10 max-w-[520px]">
+              <h3 className="font-semibold text-2xl md:text-3xl mb-3 tracking-tight">
+                {t("sust_cta_title")}
+              </h3>
+              <p className="text-white/50 text-[14px] leading-[1.6]">
+                {t("sust_cta_desc")}
+              </p>
+            </div>
+
+            <button 
+              onClick={() => { onViewChange?.("order"); window.scrollTo(0, 0); }}
+              className="group relative z-10 inline-flex items-center gap-3 bg-white text-black rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-200 shrink-0"
+            >
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-black text-white transition-all duration-500 ease-out group-hover:scale-110">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-500 ease-out group-hover:rotate-180">
+                  <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="white"/>
+                </svg>
+              </span>
+              {t("sust_cta_btn")}
+            </button>
           </div>
-
-          <button className="group relative z-10 inline-flex items-center gap-3 bg-white text-black rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-200 shrink-0">
-            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-black text-white transition-all duration-500 ease-out group-hover:scale-110">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-500 ease-out group-hover:rotate-180">
-                <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="white"/>
-              </svg>
-            </span>
-            {t("sust_cta_btn")}
-          </button>
         </div>
       </section>
     </div>

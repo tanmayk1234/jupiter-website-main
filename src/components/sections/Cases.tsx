@@ -18,19 +18,19 @@ const productNameKeys = [
   "product_5_name",
 ] as const;
 
-const partnerLogos = [
-  { src: "/assets/images/logos/clients/cb9db2da-ed44-4476-a29d-9660ab73c7b8-removebg-preview.png", alt: "Client Logo 1" },
-  { src: "/assets/images/logos/clients/cropped-terratech-logo-2.jpg", alt: "Terratech" },
-  { src: "/assets/images/logos/clients/download.png", alt: "Client Logo 3" },
-  { src: "/assets/images/logos/clients/gsp-logo-website-updated-3.png", alt: "GSP" },
+const partnerLogos: { src: string; alt: string; name?: string; sizeClass?: string }[] = [
+  { src: "/assets/images/logos/clients/cb9db2da-ed44-4476-a29d-9660ab73c7b8-removebg-preview.png", alt: "Chem Process Systems" },
+  { src: "/assets/images/logos/clients/cropped-terratech-logo-2.png", alt: "Terratech" },
+  { src: "/assets/images/logos/clients/download.png", alt: "SRF" },
+  { src: "/assets/images/logos/clients/gsp-logo-website-updated-3.png", alt: "GSP Chem" },
   { src: "/assets/images/logos/clients/keva-golden-1.png", alt: "Keva" },
-  { src: "/assets/images/logos/clients/logo (2).png", alt: "Client Logo 6" },
-  { src: "/assets/images/logos/clients/logo (3).png", alt: "Client Logo 7" },
-  { src: "/assets/images/logos/clients/logo (4).png", alt: "Client Logo 8" },
-  { src: "/assets/images/logos/clients/logo (5).png", alt: "Client Logo 9" },
-  { src: "/assets/images/logos/clients/logo-icon-1.png", alt: "Client Logo 10" },
-  { src: "/assets/images/logos/clients/logo.png", alt: "Client Logo 11" },
-  { src: "/assets/images/logos/clients/prgana-group-logo-new.png", alt: "Prgana Group" },
+  { src: "/assets/images/logos/clients/logo (2).png", alt: "Catapharma", sizeClass: "max-h-[75%] max-w-[95%] scale-[1.15] md:scale-[1.25] origin-center" },
+  { src: "/assets/images/logos/clients/logo (3).png", alt: "Kilburn Engineering", sizeClass: "max-h-[75%] max-w-[95%] scale-[1.15] md:scale-[1.25] origin-center" },
+  { src: "/assets/images/logos/clients/logo (4).png", alt: "Laxmi Organic Industries", name: "Laxmi Organic Industries Limited" },
+  { src: "/assets/images/logos/clients/logo (5).png", alt: "Rhythm Chemicals" },
+  { src: "/assets/images/logos/clients/logo-icon-1.png", alt: "Hari Orgochem", name: "Hari Orgochem Pvt. Ltd." },
+  { src: "/assets/images/logos/clients/logo.png", alt: "Bhabani" },
+  { src: "/assets/images/logos/clients/prgana-group-logo-new.png", alt: "Pragna Group" },
 ];
 
 function PlusIconSm() {
@@ -240,12 +240,17 @@ export default function Cases() {
       <div className="md:ml-[max(1.5rem,min(5vw,4rem))] overflow-hidden border-t border-b border-black">
         <div className="flex animate-marquee-right hover:play-state-paused" style={{ width: "max-content" }}>
           {loopLogos.map((logo, i) => (
-            <div key={i} className="flex-shrink-0 flex items-center justify-center w-[200px] md:w-[250px] h-[100px] md:h-[120px] border-r border-black px-6">
+            <div key={i} className="flex-shrink-0 flex flex-col items-center justify-center w-[200px] md:w-[250px] h-[110px] md:h-[130px] border-r border-black px-6">
               <img
                 src={logo.src}
                 alt={logo.alt}
-                className="max-h-[50%] max-w-[80%] object-contain hover:scale-105 transition-all duration-300 mix-blend-multiply"
+                className={`${logo.sizeClass || "max-h-[55%] max-w-[80%]"} object-contain hover:scale-105 transition-all duration-300 mix-blend-multiply`}
               />
+              {logo.name && (
+                <span className="mt-2 font-display text-[11px] md:text-[12px] font-bold text-black/60 tracking-wide text-center leading-tight whitespace-nowrap">
+                  {logo.name}
+                </span>
+              )}
             </div>
           ))}
         </div>

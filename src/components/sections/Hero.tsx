@@ -24,7 +24,7 @@ function WGBButton({ label, variant, onClick }: { label: string; variant: "dark"
   );
 }
 
-export default function Hero({ isLoaded }: { isLoaded: boolean }) {
+export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; onViewChange?: (view: "home" | "order" | "about" | "blog" | "resources" | "sustainability") => void }) {
   const { language, t } = useTranslation();
   const [hasAnimated, setHasAnimated] = useState(false);
   const containerRef  = useRef<HTMLElement>(null);
@@ -97,6 +97,11 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
               loop={false}
               rendererSettings={{ glyphs: false }}
               onEvent={(event) => {
+                if (event === PlayerEvents.Ready) {
+                  if (isLoaded) {
+                    preloaderPlayerRef.current?.play();
+                  }
+                }
                 if (event === PlayerEvents.Complete) {
                   // Reset loop to frame 0 and start it just as crossfade begins
                   loopPlayerRef.current?.stop();
@@ -167,7 +172,7 @@ export default function Hero({ isLoaded }: { isLoaded: boolean }) {
           </p>
           <div ref={btnsRef} className="flex flex-wrap items-center gap-3">
             <span className="opacity-0">
-              <WGBButton label={t("hero_cta")} variant="mono" />
+              <WGBButton label={t("hero_cta")} variant="mono" onClick={() => { onViewChange?.("order"); window.scrollTo(0, 0); }} />
             </span>
           </div>
         </div>

@@ -6,13 +6,6 @@ import { useTranslation, Language } from "../providers/LanguageContext";
 
 
 
-const navLinks = [
-  { label: "Manifesto", href: "#" },
-  { label: "Services", href: "#" },
-  { label: "Cases", href: "#" },
-  { label: "About", href: "#" },
-];
-
 export default function Navbar({ 
   isLoaded = true,
   currentView,

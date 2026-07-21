@@ -107,7 +107,8 @@ export default function OrderPage() {
                     {[
                       { id: "graphite", label: "Graphite (Corrosion-Proof)" },
                       { id: "hastelloy", label: "Hastelloy Alloys" },
-                      { id: "ss316l", label: "Stainless Steel 316L" }
+                      { id: "ss316l", label: "Stainless Steel 316L" },
+                      { id: "none", label: "None of the above" }
                     ].map(mat => (
                       <label key={mat.id} className={`flex items-center gap-3 border rounded-xl p-3.5 cursor-pointer transition-all ${
                         formData.material === mat.id ? "border-black bg-black/[0.03]" : "border-black/10 hover:border-black/20"
@@ -133,7 +134,8 @@ export default function OrderPage() {
                     {[
                       { id: "shell-tube", label: "Shell & Tube Exchanger" },
                       { id: "block", label: "Block Type Graphite Exchanger" },
-                      { id: "plate", label: "Plate & Frame Exchanger" }
+                      { id: "plate", label: "Plate & Frame Exchanger" },
+                      { id: "none", label: "None of the above" }
                     ].map(type => (
                       <label key={type.id} className={`flex items-center gap-3 border rounded-xl p-3.5 cursor-pointer transition-all ${
                         formData.type === type.id ? "border-black bg-black/[0.03]" : "border-black/10 hover:border-black/20"
