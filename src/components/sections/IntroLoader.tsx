@@ -44,21 +44,24 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
                 setLottieReady(true);
               }
               if (event === PlayerEvents.Play) {
+                // Signal Hero to prepare entrance
                 setTimeout(() => {
                   onHeroStartRef.current();
-                }, 2000); // 2s after start
-              }
-              if (event === PlayerEvents.Complete) {
-                document.body.style.overflow = '';
-                gsap.to(containerRef.current, {
-                  opacity: 0,
-                  duration: 0.8,
-                  ease: "power2.inOut",
-                  onComplete: () => {
-                    if(containerRef.current) containerRef.current.style.display = 'none';
-                    onCompleteRef.current();
-                  }
-                });
+                }, 1600);
+
+                // Seamlessly crossfade IntroLoader into Hero while composition is active
+                setTimeout(() => {
+                  document.body.style.overflow = '';
+                  gsap.to(containerRef.current, {
+                    opacity: 0,
+                    duration: 1.2,
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                      if (containerRef.current) containerRef.current.style.display = 'none';
+                      onCompleteRef.current();
+                    }
+                  });
+                }, 2200);
               }
             }}
             className="w-full h-full"
