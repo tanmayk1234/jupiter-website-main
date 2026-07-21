@@ -30,7 +30,7 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
   return (
     <div 
       ref={containerRef} 
-      className={`fixed inset-0 z-[9999] flex items-center justify-center transition-colors duration-500 ${lottieReady ? 'bg-transparent' : 'bg-[#050505]'} pointer-events-none`}
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#020202] pointer-events-none"
     >
       <div className="absolute inset-0 flex items-center justify-center w-full h-full">
         {/* We use 150vw to ensure the lottie animation drawing covers the screen just like the main website */}
@@ -52,7 +52,8 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
                 document.body.style.overflow = '';
                 gsap.to(containerRef.current, {
                   opacity: 0,
-                  duration: 0.5,
+                  duration: 0.8,
+                  ease: "power2.inOut",
                   onComplete: () => {
                     if(containerRef.current) containerRef.current.style.display = 'none';
                     onCompleteRef.current();
