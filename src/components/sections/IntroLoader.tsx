@@ -55,7 +55,7 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
                 document.body.style.overflow = '';
                 gsap.to(containerRef.current, {
                   opacity: 0,
-                  duration: 0.6,
+                  duration: 0.8,
                   ease: "power2.inOut",
                   onComplete: () => {
                     if (containerRef.current) containerRef.current.style.display = 'none';
