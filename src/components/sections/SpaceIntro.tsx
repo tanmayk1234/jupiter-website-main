@@ -52,8 +52,7 @@ const SpaceIntro = React.memo(function SpaceIntro({ onHeroStart, onComplete }: S
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.enabled = false;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.2;
 
@@ -106,9 +105,6 @@ const SpaceIntro = React.memo(function SpaceIntro({ onHeroStart, onComplete }: S
     scene.add(new THREE.AmbientLight(0x0e172e, 0.75));
     const sunLight = new THREE.DirectionalLight(0xfffdf2, 3.2);
     sunLight.position.set(22, 6, 14);
-    sunLight.castShadow = true;
-    sunLight.shadow.mapSize.set(2048, 2048);
-    sunLight.shadow.bias = -0.0005;
     scene.add(sunLight);
 
     // --- SPACE DUST ---
@@ -171,7 +167,6 @@ const SpaceIntro = React.memo(function SpaceIntro({ onHeroStart, onComplete }: S
       new THREE.SphereGeometry(2.2, 128, 128),
       new THREE.MeshStandardMaterial({ map: jupiterTexture, roughness: 0.8, metalness: 0.05 })
     );
-    jupiter.receiveShadow = true;
     scene.add(jupiter);
 
     // Atmosphere glow shader
