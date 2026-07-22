@@ -44,24 +44,24 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
                 setLottieReady(true);
               }
               if (event === PlayerEvents.Play) {
-                // Signal Hero to prepare entrance
+                // Signal Hero section to prepare
                 setTimeout(() => {
                   onHeroStartRef.current();
-                }, 1600);
-
-                // Seamlessly crossfade IntroLoader into Hero while composition is active
-                setTimeout(() => {
-                  document.body.style.overflow = '';
-                  gsap.to(containerRef.current, {
-                    opacity: 0,
-                    duration: 1.2,
-                    ease: "power2.inOut",
-                    onComplete: () => {
-                      if (containerRef.current) containerRef.current.style.display = 'none';
-                      onCompleteRef.current();
-                    }
-                  });
-                }, 2200);
+                }, 2000);
+              }
+              if (event === PlayerEvents.Complete) {
+                // When intro-comp finishes drawing its orbit line around the text,
+                // smoothly dissolve IntroLoader to reveal the Hero orbit line drawing below
+                document.body.style.overflow = '';
+                gsap.to(containerRef.current, {
+                  opacity: 0,
+                  duration: 0.6,
+                  ease: "power2.inOut",
+                  onComplete: () => {
+                    if (containerRef.current) containerRef.current.style.display = 'none';
+                    onCompleteRef.current();
+                  }
+                });
               }
             }}
             className="w-full h-full"

@@ -97,11 +97,6 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
               loop={false}
               rendererSettings={{ glyphs: false }}
               onEvent={(event) => {
-                if (event === PlayerEvents.Ready) {
-                  if (isLoaded) {
-                    preloaderPlayerRef.current?.play();
-                  }
-                }
                 if (event === PlayerEvents.Complete) {
                   // Reset loop to frame 0 and start it just as crossfade begins
                   loopPlayerRef.current?.stop();
