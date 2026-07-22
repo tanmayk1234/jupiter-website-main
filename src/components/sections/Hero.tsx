@@ -44,35 +44,39 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
   useEffect(() => {
     if (!isLoaded) return;
 
+    // Start preloader orbit drawing EXACTLY after IntroLoader's 0.8s fade out completes.
+    // isLoaded becomes true 2000ms into IntroLoader.
+    // IntroLoader finishes at 3200ms and fades out for 800ms (completes at 4000ms).
+    // So 4000ms - 2000ms = 2000ms wait here.
     setTimeout(() => {
       preloaderPlayerRef.current?.play();
       mobilePlayerRef.current?.play();
       // loop player is intentionally NOT started here —
       // it starts from frame 0 only when the preloader completes (see onEvent below)
-    }, 1200);
+    }, 2000);
 
-    gsap.fromTo(subtextRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, delay: 3.0, ease: "power3.out" });
+    gsap.fromTo(subtextRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, delay: 3.8, ease: "power3.out" });
     if (btnsRef.current) {
       gsap.fromTo(btnsRef.current.children,
         { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, delay: 3.4, stagger: 0.1, ease: "power3.out" }
+        { y: 0, opacity: 1, duration: 0.8, delay: 4.2, stagger: 0.1, ease: "power3.out" }
       );
     }
     if (mobileLottieRef.current) {
-      gsap.fromTo(mobileLottieRef.current, { opacity: 0 }, { opacity: 1, duration: 2, delay: 1.5, ease: "power2.inOut" });
+      gsap.fromTo(mobileLottieRef.current, { opacity: 0 }, { opacity: 1, duration: 2, delay: 2.3, ease: "power2.inOut" });
     }
     // Fade in the grid lines after the circle finishes drawing
     if (vLineRef.current) {
       gsap.fromTo(vLineRef.current, 
         { opacity: 0 }, 
-        { opacity: 1, duration: 1.5, delay: 3.2, ease: "power2.out" }
+        { opacity: 1, duration: 1.5, delay: 4.0, ease: "power2.out" }
       );
     }
 
     // Set hasAnimated to true after the entrance animations complete so subsequent language switches render text immediately
     const timer = setTimeout(() => {
       setHasAnimated(true);
-    }, 3800);
+    }, 4600);
 
     return () => clearTimeout(timer);
   }, [isLoaded]);
