@@ -8,7 +8,7 @@
 export default function GridLine({ className = "absolute bg-black" }: { className?: string }) {
   return (
     <div
-      className={`hidden md:block top-0 bottom-0 w-px z-20 pointer-events-none ${className}`}
+      className={`hidden md:block top-0 bottom-0 w-[1.5px] z-20 pointer-events-none ${className}`}
       style={{ left: "max(1.5rem, min(5vw, 4rem))" }}
     />
   );

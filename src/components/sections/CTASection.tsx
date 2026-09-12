@@ -30,7 +30,7 @@ export default function CTASection({ onNavigate }: { onNavigate?: () => void }) 
       <GridLine />
 
       {/* Top horizontal border to seamlessly connect with Testimonials */}
-      <div className="hidden md:block absolute top-0 right-0 h-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
+      <div className="hidden md:block absolute top-0 right-0 h-[1.5px] bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
 
       <div className="md:ml-[max(1.5rem,min(5vw,4rem))] px-6 md:px-12 relative z-10 h-full mt-4 md:mt-8">
         

@@ -81,7 +81,7 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
       style={{ backgroundColor: "#F5F5F0" }}
     >
       {/* Left vertical border — starts exactly below the logo and runs full height */}
-      <div ref={vLineRef} className="hidden md:block absolute bottom-0 w-px bg-black z-20 pointer-events-none opacity-0" style={{ left: "max(1.5rem, min(5vw, 4rem))", top: "88px" }} />
+      <div ref={vLineRef} className="hidden md:block absolute bottom-0 w-[1.5px] bg-black z-20 pointer-events-none opacity-0" style={{ left: "max(1.5rem, min(5vw, 4rem))", top: "88px" }} />
 
       {/* Background Lottie */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0 scale-[1.1] md:scale-[1.15] translate-x-0 md:translate-x-[5%] translate-y-[-5%] md:translate-y-[-2%]">
