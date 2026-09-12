@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { useTranslation } from "../providers/LanguageContext";
 
 function CloseIcon() {
@@ -27,7 +26,6 @@ function SparkIcon() {
 
 export default function CTASection({ onNavigate }: { onNavigate?: () => void }) {
   const { language, t } = useTranslation();
-  const sectionRef = useRef<HTMLElement>(null);
 
   const localizedComparisons = [
     {
@@ -49,7 +47,7 @@ export default function CTASection({ onNavigate }: { onNavigate?: () => void }) 
   ];
 
   return (
-    <section ref={sectionRef} className="relative bg-[#F5F5F0] pt-8 md:pt-12 pb-6 md:pb-8">
+    <section className="relative bg-[#F5F5F0] pt-8 md:pt-12 pb-6 md:pb-8">
       {/* Global Vertical line */}
       <div className="hidden md:block absolute top-[0px] bottom-0 w-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
 

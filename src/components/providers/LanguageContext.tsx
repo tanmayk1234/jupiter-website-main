@@ -5,13 +5,9 @@ export type Language = "en" | "gu" | "te";
 export const translations = {
   en: {
     // Navbar
-    manifesto: "Manifesto",
-    services: "Services",
-    cases: "Cases",
     about: "About",
     resources: "Resources",
     blog: "Blog",
-    growth_assets: "Growth Assets",
     talk_to_us: "Talk to us",
     jupiter_title: "Jupiter Engineering Solutions",
     home: "Home",
@@ -37,12 +33,6 @@ export const translations = {
     order_hero_title_main: "Connect with ",
     order_hero_title_italic: "us",
     order_hero_sub: "Get in touch with our engineering team to discuss your process requirements, design custom heat exchangers, or request standard technical evaluations.",
-    order_form_params: "Process Parameters",
-    order_form_hot_in: "Hot Side Inlet Temp (°C)",
-    order_form_hot_out: "Hot Side Outlet Temp (°C)",
-    order_form_cold_in: "Cold Side Inlet Temp (°C)",
-    order_form_cold_out: "Cold Side Outlet Temp (°C)",
-    order_form_flow: "Flow Rate (kg/h)",
     order_form_name: "Full Name",
     order_form_email: "Email Address",
     order_form_message: "Project Requirements / Message",
@@ -59,7 +49,6 @@ export const translations = {
     hero_cta: "Request a Technical Consultation",
     
     // PainPoints
-    painpoints_title: "Your processes are world-class. Your thermal equipment shouldn't hold you back.",
     problem_1_title: "Corrosion & Equipment Failure",
     problem_1_body: "Standard metal heat exchangers degrade rapidly when handling aggressive chemicals like HCl, H₂SO₄ and phosphoric acid, causing hazardous leaks and expensive plant shutdowns.",
     problem_2_title: "Suboptimal Thermal Design & Fouling",
@@ -74,27 +63,15 @@ export const translations = {
     painpoints_cta_btn: "Request a Technical Consultation",
     
     // Cases
-    cases_title_1: "Proven with 30+",
-    cases_title_2: "industrial plants that trusted us",
-    cases_title_3: "in optimizing their heat transfer",
-    cases_explore_btn: "Explore our cases",
-    cases_explore_hover: "Explore case",
-    cases_coming_soon: "Coming Soon",
     
     // Services (Heat Exchangers)
-    services_1_heading: "Shell & Tube Exchangers",
     services_1_body: "Engineered for high-pressure and high-temperature processes. We design shell and tube heat exchangers that deliver optimal thermal performance and maximum durability under extreme industrial conditions across pharma, chemical, and petrochemical plants.",
-    services_2_heading: "Graphite Technology",
     services_2_body: "Unmatched corrosion resistance for aggressive chemical processing. Our graphite polyblock heat exchangers provide exceptional thermal conductivity, making them ideal for handling highly corrosive acids like HCl, H₂SO₄, and phosphoric acid.",
-    services_3_heading: "Precision Thermal Design",
     services_3_body: "Optimized heat transfer using advanced HTRI 9 calculations, proprietary software, and AspenTech process simulations. We customize tube configurations and baffle spacing to minimize pressure drop and prevent fouling.",
-    services_4_heading: "Lifecycle Performance",
     services_4_body: "Complete maintenance, refurbishing, and re-tubing services backed by our 6,000 sq. ft. workshop with 35-foot EOT crane. We ensure your heat transfer systems run continuously at peak performance.",
     services_discover_btn: "Discover our solutions",
     
     // Testimonials
-    testimonials_title_1: "We engineer thermal &",
-    testimonials_title_2: "process systems to last",
     testimonials_subtext: "From thermal design to custom fabrication, we deliver heat exchangers and pressure vessels engineered for maximum operational reliability across pharmaceuticals, chemicals, and refineries.",
     
     // CTA Section
@@ -116,19 +93,11 @@ export const translations = {
     cta_btn: "Talk to an engineer",
     
     // Footer
-    footer_headline_1: "Talk to an engineer,",
-    footer_headline_2: "not sales",
     footer_follow: "Follow us",
     footer_rights: "© 2026 Jupiter Engineering Solutions. All rights reserved.",
     footer_privacy: "Privacy Policy",
     footer_imprint: "Imprint",
     footer_cookies: "Cookies",
-    footer_branding: "Branding by Ali",
-    footer_design: "Design by Dylan",
-    footer_tagline: "Efficiency Through Innovation: Your Heat, Our Exchange",
-    footer_address: "Gat No. 20/5, Besides Caves County Resorts, Mumbai Agra Highway, Villholi, Nashik - 422010",
-    footer_email: "jupiterengg18@gmail.com",
-    footer_phone: "8600031275 / 9766963331",
     footer_eng_excellence: "Engineering excellence, built to last.",
     footer_ravindra_title: "Managing Director",
     footer_viraj_title: "Founder",
@@ -139,20 +108,11 @@ export const translations = {
     footer_developed_by: "Design & Developed by Tanmay",
 
     // Products section
-    products_header: "Engineered",
-    products_header_italic: "products",
-    products_header_2: "built to perform",
-    products_desc: "Precision-manufactured graphite and alloy components designed for extreme chemical and thermal environments.",
     product_1_name: "Graphite Multi-Port Distributor",
-    product_1_spec: "Corrosion-proof graphite construction",
     product_2_name: "Block Type Heat Exchanger",
-    product_2_spec: "High-pressure industrial applications",
     product_3_name: "Graphite Column Assembly",
-    product_3_spec: "SS frame with graphite internals",
     product_4_name: "Graphite Nozzle",
-    product_4_spec: "Precision-machined graphite component",
     product_5_name: "Graphite Polyblock Exchanger",
-    product_5_spec: "Maximum thermal conductivity",
     view_product: "View Product",
 
     // Cases / Our Clients
@@ -166,7 +126,6 @@ export const translations = {
     our_clients_heading_italic: "chemical & pharmaceutical",
     our_clients_heading_2: "innovators",
     our_clients_desc: "We provide custom engineering, design verification, and thermal solutions that power critical process facilities across the country.",
-    trusted_partners: "Trusted Partners",
 
     // Zoom modal
     zoom_hint: "Scroll to zoom · Drag to pan · Double-click to reset",
@@ -190,7 +149,6 @@ export const translations = {
     sust_card_2_desc: "We exclusively use synthetic graphite and corrosion-resistant alloys that are 100% recyclable. Our manufacturing processes eliminate volatile organic compound (VOC) release at the source.",
     sust_card_3_title: "Water-Positive Operations",
     sust_card_3_desc: "Zero-discharge water treatment plants across all facilities ensure that every drop of process water is treated, recycled, and returned — achieving water-positive status since 2024.",
-    sust_learn_more: "Learn more",
     sust_env_title_1: "Environment",
     sust_env_title_italic: "Protection",
     sust_env_title_2: "Initiatives",
@@ -203,23 +161,6 @@ export const translations = {
     sust_env_7: "Rainwater harvesting infrastructure capturing 12 million litres annually",
     sust_env_8: "Replacement of furnace oil with natural gas across all thermal processes",
     sust_env_9: "Green belt development with 15,000+ native trees planted across facilities",
-    sust_safety_label: "Safety First",
-    sust_safety_title_1: "Where precision meets",
-    sust_safety_title_italic: "protection",
-    sust_safety_1: "All personnel equipped with PPE — helmets, heat-resistant gloves, safety shoes, and eye protection",
-    sust_safety_2: "Monthly safety drills and quarterly emergency evacuation simulations",
-    sust_safety_3: "CCTV-monitored confined space entry with gas detection protocols",
-    sust_safety_4: "Fire extinguishers and hydrant systems inspected weekly by certified engineers",
-    sust_safety_5: "Pressure vessels and storage tanks undergo annual load-bearing certification",
-    sust_safety_btn: "View Safety Policy",
-    sust_health_label: "Health",
-    sust_health_title_1: "We Care For Our",
-    sust_health_title_italic: "People",
-    sust_health_desc: "Our plants have adopted wide-ranging initiatives to protect the health and wellbeing of every employee. Here are some of the key measures adopted across our facilities.",
-    sust_health_1: "ESIC & Personal Accident coverage for all workers",
-    sust_health_2: "Biannual health screenings by qualified physicians",
-    sust_health_3: "Mediclaim & PA Policy for officers and staff",
-    sust_health_4: "Dust, fumes & heat exposure controlled below permissible limits",
     sust_cta_title: "Partner with us for a sustainable future",
     sust_cta_desc: "Explore how our thermally efficient, low-emission heat exchangers can reduce your plant's carbon footprint while improving process performance.",
     sust_cta_btn: "Schedule a Consultation",
@@ -273,13 +214,9 @@ export const translations = {
   },
   gu: {
     // Navbar
-    manifesto: "મેનિફેસ્ટો",
-    services: "સેવાઓ",
-    cases: "કેસો",
     about: "અમારા વિશે",
     resources: "સંસાધનો",
     blog: "બ્લોગ",
-    growth_assets: "ગ્રોથ એસેટ્સ",
     talk_to_us: "અમારો સંપર્ક કરો",
     jupiter_title: "જ્યુપિટર એન્જિનિયરિંગ સોલ્યુશન્સ",
     home: "હોમ",
@@ -304,12 +241,6 @@ export const translations = {
     order_hero_title_main: "અમારી સાથે ",
     order_hero_title_italic: "જોડાઓ",
     order_hero_sub: "તમારી પ્રક્રિયા જરૂરિયાતો, કસ્ટમ હીટ એક્સચેન્જર્સની ડિઝાઇન અથવા તકનીકી મૂલ્યાંકન માટે અમારી એન્જિનિયરિંગ ટીમ સાથે સંપર્ક કરો.",
-    order_form_params: "પ્રક્રિયા પેરામીટર્સ",
-    order_form_hot_in: "હોટ સાઇડ ઇનલેટ ટેમ્પ (°C)",
-    order_form_hot_out: "હોટ સાઇડ આઉટલેટ ટેમ્પ (°C)",
-    order_form_cold_in: "કોલ્ડ સાઇડ ઇનલેટ ટેમ્પ (°C)",
-    order_form_cold_out: "કોલ્ડ સાઇડ આઉટલેટ ટેમ્પ (°C)",
-    order_form_flow: "ફ્લો રેટ (kg/h)",
     order_form_name: "પૂરું નામ",
     order_form_email: "ઇમેઇલ સરનામું",
     order_form_message: "પ્રોજેક્ટ જરૂરિયાતો / સંદેશ",
@@ -325,7 +256,6 @@ export const translations = {
     hero_subtext: "જટિલ ઔદ્યોગિક ઉપયોગો માટે પ્રોસેસ ઇક્વિપમેન્ટનું ફેબ્રિકેશન, એન્જિનિયરિંગ અને ઉત્પાદન. ત્રણ દાયકાથી વધુના સંયુક્ત અનુભવ સાથે, અમે શ્રેષ્ઠ પરિણામો માટે તમારી પ્રક્રિયાઓને ઓપ્ટિમાઇઝ કરવા માટે નિપુણતા પર આધાર રાખીએ છીએ.",
     hero_cta: "ટેકનિકલ પરામર્શ માટે વિનંતી કરો",
     // PainPoints
-    painpoints_title: "તમારી પ્રક્રિયાઓ વર્લ્ડ-ક્લાસ છે. તમારા થર્મલ સાધનો તેમાં અવરોધ ન બનવા જોઈએ.",
     problem_1_title: "કાટ અને સાધનોની નિષ્ફળતા",
     problem_1_body: "જ્યારે આક્રમક રસાયણો જેમ કે HCl, H₂SO₄ અને ફોસ્ફોરિક એસિડ સાથે કામ કરવામાં આવે છે, ત્યારે સામાન્ય મેટલ હીટ એક્સચેન્જર્સ ઝડપથી બગડે છે, જેના કારણે જોખમી લીકેજ અને મોંઘા પ્લાન્ટ બંધ થાય છે.",
     problem_2_title: "બિન-ઓપ્ટિમલ થર્મલ ડિઝાઇન અને ચોકિંગ",
@@ -340,27 +270,15 @@ export const translations = {
     painpoints_cta_btn: "ટેકનિકલ પરામર્શ માટે વિનંતી કરો",
     
     // Cases
-    cases_title_1: "30+ ઔદ્યોગિક પ્લાન્ટ્સ સાથે સાબિત,",
-    cases_title_2: "જેમણે તેમના હીટ ટ્રાન્સફરને ઓપ્ટિમાઇઝ કરવા માટે",
-    cases_title_3: "અમારા પર વિશ્વાસ મૂક્યો છે",
-    cases_explore_btn: "અમારા કેસો જુઓ",
-    cases_explore_hover: "કેસ જુઓ",
-    cases_coming_soon: "ટૂંક સમયમાં આવી રહ્યું છે",
     
     // Services (Heat Exchangers)
-    services_1_heading: "શેલ અને ટ્યુબ એક્સચેન્જર્સ",
     services_1_body: "ઉચ્ચ દબાણ અને ઉચ્ચ તાપમાનની પ્રક્રિયાઓ માટે એન્જિનિયર્ડ. અમે ફાર્મા, કેમિકલ અને પેટ્રોકેમિકલ પ્લાન્ટ્સમાં કઠિન ઔદ્યોગિક પરિસ્થિતિઓમાં શ્રેષ્ઠ થર્મલ પ્રદર્શન અને મહત્તમ ટકાઉપણું પ્રદાન કરતા શેલ અને ટ્યુબ એક્સચેન્જર્સ ડિઝાઇન કરીએ છીએ.",
-    services_2_heading: "ગ્રેફાઇટ ટેકનોલોજી",
     services_2_body: "આક્રમક રાસાયણિક પ્રક્રિયાઓ માટે અતુલ્ય કાટ પ્રતિકારક શક્તિ. અમારા ગ્રેફાઇટ પોલીબ્લોક હીટ એક્સચેન્જર્સ અસાધારણ થર્મલ વાહકતા પ્રદાન કરે છે, જે HCl, H₂SO₄ અને ફોસ્ફોરિક એસિડ જેવા અતિશય કાટ ખાનારા દ્રાવણોના સંચાલન માટે આદર્શ બનાવે છે.",
-    services_3_heading: "ચોક્કસ થર્મલ ડિઝાઇન",
     services_3_body: "અદ્યતન HTRI 9 ગણતરીઓ, પ્રોપ્રાયટરી સોફ્ટવેર અને AspenTech પ્રોસેસ સિમ્યુલેશનનો ઉપયોગ કરીને ઓપ્ટિમાઇઝ હીટ ટ્રાન્સફર. પ્રેશર ડ્રોપ ઘટાડવા અને ટ્યુબમાં જમા થતા કચરાને રોકવા માટે અમે ટ્યુબ ગોઠવણી અને બેફલ સ્પેસિંગને કસ્ટમાઇઝ કરીએ છીએ.",
-    services_4_heading: "લાઇફસાયકલ પર્ફોર્મન્સ",
     services_4_body: "સંપૂર્ણ જાળવણી, નવીનીકરણ અને રી-ટ્યુબિંગ સેવાઓ, 35 ફૂટ EOT ક્રેન સાથે અમારા 6,000 ચો.ફૂટ. વર્કશોપ દ્વારા સમર્થિત. અમે ખાતરી કરીએ છીએ કે તમારી હીટ ટ્રાન્સફર સિસ્ટમ્સ પીક પર્ફોર્મન્સ પર સતત કાર્યરત રહે.",
     services_discover_btn: "અમારા સોલ્યુશન્સ શોધો",
     
     // Testimonials
-    testimonials_title_1: "અમે થર્મલ અને પ્રોસેસ",
-    testimonials_title_2: "સિસ્ટમ્સને ટકાઉ બનાવીએ છીએ",
     testimonials_subtext: "થર્મલ ડિઝાઇનથી લઈને કસ્ટમ ફેબ્રિકેશન સુધી, અમે ફાર્માસ્યુટિકલ્સ, કેમિકલ્સ અને રિફાઇનરીઓમાં મહત્તમ ઓપરેશનલ વિશ્વસનીયતા માટે એન્જિનિયર્ડ હીટ એક્સચેન્જર્સ અને પ્રેશર વેસલ્સ પ્રદાન કરીએ છીએ.",
     
     // CTA Section
@@ -382,19 +300,11 @@ export const translations = {
     cta_btn: "એન્જિનિયર સાથે વાત કરો",
     
     // Footer
-    footer_headline_1: "એન્જિનિયર સાથે વાત કરો,",
-    footer_headline_2: "સેલ્સ ટીમ સાથે નહીં",
     footer_follow: "અમને ફોલો કરો",
     footer_rights: "© 2026 જ્યુપિટર એન્જિનિયરિંગ સોલ્યુશન્સ. સર્વાધિકાર સુરક્ષિત.",
     footer_privacy: "ગોપનીયતા નીતિ",
     footer_imprint: "ઇમ્પ્રિન્ટ",
     footer_cookies: "કૂકીઝ",
-    footer_branding: "અલી દ્વારા બ્રાન્ડિંગ",
-    footer_design: "ડાયલન દ્વારા ડિઝાઇન",
-    footer_tagline: "નવીનતા દ્વારા કાર્યક્ષમતા: તમારી ગરમી, અમારું એક્સચેન્જ",
-    footer_address: "ગેટ નં. 20/5, કેવ્ઝ કાઉન્ટી રિસોર્ટ્સ પાસે, મુંબઈ આગ્રા હાઇવે, વિલ્હોળી, નાશિક - 422010",
-    footer_email: "jupiterengg18@gmail.com",
-    footer_phone: "8600031275 / 9766963331",
     footer_eng_excellence: "એન્જિનિયરિંગ ઉત્કૃષ્ટતા, ટકાઉ બનાવેલ.",
     footer_ravindra_title: "મેનેજિંગ ડિરેક્ટર",
     footer_viraj_title: "ફાઉન્ડર",
@@ -405,20 +315,11 @@ export const translations = {
     footer_developed_by: "ડિઝાઇન અને ડેવલપ - Tanmay",
 
     // Products section
-    products_header: "એન્જિનિયર્ડ",
-    products_header_italic: "ઉત્પાદનો",
-    products_header_2: "કાર્યક્ષમતા માટે બનેલા",
-    products_desc: "અત્યંત રાસાયણિક અને થર્મલ વાતાવરણ માટે ડિઝાઇન કરાયેલ ચોકસાઇ-ઉત્પાદિત ગ્રેફાઇટ અને એલોય ઘટકો.",
     product_1_name: "ગ્રેફાઇટ મલ્ટી-પોર્ટ ડિસ્ટ્રિબ્યુટર",
-    product_1_spec: "કાટ-પ્રૂફ ગ્રેફાઇટ બાંધકામ",
     product_2_name: "બ્લોક ટાઈપ હીટ એક્સચેન્જર",
-    product_2_spec: "ઉચ્ચ-દબાણ ઔદ્યોગિક ઉપયોગ",
     product_3_name: "ગ્રેફાઇટ કોલમ એસેમ્બલી",
-    product_3_spec: "SS ફ્રેમ સાથે ગ્રેફાઇટ આંતરિક ભાગો",
     product_4_name: "ગ્રેફાઇટ નોઝલ",
-    product_4_spec: "ચોકસાઇ-મશીન્ડ ગ્રેફાઇટ ઘટક",
     product_5_name: "ગ્રેફાઇટ પોલીબ્લોક એક્સચેન્જર",
-    product_5_spec: "મહત્તમ થર્મલ વાહકતા",
     view_product: "ઉત્પાદન જુઓ",
 
     // Cases / Our Clients
@@ -432,7 +333,6 @@ export const translations = {
     our_clients_heading_italic: "રાસાયણિક અને ફાર્માસ્યુટિકલ",
     our_clients_heading_2: "નવીનતાકારો સાથે ભાગીદારી",
     our_clients_desc: "અમે કસ્ટમ એન્જિનિયરિંગ, ડિઝાઇન ચકાસણી અને થર્મલ સોલ્યુશન્સ પ્રદાન કરીએ છીએ જે દેશભરની મહત્વપૂર્ણ પ્રક્રિયા સુવિધાઓને સંચાલિત કરે છે.",
-    trusted_partners: "વિશ્વસનીય ભાગીદારો",
 
     // Zoom modal
     zoom_hint: "ઝૂમ માટે સ્ક્રોલ · ખેંચવા ડ્રેગ · રિસેટ માટે ડબલ-ક્લિક",
@@ -456,7 +356,6 @@ export const translations = {
     sust_card_2_desc: "અમે ફક્ત સિન્થેટિક ગ્રેફાઇટ અને કાટ-પ્રતિરોધક એલોયનો ઉપયોગ કરીએ છીએ જે 100% રિસાયકલ કરી શકાય છે. અમારી મેન્યુફેક્ચરિંગ પ્રક્રિયાઓ VOC ઉત્સર્જનને સ્ત્રોત પર જ દૂર કરે છે.",
     sust_card_3_title: "પાણી-સકારાત્મક કામગીરી",
     sust_card_3_desc: "તમામ સુવિધાઓમાં ઝીરો-ડિસ્ચાર્જ જળ શુદ્ધિકરણ પ્લાન્ટ ખાતરી કરે છે કે પ્રક્રિયા પાણીનું દરેક ટીપું સારવાર, રિસાયકલ અને પરત થાય — 2024 થી પાણી-સકારાત્મક સ્થિતિ હાંસલ.",
-    sust_learn_more: "વધુ જાણો",
     sust_env_title_1: "પર્યાવરણ",
     sust_env_title_italic: "સુરક્ષા",
     sust_env_title_2: "પહેલ",
@@ -469,23 +368,6 @@ export const translations = {
     sust_env_7: "વાર્ષિક 1.2 કરોડ લિટર કેપ્ચર કરતી વરસાદી પાણી સંગ્રહ ઇન્ફ્રાસ્ટ્રક્ચર",
     sust_env_8: "તમામ થર્મલ પ્રક્રિયાઓમાં ફર્નેસ ઓઇલને નેચરલ ગેસ વડે બદલવું",
     sust_env_9: "સુવિધાઓમાં 15,000+ દેશી વૃક્ષો વાવીને ગ્રીન બેલ્ટ વિકાસ",
-    sust_safety_label: "સલામતી પ્રથમ",
-    sust_safety_title_1: "જ્યાં ચોકસાઈ",
-    sust_safety_title_italic: "સુરક્ષાને",
-    sust_safety_1: "તમામ કર્મચારીઓને PPE — હેલ્મેટ, ગરમી-પ્રતિરોધક ગ્લવ્ઝ, સેફ્ટી શૂઝ અને આંખની સુરક્ષા સાથે સજ્જ",
-    sust_safety_2: "માસિક સલામતી કવાયત અને ત્રિમાસિક ઇમર્જન્સી ઇવેક્યુએશન સિમ્યુલેશન",
-    sust_safety_3: "ગેસ ડિટેક્શન પ્રોટોકોલ સાથે CCTV-મોનિટર્ડ કન્ફાઇન્ડ સ્પેસ એન્ટ્રી",
-    sust_safety_4: "પ્રમાણિત એન્જિનિયર્સ દ્વારા સાપ્તાહિક ફાયર એક્સટિંગ્વિશર અને હાઇડ્રન્ટ સિસ્ટમ્સ તપાસ",
-    sust_safety_5: "પ્રેશર વેસલ્સ અને સ્ટોરેજ ટેન્ક વાર્ષિક લોડ-બેરિંગ પ્રમાણપત્ર",
-    sust_safety_btn: "સલામતી નીતિ જુઓ",
-    sust_health_label: "આરોગ્ય",
-    sust_health_title_1: "અમે અમારા",
-    sust_health_title_italic: "લોકોની",
-    sust_health_desc: "અમારા પ્લાન્ટ્સે દરેક કર્મચારીના સ્વાસ્થ્ય અને કલ્યાણની રક્ષા માટે વ્યાપક પહેલ અપનાવી છે. અમારી સુવિધાઓમાં અપનાવવામાં આવેલા કેટલાક મુખ્ય પગલાં.",
-    sust_health_1: "તમામ કામદારો માટે ESIC અને પર્સનલ એક્સિડન્ટ કવરેજ",
-    sust_health_2: "લાયક ચિકિત્સકો દ્વારા દ્વિવાર્ષિક સ્વાસ્થ્ય તપાસ",
-    sust_health_3: "અધિકારીઓ અને કર્મચારીઓ માટે મેડિક્લેમ અને PA પોલિસી",
-    sust_health_4: "ધૂળ, ધુમાડો અને ગરમીનો સંપર્ક માન્ય મર્યાદાઓ નીચે નિયંત્રિત",
     sust_cta_title: "ટકાઉ ભવિષ્ય માટે અમારી સાથે ભાગીદારી કરો",
     sust_cta_desc: "અમારા થર્મલી કાર્યક્ષમ, ઓછા-ઉત્સર્જન હીટ એક્સચેન્જર્સ કેવી રીતે તમારા પ્લાન્ટના કાર્બન ફૂટપ્રિન્ટને ઘટાડી શકે છે તે શોધો.",
     sust_cta_btn: "પરામર્શ શેડ્યૂલ કરો",
@@ -539,13 +421,9 @@ export const translations = {
   },
   te: {
     // Navbar
-    manifesto: "మేనిఫెస్టో",
-    services: "సేవలు",
-    cases: "కేసులు",
     about: "మా గురించి",
     resources: "వనరులు",
     blog: "బ్లాగ్",
-    growth_assets: "గ్రోత్ అసెట్స్",
     talk_to_us: "మాతో మాట్లాడండి",
     jupiter_title: "జూపిటర్ ఇంజనీరింగ్ సొల్యూషన్స్",
     home: "హోమ్",
@@ -570,12 +448,6 @@ export const translations = {
     order_hero_title_main: "మాతో ",
     order_hero_title_italic: "కనెక్ట్ అవ్వండి",
     order_hero_sub: "మీ ప్రక్రియ అవసరాలను చర్చించడానికి, కస్టమ్ హీట్ ఎక్స్ఛేంజర్‌లను డిజైన్ చేయడానికి లేదా సాంకేతిక అంచనాలను అభ్యర్థించడానికి మా ఇంజనీరింగ్ బృందాన్ని సంప్రదించండి.",
-    order_form_params: "Process Parameters",
-    order_form_hot_in: "Hot Side Inlet Temp (°C)",
-    order_form_hot_out: "Hot Side Outlet Temp (°C)",
-    order_form_cold_in: "Cold Side Inlet Temp (°C)",
-    order_form_cold_out: "Cold Side Outlet Temp (°C)",
-    order_form_flow: "Flow Rate (kg/h)",
     order_form_name: "పూర్తి పేరు",
     order_form_email: "ఈమెయిల్ చిరునామా",
     order_form_message: "ప్రాజెక్ట్ అవసరాలు / సందేశం",
@@ -592,7 +464,6 @@ export const translations = {
     hero_cta: "సాంకేతిక సంప్రదింపుల కోసం అభ్యర్థించండి",
     
     // PainPoints
-    painpoints_title: "మీ ప్రక్రియలు ప్రపంచ స్థాయి ప్రమాణాలతో ఉన్నాయి. మీ థర్మల్ పరికరాలు అవరోధం కాకూడదు.",
     problem_1_title: "తుప్పు & పరికరాల విఫలం",
     problem_1_body: "HCl, H₂SO₄ మరియు ఫాస్ఫారిక్ ఆమ్లం వంటి దూకుడు రసాయనాలను నిర్వహిస్తున్నప్పుడు ప్రామాణిక మెటల్ హీట్ ఎక్స్‌చేంజర్లు వేగంగా క్షీణిస్తాయి, ఇది ప్రమాదకరమైన లీకేజీలు మరియు ఖరీదైన ప్లాంట్ షట్‌డౌన్‌లకు కారణమవుతుంది.",
     problem_2_title: "సబ్-ఆప్టిమల్ థర్మల్ డిజైన్ & ఫౌలింగ్",
@@ -607,27 +478,15 @@ export const translations = {
     painpoints_cta_btn: "సాంకేతిక సంప్రదింపు అభ్యర్థించండి",
     
     // Cases
-    cases_title_1: "30+ పారిశ్రామిక ప్లాంట్లతో నిరూపితమైంది,",
-    cases_title_2: "వారు తమ హీట్ ట్రాన్స్‌ఫర్‌ను ఆప్టిమైజ్ చేయడం కోసం",
-    cases_title_3: "మమ్మల్ని నమ్మారు",
-    cases_explore_btn: "మా కేసులు అన్వేషించండి",
-    cases_explore_hover: "కేసు చూడండి",
-    cases_coming_soon: "త్వరలో రాబోతోంది",
     
     // Services (Heat Exchangers)
-    services_1_heading: "షెల్ & ట్యూబ్ ఎక్స్‌చేంజర్స్",
     services_1_body: "అధిక పీడనం మరియు అధిక ఉష్ణోగ్రత ప్రక్రియల కోసం రూపొందించబడింది. ఫార్మా, కెమికల్ మరియు పెట్రోకెమికల్ ప్లాంట్లలో కఠినమైన పారిశ్రామిక పరిస్థితులలో ఉత్తమ థర్మల్ పనితీరు మరియు గరిష్ట మన్నికను అందించే షెల్ మరియు ట్యూబ్ ఎక్స్‌చేంజర్‌లను మేము డిజైన్ చేస్తాము.",
-    services_2_heading: "గ్రాఫైట్ టెక్నాలజీ",
     services_2_body: "తీవ్రమైన రసాయన ప్రక్రియల కోసం ఎదురులేని తుప్పు నిరోధకత. మా గ్రాఫైట్ పాలీబ్లాక్ హీట్ ఎక్స్‌చేంజర్లు అసాధారణమైన థర్మల్ వాహకతను అందిస్తాయి, HCl, H₂SO₄ మరియు ఫాస్ఫారిక్ ఆమ్లం వంటి అత్యంత తుప్పు పట్టించే ద్రావణాలను నిర్వహించడానికి అనువుగా ఉంటాయి.",
-    services_3_heading: "ఖచ్చితమైన థర్మల్ డిజైన్",
     services_3_body: "అధునాతన HTRI 9 లెక్కలు, ప్రొప్రైటరీ సాఫ్ట్‌వేర్ మరియు AspenTech ప్రాసెస్ సిమ్యులేషన్‌లను ఉపయోగించి ఆప్టిమైజ్ చేయబడిన ఉష్ణ బదిలీ. పీడన డ్రాప్‌ను తగ్గించడానికి మరియు ట్యూబ్‌లలో వ్యర్థాలు చేరకుండా ఉండటానికి మేము ట్యూబ్ లేఅవుట్‌లు మరియు బాఫిల్ స్పేసింగ్‌ను అనుకూలీకరిస్తాము.",
-    services_4_heading: "లైఫ్‌సైకిల్ పెర్ఫార్మెన్స్",
     services_4_body: "35-అడుగుల EOT క్రేన్‌తో మా 6,000 చ.అ. వర్క్‌షాప్ ద్వారా మద్దతునిచ్చే పూర్తి నిర్వహణ, పునరుద్ధరణ మరియు రీ-ట్యూబింగ్ సేవలు. మీ హీట్ ట్రాన్స్‌ఫర్ సిస్టమ్‌లు గరిష్ట పనితీరుతో నిరంతరం పనిచేయడాన్ని మేము నిర్ధారిస్తాము.",
     services_discover_btn: "మా పరిష్కారాలను కనుగొనండి",
     
     // Testimonials
-    testimonials_title_1: "మేము థర్మల్ మరియు ప్రాసెస్",
-    testimonials_title_2: "వ్యవస్థలను మన్నికగా డిజైన్ చేస్తాము",
     testimonials_subtext: "థర్మల్ డిజైన్ నుండి కస్టమ్ ఫ్యాబ్రికేషన్ వరకు, ఫార్మాస్యూటికల్స్, కెమికల్స్ మరియు రిఫైనరీలలో గరిష్ట కార్యాచరణ విశ్వసనీయత కోసం రూపొందించబడిన హీట్ ఎక్స్‌చేంజర్లు మరియు ప్రెజర్ వెసెల్స్ అందిస్తాము.",
     
     // CTA Section
@@ -649,19 +508,11 @@ export const translations = {
     cta_btn: "ఇంజనీర్‌తో మాట్లాడండి",
     
     // Footer
-    footer_headline_1: "ఇంజనీర్‌తో మాట్లాడండి,",
-    footer_headline_2: "సేల్స్ టీమ్‌తో కాదు",
     footer_follow: "మమ్మల్ని ఫాలో అవ్వండి",
     footer_rights: "© 2026 జూపిటర్ ఇంజనీరింగ్ సొల్యూషన్స్. సర్వ హక్కులు ప్రత్యేకించబడినవి.",
     footer_privacy: "గోప్యతా విధానం",
     footer_imprint: "ఇంప్రింట్",
     footer_cookies: "కుకీలు",
-    footer_branding: "అలీ బ్రాండింగ్",
-    footer_design: "డైలాన్ డిజైన్",
-    footer_tagline: "ఆవిష్కరణ ద్వారా సామర్థ్యం: మీ వేడి, మా ఎక్స్‌చేంజ్",
-    footer_address: "గేట్ నం. 20/5, కేవ్స్ కౌంటీ రిసార్ట్స్ పక్కన, ముంబై ఆగ్రా హైవే, విల్హోళీ, నాశిక్ - 422010",
-    footer_email: "jupiterengg18@gmail.com",
-    footer_phone: "8600031275 / 9766963331",
     footer_eng_excellence: "ఇంజనీరింగ్ శ్రేష్ఠత, మన్నికగా నిర్మితం.",
     footer_ravindra_title: "మేనేజింగ్ డైరెక్టర్",
     footer_viraj_title: "వ్యవస్థాపకుడు",
@@ -672,20 +523,11 @@ export const translations = {
     footer_developed_by: "డిజైన్ & డెవెలప్ - Tanmay",
 
     // Products section
-    products_header: "ఇంజనీర్డ్",
-    products_header_italic: "ఉత్పత్తులు",
-    products_header_2: "పనితీరు కోసం నిర్మితం",
-    products_desc: "తీవ్రమైన రసాయన మరియు ఉష్ణ వాతావరణాల కోసం రూపొందించబడిన ఖచ్చితమైన-తయారీ గ్రాఫైట్ మరియు మిశ్రమం భాగాలు.",
     product_1_name: "గ్రాఫైట్ మల్టీ-పోర్ట్ డిస్ట్రిబ్యూటర్",
-    product_1_spec: "తుప్పు-నిరోధక గ్రాఫైట్ నిర్మాణం",
     product_2_name: "బ్లాక్ టైప్ హీట్ ఎక్స్ఛేంజర్",
-    product_2_spec: "అధిక-పీడన పారిశ్రామిక అనువర్తనాలు",
     product_3_name: "గ్రాఫైట్ కాలమ్ అసెంబ్లీ",
-    product_3_spec: "SS ఫ్రేమ్‌తో గ్రాఫైట్ ఇంటర్నల్స్",
     product_4_name: "గ్రాఫైట్ నాజిల్",
-    product_4_spec: "ఖచ్చితంగా మెషిన్ చేయబడిన గ్రాఫైట్ భాగం",
     product_5_name: "గ్రాఫైట్ పాలీబ్లాక్ ఎక్స్ఛేంజర్",
-    product_5_spec: "గరిష్ట థర్మల్ వాహకత",
     view_product: "ఉత్పత్తిని చూడండి",
 
     // Cases / Our Clients
@@ -699,7 +541,6 @@ export const translations = {
     our_clients_heading_italic: "రసాయన & ఫార్మాస్యూటికల్",
     our_clients_heading_2: "ఆవిష్కర్తలతో భాగస్వామ్యం",
     our_clients_desc: "దేశవ్యాప్తంగా కీలకమైన ప్రాసెస్ సదుపాయాలకు శక్తినిచ్చే కస్టమ్ ఇంజనీరింగ్, డిజైన్ ధృవీకరణ మరియు థర్మల్ సొల్యూషన్‌లను మేము అందిస్తాము.",
-    trusted_partners: "నమ్మకమైన భాగస్వాములు",
 
     // Zoom modal
     zoom_hint: "జూమ్ చేయడానికి స్క్రోల్ · ఈడ్చడానికి డ్రాగ్ · రీసెట్ చేయడానికి డబుల్-క్లిక్",
@@ -723,7 +564,6 @@ export const translations = {
     sust_card_2_desc: "మేము 100% రీసైకిల్ చేయగల సింథటిక్ గ్రాఫైట్ మరియు తుప్పు-నిరోధక అల్లాయ్‌లను మాత్రమే ఉపయోగిస్తాము. మా తయారీ ప్రక్రియలు VOC ఉద్గారాలను మూలం వద్దనే తొలగిస్తాయి.",
     sust_card_3_title: "నీరు-సానుకూల కార్యకలాపాలు",
     sust_card_3_desc: "అన్ని సదుపాయాలలో జీరో-డిశ్చార్జ్ నీటి శుద్ధి ప్లాంట్లు ప్రతి ప్రాసెస్ నీటి చుక్కను శుద్ధి చేసి, రీసైకిల్ చేసి, తిరిగి ఇస్తాయి — 2024 నుండి నీటి-సానుకూల స్థితి సాధించాము.",
-    sust_learn_more: "మరింత తెలుసుకోండి",
     sust_env_title_1: "పర్యావరణ",
     sust_env_title_italic: "రక్షణ",
     sust_env_title_2: "చొరవలు",
@@ -736,23 +576,6 @@ export const translations = {
     sust_env_7: "ఏటా 1.2 కోట్ల లీటర్లు సేకరించే వర్షపు నీటి సంగ్రహ మౌలిక సదుపాయం",
     sust_env_8: "అన్ని థర్మల్ ప్రక్రియలలో ఫర్నేస్ ఆయిల్‌ను సహజ వాయువుతో భర్తీ చేయడం",
     sust_env_9: "సదుపాయాల్లో 15,000+ స్థానిక చెట్లు నాటి గ్రీన్ బెల్ట్ అభివృద్ధి",
-    sust_safety_label: "భద్రత ముందు",
-    sust_safety_title_1: "ఖచ్చితత్వం కలిసే చోట",
-    sust_safety_title_italic: "రక్షణ",
-    sust_safety_1: "అన్ని సిబ్బందికి PPE — హెల్మెట్లు, వేడి-నిరోధక గ్లవ్స్, భద్రతా బూట్లు మరియు కన్ను రక్షణతో సజ్జీకరించబడ్డారు",
-    sust_safety_2: "నెలవారీ భద్రతా విన్యాసాలు మరియు త్రైమాసిక అత్యవసర ఖాళీ చేయడం సిమ్యులేషన్‌లు",
-    sust_safety_3: "గ్యాస్ డిటెక్షన్ ప్రోటోకాల్స్‌తో CCTV-పర్యవేక్షించబడిన పరిమిత ప్రదేశ ప్రవేశం",
-    sust_safety_4: "ధృవీకరించబడిన ఇంజనీర్ల ద్వారా వారపు అగ్నిమాపక యంత్రాలు మరియు హైడ్రంట్ సిస్టమ్‌ల తనిఖీ",
-    sust_safety_5: "ప్రెజర్ వెసెల్స్ మరియు స్టోరేజ్ ట్యాంక్‌లు వార్షిక లోడ్-బేరింగ్ ధృవీకరణ",
-    sust_safety_btn: "భద్రతా విధానం చూడండి",
-    sust_health_label: "ఆరోగ్యం",
-    sust_health_title_1: "మేము మా",
-    sust_health_title_italic: "వ్యక్తుల",
-    sust_health_desc: "ప్రతి ఉద్యోగి ఆరోగ్యం మరియు శ్రేయస్సును కాపాడటానికి మా ప్లాంట్లు విస్తృతమైన చొరవలను అమలు చేశాయి. మా సదుపాయాల్లో అమలు చేసిన కొన్ని ముఖ్యమైన చర్యలు.",
-    sust_health_1: "అన్ని కార్మికులకు ESIC & వ్యక్తిగత ప్రమాద బీమా",
-    sust_health_2: "అర్హత కలిగిన వైద్యుల ద్వారా ద్వివార్షిక ఆరోగ్య పరీక్షలు",
-    sust_health_3: "అధికారులు మరియు సిబ్బందికి మెడిక్లెయిమ్ & PA పాలసీ",
-    sust_health_4: "ధూళి, పొగలు & వేడి ఎక్స్‌పోజర్ అనుమతించదగిన పరిమితుల కంటే తక్కువగా నియంత్రించబడుతుంది",
     sust_cta_title: "సుస్థిర భవిష్యత్తు కోసం మాతో భాగస్వామ్యం అవ్వండి",
     sust_cta_desc: "మా థర్మల్‌గా సమర్థమైన, తక్కువ-ఉద్గార హీట్ ఎక్స్‌చేంజర్లు మీ ప్లాంట్ కార్బన్ ఫుట్‌ప్రింట్‌ను ఎలా తగ్గించగలవో అన్వేషించండి.",
     sust_cta_btn: "సంప్రదింపు షెడ్యూల్ చేయండి",

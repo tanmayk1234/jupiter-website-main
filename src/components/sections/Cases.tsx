@@ -143,7 +143,7 @@ function ProductZoomModal({ product, onClose }: { product: { img: string; name: 
 }
 
 export default function Cases() {
-  const { language, t } = useTranslation();
+  const { t } = useTranslation();
   const [activeProduct, setActiveProduct] = useState<{ img: string; name: string } | null>(null);
 
   const productCards = productCardImages.map((img, i) => ({
@@ -238,7 +238,7 @@ export default function Cases() {
 
       {/* Partner logos marquee */}
       <div className="md:ml-[max(1.5rem,min(5vw,4rem))] overflow-hidden border-t border-b border-black">
-        <div className="flex animate-marquee-right hover:play-state-paused" style={{ width: "max-content" }}>
+        <div className="flex animate-marquee-right" style={{ width: "max-content" }}>
           {loopLogos.map((logo, i) => (
             <div key={i} className="flex-shrink-0 flex flex-col items-center justify-center w-[200px] md:w-[250px] h-[110px] md:h-[130px] border-r border-black px-6">
               <img

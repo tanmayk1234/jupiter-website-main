@@ -4,7 +4,6 @@ import LenisProvider from "./components/providers/LenisProvider";
 import CustomCursor from "./components/ui/CustomCursor";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-import SpaceIntro from "./components/sections/SpaceIntro";
 import IntroLoader from "./components/sections/IntroLoader";
 import Hero from "./components/sections/Hero";
 import PainPoints from "./components/sections/PainPoints";
@@ -21,7 +20,6 @@ import SustainabilityPage from "./components/sections/SustainabilityPage";
 import { LanguageProvider } from "./components/providers/LanguageContext";
 
 export default function App() {
-  const [spaceComplete, setSpaceComplete] = useState(false);
   const [loaderComplete, setLoaderComplete] = useState(false);
   const [heroStart, setHeroStart] = useState(false);
   const [currentView, setCurrentView] = useState<"home" | "order" | "about" | "blog" | "resources" | "sustainability">("home");
@@ -31,11 +29,6 @@ export default function App() {
       window.history.scrollRestoration = "manual";
     }
     window.scrollTo(0, 0);
-  }, []);
-
-  const handleSpaceComplete = useCallback(() => {
-    window.scrollTo(0, 0);
-    setSpaceComplete(true);
   }, []);
 
   const handleHeroStart = useCallback(() => {
@@ -67,23 +60,15 @@ export default function App() {
       <LanguageProvider>
         <CustomCursor />
         
-        {/* Step 1: jupiter 1 (Space 3D intro) */}
-        {!spaceComplete && (
-          <SpaceIntro
-            onHeroStart={() => {}}
-            onComplete={handleSpaceComplete}
-          />
-        )}
-        
-        {/* Step 2: jupiter main animation (IntroLoader) */}
-        {spaceComplete && !loaderComplete && (
+        {/* Step 1: black screen + orbit line animation (IntroLoader) */}
+        {!loaderComplete && (
           <IntroLoader
             onHeroStart={handleHeroStart}
             onComplete={handleLoaderComplete}
           />
         )}
-        
-        {/* Step 3: jupiter main website */}
+
+        {/* Step 2: jupiter main website */}
         <div>
           <Navbar isLoaded={heroStart} currentView={currentView} onViewChange={setCurrentView} />
           

@@ -1,9 +1,6 @@
-import React, { useEffect, useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import SplitType from "split-type";
-
-// Use useLayoutEffect consistently, fallback to useEffect safely for SSR if needed
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 export default function SplitText({
   text,
@@ -21,7 +18,7 @@ export default function SplitText({
 }) {
   const textRef = useRef<HTMLDivElement>(null);
 
-  useIsomorphicLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (!textRef.current || !startTrigger) return;
 
     // Split text into words (and optionally lines) before it is painted

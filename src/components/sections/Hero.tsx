@@ -6,11 +6,9 @@ import type { DotLottieCommonPlayer } from "@dotlottie/react-player";
 import { useTranslation } from "../providers/LanguageContext";
 
 // WGB icon-button component
-function WGBButton({ label, variant, onClick }: { label: string; variant: "dark" | "blue" | "mono"; onClick?: () => void }) {
-  const btnRef = useRef<HTMLButtonElement>(null);
+function WGBButton({ label, onClick }: { label: string; onClick?: () => void }) {
   return (
     <button
-      ref={btnRef}
       onClick={onClick}
       className="group inline-flex items-center gap-3 rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl bg-black text-white hover:bg-neutral-800"
     >
@@ -167,7 +165,7 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
           </p>
           <div ref={btnsRef} className="flex flex-wrap items-center gap-3">
             <span className="opacity-0">
-              <WGBButton label={t("hero_cta")} variant="mono" onClick={() => { onViewChange?.("order"); window.scrollTo(0, 0); }} />
+              <WGBButton label={t("hero_cta")} onClick={() => { onViewChange?.("order"); window.scrollTo(0, 0); }} />
             </span>
           </div>
         </div>

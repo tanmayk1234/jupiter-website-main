@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { useTranslation } from "../providers/LanguageContext";
 
 function PlusIconSm() {
@@ -11,7 +10,6 @@ function PlusIconSm() {
 
 export default function Testimonials({ onViewChange }: { onViewChange?: (view: "home" | "order" | "about" | "blog" | "resources" | "sustainability") => void }) {
   const { language, t } = useTranslation();
-  const sectionRef = useRef<HTMLElement>(null);
 
   const testimonialsLeft = [
     {
@@ -50,7 +48,7 @@ export default function Testimonials({ onViewChange }: { onViewChange?: (view: "
   ];
 
   return (
-    <section ref={sectionRef} className="relative h-[800px] md:h-[85vh] min-h-[600px] max-h-[1000px] overflow-hidden" style={{ backgroundColor: "#F5F5F0" }}>
+    <section className="relative h-[800px] md:h-[85vh] min-h-[600px] max-h-[1000px] overflow-hidden" style={{ backgroundColor: "#F5F5F0" }}>
       {/* Global Vertical line */}
       <div className="hidden md:block absolute top-0 bottom-0 w-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
 
@@ -100,7 +98,7 @@ export default function Testimonials({ onViewChange }: { onViewChange?: (view: "
           
           {/* Lane 1: Scrolling UP */}
           <div className="w-1/2 h-full overflow-hidden">
-            <div className="flex flex-col gap-6 animate-marquee-up hover:play-state-paused" style={{ height: "max-content" }}>
+            <div className="flex flex-col gap-6 animate-marquee-up" style={{ height: "max-content" }}>
               {[...testimonialsLeft, ...testimonialsLeft].map((t, i) => (
                 <div key={`l-${i}`} className="bg-white rounded-xl p-6 md:p-8 flex flex-col gap-5 shadow-sm">
                   {t.name && (
@@ -122,7 +120,7 @@ export default function Testimonials({ onViewChange }: { onViewChange?: (view: "
 
           {/* Lane 2: Scrolling DOWN */}
           <div className="w-1/2 h-full overflow-hidden">
-            <div className="flex flex-col gap-6 animate-marquee-down hover:play-state-paused" style={{ height: "max-content" }}>
+            <div className="flex flex-col gap-6 animate-marquee-down" style={{ height: "max-content" }}>
               {[...testimonialsRight, ...testimonialsRight].map((t, i) => (
                 <div key={`r-${i}`} className="bg-white rounded-xl p-6 md:p-8 flex flex-col gap-5 shadow-sm">
                   {t.name && (
