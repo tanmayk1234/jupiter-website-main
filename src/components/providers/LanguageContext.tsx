@@ -49,7 +49,7 @@ export const translations = {
     order_form_material: "Material Selection",
     order_form_type: "Exchanger Type",
     order_form_submit: "Send Request",
-    order_form_success: "Thank you! Our engineering team will get back to you soon.",
+    order_form_success: "Your email draft is ready - press send and our engineering team will get back to you soon.",
     
     // Hero
     hero_headline_1: "The Future Leader",
@@ -316,7 +316,7 @@ export const translations = {
     order_form_material: "મટિરિયલ પસંદગી",
     order_form_type: "એક્સચેન્જર પ્રકાર",
     order_form_submit: "વિનંતી મોકલો",
-    order_form_success: "આભાર! અમારી એન્જિનિયરિંગ ટીમ ટૂંક સમયમાં તમારો સંપર્ક કરશે.",
+    order_form_success: "તમારો ઈમેલ ડ્રાફ્ટ તૈયાર છે - મોકલો દબાવો, અમારી એન્જિનિયરિંગ ટીમ ટૂંક સમયમાં સંપર્ક કરશે.",
     
     // Hero
     hero_headline_1: "ભવિષ્યના લીડર",
@@ -582,7 +582,7 @@ export const translations = {
     order_form_material: "మెటీరియల్ ఎంపిక",
     order_form_type: "ఎక్స్‌చేంజర్ రకం",
     order_form_submit: "అభ్యర్థనను పంపండి",
-    order_form_success: "ధన్యవాదాలు! మా ఇంజనీరింగ్ బృందం త్వరలోనే మిమ్మల్ని సంప్రదిస్తుంది.",
+    order_form_success: "మీ ఇమెయిల్ డ్రాఫ్ట్ సిద్ధంగా ఉంది - పంపు నొక్కండి, మా ఇంజనీరింగ్ బృందం త్వరలో సంప్రదిస్తుంది.",
     
     // Hero
     hero_headline_1: "భవిష్యత్ అగ్రగామి",

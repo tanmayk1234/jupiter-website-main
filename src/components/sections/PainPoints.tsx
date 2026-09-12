@@ -17,29 +17,6 @@ function CrossIcon() {
   );
 }
 
-const problems = [
-  {
-    title: "Your sales pipeline depends on luck",
-    body: "You rely entirely on referrals and sporadic inbound. When they dry up, you have no engineered mechanism to generate demand on your own terms.",
-  },
-  {
-    title: "Your own marketing is the first thing you cut",
-    body: "Client delivery consumes all your oxygen. Your company's growth strategy becomes a \"side project\" that lacks the consistency to generate real results.",
-  },
-  {
-    title: "Your distinct value is lost in the noise",
-    body: "You're visible, but not memorable. You haven't built the thought leadership or positioning needed to become the only choice for your dream client.",
-  },
-  {
-    title: "You've tried content, ads, and outreach — but never in sync",
-    body: "You tried these tactics in silos, and they failed to convert. Without a holistic system to integrate them, your efforts feel busy rather than strategic.",
-  },
-  {
-    title: "You're unable to book the client meetings you actually want",
-    body: "You know who your dream clients are, but you can't reach them. You lack the intent data and trust required to break through and start the conversation.",
-  },
-];
-
 export default function PainPoints({ onViewChange }: { onViewChange?: (view: "home" | "order" | "about" | "blog" | "resources" | "sustainability") => void }) {
   const { language, t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);

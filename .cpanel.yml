@@ -1,5 +1,15 @@
 ---
+# Disabled: the previous value pointed at another project's account
+# (/home/purplehatinstitu/://purplehatinstitute.com) and rsynced the whole
+# repo instead of the build output. Deploying it would have overwritten an
+# unrelated site.
+#
+# To enable, fill in the real cPanel home path and uncomment. Note it must
+# copy dist/ (the Vite build), not ./ :
+#
+# deployment:
+#   tasks:
+#     - export DEPLOYPATH=/home/<cpanel-user>/public_html/
+#     - /bin/rsync -av --delete dist/ $DEPLOYPATH
 deployment:
-  tasks:
-    - export DEPLOYPATH=/home/purplehatinstitu/://purplehatinstitute.com
-    - /bin/rsync -av --exclude='.git' ./ $DEPLOYPATH
+  tasks: []

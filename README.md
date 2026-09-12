@@ -1,20 +1,59 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Jupiter Engineering Solutions — website
 
-# Run and deploy your AI Studio app
+Marketing site for Jupiter Engineering Solutions (Nashik, India): graphite and
+shell & tube heat exchangers, pressure vessels and process equipment.
 
-This contains everything you need to run your app locally.
+Vite + React 19 + TypeScript, Tailwind 4, GSAP/ScrollTrigger, Lenis smooth
+scroll, three.js, dotLottie.
 
-View your app in AI Studio: https://ai.studio/apps/ff75a529-9a4e-4677-95a0-5efce4910a19
+## Run locally
 
-## Run Locally
+```
+npm install
+npm run dev      # http://localhost:3000
+```
 
-**Prerequisites:**  Node.js
+Other scripts: `npm run build`, `npm run preview`, `npm run lint` (`tsc --noEmit`),
+`npm run clean`.
 
+No environment variables are needed — the site is fully static.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Structure
+
+```
+index.html                      entry + CSP + SEO meta
+src/App.tsx                     view switcher (no router; views are local state)
+src/components/sections/        SpaceIntro, IntroLoader, Hero, PainPoints,
+                                Cases, Services, Testimonials, CTASection,
+                                OrderPage, AboutPage, SustainabilityPage,
+                                PlaceholderPage
+src/components/layout/          Navbar, Footer
+src/components/providers/       LanguageContext (en/gu/te), LenisProvider
+public/assets/lottie/           intro + hero animations
+public/frames/                  132 JPGs scrubbed onto a canvas in Services
+public/textures/                jupiter.jpg, stars.jpg for the three.js intro
+coming-soon/                    standalone holding page (separate deploy)
+```
+
+### Intro sequence
+
+Three gates run before the site is visible, chained by state in `App.tsx`:
+
+1. `SpaceIntro` — three.js Jupiter scene, camera driven by 4×100vh of scroll;
+   warps out at 95% progress.
+2. `IntroLoader` — fullscreen lottie, fades out on complete.
+3. The site, with `heroStart` releasing Hero's animation timeline.
+
+## Known gaps
+
+- The enquiry form in `OrderPage` opens a prefilled `mailto:` draft. There is no
+  backend. Pointing it at a real endpoint means replacing the body of
+  `handleSubmit` and widening `connect-src` in `index.html`'s CSP.
+- Views are local state, so only `/` has a URL. Anything beyond the home page is
+  invisible to search engines.
+- `.cpanel.yml` is disabled — it pointed at an unrelated project's account. Fill
+  in the real cPanel path before using it, and have it copy `dist/`, not `./`.
+
+## Deploy
+
+`npm run build`, then upload the contents of `dist/` to the web root.

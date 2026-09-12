@@ -3,33 +3,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "../providers/LanguageContext";
 
-const panels = [
-  {
-    id: "shell-tube",
-    dot: null,
-    heading: <>Shell & Tube <em className="font-accent font-normal tracking-normal">Exchangers</em></>,
-    body: "Engineered for high-pressure and high-temperature processes. We design shell and tube exchangers that deliver optimal thermal performance and maximum durability under extreme industrial conditions.",
-  },
-  {
-    id: "graphite",
-    dot: null,
-    heading: <>Graphite <em className="font-accent font-normal tracking-normal">Technology</em></>,
-    body: "Unmatched corrosion resistance for aggressive chemical processing. Our graphite heat exchangers provide exceptional thermal conductivity, making them ideal for handling highly corrosive acids.",
-  },
-  {
-    id: "thermal-design",
-    dot: null,
-    heading: <>Precision <em className="font-accent font-normal tracking-normal">Thermal</em> Design</>,
-    body: "Optimized heat transfer using advanced HTRI calculations and CFD flow simulations. We customize tube configurations and baffle spacing to minimize pressure drop and prevent fouling.",
-  },
-  {
-    id: "performance",
-    dot: null,
-    heading: <>Lifecycle <em className="font-accent font-normal tracking-normal">Performance</em></>,
-    body: "Complete maintenance, refurbishing, and re-tubing services. We ensure your heat transfer systems run continuously at peak performance, minimizing downtime and extending operational life.",
-  },
-];
-
 // Decorative + marks scattered in the black bg
 const plusMarks = [
   { top: "8%",  left: "5%"  }, { top: "20%", left: "78%" },
@@ -106,6 +79,12 @@ export default function Services({ onViewChange }: { onViewChange?: (view: "home
 
   // --- Scroll-driven frame animation ---
   useEffect(() => {
+    // The canvas lives inside a `hidden md:block` wrapper, so on phones it never
+    // paints — but the ref still resolves and all 132 frames (7.1 MB) downloaded.
+    // ponytail: checked once on mount, not on resize. A desktop user who starts
+    // below 768px and widens gets no frames until reload; costs nothing to live with.
+    if (!window.matchMedia("(min-width: 768px)").matches) return;
+
     const canvas = canvasRef.current;
     if (!canvas || !sectionRef.current) return;
     const ctx2d = canvas.getContext("2d");

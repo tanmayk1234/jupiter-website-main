@@ -21,10 +21,25 @@ export default function OrderPage() {
     );
   }, []);
 
+  // ponytail: mailto is the only send channel a static site has, and it beats
+  // the previous behaviour of silently discarding every lead. Swap the body of
+  // this handler for a fetch POST once a real endpoint exists (that also needs
+  // connect-src widened in index.html).
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const body = [
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Material: ${formData.material}`,
+      `Exchanger type: ${formData.type}`,
+      "",
+      formData.message,
+    ].join("\n");
+    window.location.href =
+      `mailto:jupiterengg18@gmail.com?subject=${encodeURIComponent(
+        `Technical enquiry - ${formData.name}`
+      )}&body=${encodeURIComponent(body)}`;
     setSubmitted(true);
-    // Smooth reset success notification
     setTimeout(() => {
       setSubmitted(false);
     }, 8000);
