@@ -111,7 +111,7 @@ export default function Footer({ onViewChange }: FooterProps) {
   return (
     <footer className="relative bg-[#020202] text-white overflow-hidden section-dark pt-0 pb-6 border-t border-white/20">
       {/* Global Vertical line */}
-      <GridLine className="absolute bg-white/20" />
+      <GridLine className="absolute bg-white" />
 
       {/* Main Content Area */}
       <div className="md:ml-[max(1.5rem,min(5vw,4rem))] relative z-10 pb-16 md:pb-24 border-b border-white/20">

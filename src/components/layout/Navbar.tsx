@@ -118,8 +118,7 @@ export default function Navbar({
   // Dynamic colors based on isDark
   const bgColor = isDark ? "#000000" : "#F5F5F0";
   const textColor = isDark ? "text-white" : "text-black";
-  const borderColor = isDark ? "bg-white/40" : "bg-black";
-  const borderRightColor = isDark ? "border-white/40" : "border-black";
+  const borderColor = isDark ? "bg-white" : "bg-black";
 
   return (
     <>

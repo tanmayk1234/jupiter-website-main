@@ -226,7 +226,7 @@ export default function SustainabilityPage({ onViewChange }: { onViewChange?: (v
       {/* ═══ CTA BANNER ═══ */}
       <section className="relative bg-[#F5F5F0] pb-20">
         {/* Vertical separator line matching the page theme */}
-        <GridLine className="absolute bg-black/20" />
+        <GridLine className="absolute bg-black" />
 
         <div className="md:ml-[max(1.5rem,min(5vw,4rem))] px-6 md:px-16 relative z-10">
           <div className="max-w-[1100px] mx-auto bg-black text-white rounded-3xl p-8 md:p-14 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative overflow-hidden">

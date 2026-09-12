@@ -173,7 +173,7 @@ export default function Services({ onViewChange }: { onViewChange?: (view: "home
         >+</span>
       ))}
 
-      <GridLine className="absolute bg-white/40" />
+      <GridLine className="absolute bg-white" />
 
       {/* Mobile: stacked layout */}
       <div className="md:hidden px-6 py-24 flex flex-col gap-16">
