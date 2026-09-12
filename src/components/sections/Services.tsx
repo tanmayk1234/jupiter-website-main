@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "../providers/LanguageContext";
+import { PlusIcon } from "../ui/icons";
+import GridLine from "../ui/GridLine";
 
 // Decorative + marks scattered in the black bg
 const plusMarks = [
@@ -10,14 +12,6 @@ const plusMarks = [
   { top: "68%", left: "88%" }, { top: "80%", left: "35%" },
   { top: "12%", left: "92%" }, { top: "45%", left: "96%" },
 ];
-
-function PlusIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-      <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="currentColor"/>
-    </svg>
-  );
-}
 
 // Decorative + marks scattered in the black bg
 
@@ -179,7 +173,7 @@ export default function Services({ onViewChange }: { onViewChange?: (view: "home
         >+</span>
       ))}
 
-      <div className="hidden md:block absolute top-0 bottom-0 w-px bg-white/40 z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
+      <GridLine className="absolute bg-white/40" />
 
       {/* Mobile: stacked layout */}
       <div className="md:hidden px-6 py-24 flex flex-col gap-16">
@@ -194,7 +188,7 @@ export default function Services({ onViewChange }: { onViewChange?: (view: "home
               className="self-start inline-flex items-center gap-2.5 border border-white/20 text-white rounded-full font-display font-medium text-[14px] pl-1.5 pr-5 py-1.5 hover:bg-white hover:text-black transition-colors duration-300"
             >
               <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/10">
-                <PlusIcon />
+                <PlusIcon size={12} />
               </span>
               {t("services_discover_btn")}
             </button>
@@ -223,7 +217,7 @@ export default function Services({ onViewChange }: { onViewChange?: (view: "home
                 className="self-start inline-flex items-center gap-2.5 border border-white/20 text-white rounded-full font-display font-medium text-[14px] pl-1.5 pr-5 py-1.5 hover:bg-white hover:text-black transition-colors duration-300"
               >
                 <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/10">
-                  <PlusIcon />
+                  <PlusIcon size={12} />
                 </span>
                 {t("services_discover_btn")}
               </button>

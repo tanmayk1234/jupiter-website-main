@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useTranslation } from "../providers/LanguageContext";
+import GridLine from "../ui/GridLine";
 
 export default function AboutPage({ onViewChange }: { onViewChange?: (view: "home" | "order" | "about" | "blog" | "resources" | "sustainability") => void }) {
   const { t } = useTranslation();
@@ -17,7 +18,7 @@ export default function AboutPage({ onViewChange }: { onViewChange?: (view: "hom
   return (
     <div ref={pageRef} className="bg-[#F5F5F0] text-black min-h-screen pt-32 pb-24 px-6 md:px-[max(1.5rem,min(5vw,4rem))] font-display">
       {/* Global vertical border line on desktop to match the theme */}
-      <div className="hidden md:block absolute top-0 bottom-0 w-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
+      <GridLine />
 
       <div className="max-w-[1100px] mx-auto md:pl-16 relative z-10">
         

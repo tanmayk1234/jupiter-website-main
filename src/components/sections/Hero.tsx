@@ -4,6 +4,7 @@ import SplitText from "../ui/SplitText";
 import { DotLottiePlayer, PlayerEvents } from "@dotlottie/react-player";
 import type { DotLottieCommonPlayer } from "@dotlottie/react-player";
 import { useTranslation } from "../providers/LanguageContext";
+import { PlusIcon } from "../ui/icons";
 
 // WGB icon-button component
 function WGBButton({ label, onClick }: { label: string; onClick?: () => void }) {
@@ -13,9 +14,7 @@ function WGBButton({ label, onClick }: { label: string; onClick?: () => void }) 
       className="group inline-flex items-center gap-3 rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl bg-black text-white hover:bg-neutral-800"
     >
       <span className="flex items-center justify-center w-8 h-8 rounded-full transition-all duration-500 ease-out bg-white group-hover:scale-110">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-500 ease-out group-hover:rotate-180">
-          <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="black"/>
-        </svg>
+        <PlusIcon className="text-black transition-transform duration-500 ease-out group-hover:rotate-180" />
       </span>
       {label}
     </button>

@@ -1,12 +1,6 @@
 import { useTranslation } from "../providers/LanguageContext";
-
-function PlusIconSm() {
-  return (
-    <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
-      <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="currentColor"/>
-    </svg>
-  );
-}
+import { PlusIcon } from "../ui/icons";
+import GridLine from "../ui/GridLine";
 
 export default function Testimonials({ onViewChange }: { onViewChange?: (view: "home" | "order" | "about" | "blog" | "resources" | "sustainability") => void }) {
   const { language, t } = useTranslation();
@@ -50,7 +44,7 @@ export default function Testimonials({ onViewChange }: { onViewChange?: (view: "
   return (
     <section className="relative h-[800px] md:h-[85vh] min-h-[600px] max-h-[1000px] overflow-hidden" style={{ backgroundColor: "#F5F5F0" }}>
       {/* Global Vertical line */}
-      <div className="hidden md:block absolute top-0 bottom-0 w-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
+      <GridLine />
 
       {/* Top horizontal border to seamlessly connect with previous dark section */}
       <div className="hidden md:block absolute top-0 right-0 h-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
@@ -86,7 +80,7 @@ export default function Testimonials({ onViewChange }: { onViewChange?: (view: "
               className="group inline-flex items-center gap-3 bg-black text-white rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-800 shrink-0"
             >
               <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black transition-all duration-500 ease-out group-hover:scale-110">
-                <PlusIconSm />
+                <PlusIcon size={10} />
               </span>
               {t("talk_to_us")}
             </button>

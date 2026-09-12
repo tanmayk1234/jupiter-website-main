@@ -2,17 +2,10 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "../providers/LanguageContext";
+import { PlusIcon } from "../ui/icons";
+import GridLine from "../ui/GridLine";
 
 gsap.registerPlugin(ScrollTrigger);
-
-/* ─── Reusable plus icon ─── */
-function PlusIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-      <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="currentColor"/>
-    </svg>
-  );
-}
 
 /* ─── Leaf SVG icon for bullet lists ─── */
 function LeafIcon({ className = "" }: { className?: string }) {
@@ -111,7 +104,7 @@ export default function SustainabilityPage({ onViewChange }: { onViewChange?: (v
   return (
     <div ref={pageRef} className="bg-[#F5F5F0] text-black min-h-screen font-display">
       {/* Global vertical border */}
-      <div className="hidden md:block fixed top-0 bottom-0 w-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
+      <GridLine className="fixed bg-black" />
 
       {/* ═══ HERO ═══ */}
       <section ref={heroRef} className="relative pt-32 md:pt-40 pb-20 md:pb-28 px-6 md:px-[max(1.5rem,min(5vw,4rem))] overflow-hidden">
@@ -233,7 +226,7 @@ export default function SustainabilityPage({ onViewChange }: { onViewChange?: (v
       {/* ═══ CTA BANNER ═══ */}
       <section className="relative bg-[#F5F5F0] pb-20">
         {/* Vertical separator line matching the page theme */}
-        <div className="hidden md:block absolute top-0 bottom-0 w-px bg-black/20 z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
+        <GridLine className="absolute bg-black/20" />
 
         <div className="md:ml-[max(1.5rem,min(5vw,4rem))] px-6 md:px-16 relative z-10">
           <div className="max-w-[1100px] mx-auto bg-black text-white rounded-3xl p-8 md:p-14 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative overflow-hidden">
@@ -254,9 +247,7 @@ export default function SustainabilityPage({ onViewChange }: { onViewChange?: (v
               className="group relative z-10 inline-flex items-center gap-3 bg-white text-black rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-200 shrink-0"
             >
               <span className="flex items-center justify-center w-8 h-8 rounded-full bg-black text-white transition-all duration-500 ease-out group-hover:scale-110">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-500 ease-out group-hover:rotate-180">
-                  <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="white"/>
-                </svg>
+                <PlusIcon className="text-white transition-transform duration-500 ease-out group-hover:rotate-180" />
               </span>
               {t("sust_cta_btn")}
             </button>

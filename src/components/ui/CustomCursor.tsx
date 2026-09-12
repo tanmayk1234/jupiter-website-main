@@ -16,18 +16,11 @@ export default function CustomCursor() {
       });
     };
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName.toLowerCase() === "button" || target.tagName.toLowerCase() === "a" || target.closest("button") || target.closest("a")) {
-        gsap.to(cursorRef.current, { scale: 2, duration: 0.2 });
-      }
-    };
-
-    const handleMouseOut = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName.toLowerCase() === "button" || target.tagName.toLowerCase() === "a" || target.closest("button") || target.closest("a")) {
-        gsap.to(cursorRef.current, { scale: 1, duration: 0.2 });
-      }
+    // One handler for both: the hit test was duplicated verbatim and only the
+    // target scale differed.
+    const handleHover = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest("button, a")) return;
+      gsap.to(cursorRef.current, { scale: e.type === "mouseover" ? 2 : 1, duration: 0.2 });
     };
 
     const handleMouseDown = () => {
@@ -39,15 +32,15 @@ export default function CustomCursor() {
     };
 
     window.addEventListener("mousemove", move);
-    window.addEventListener("mouseover", handleMouseOver);
-    window.addEventListener("mouseout", handleMouseOut);
+    window.addEventListener("mouseover", handleHover);
+    window.addEventListener("mouseout", handleHover);
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
 
     return () => {
       window.removeEventListener("mousemove", move);
-      window.removeEventListener("mouseover", handleMouseOver);
-      window.removeEventListener("mouseout", handleMouseOut);
+      window.removeEventListener("mouseover", handleHover);
+      window.removeEventListener("mouseout", handleHover);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };

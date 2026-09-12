@@ -1,28 +1,6 @@
 import { useTranslation } from "../providers/LanguageContext";
-
-function CloseIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-      <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="currentColor"/>
-    </svg>
-  );
-}
-
-function PlusIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-      <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="currentColor"/>
-    </svg>
-  );
-}
-
-function SparkIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-black">
-      <path d="M12 0C12 6.62742 17.3726 12 24 12C17.3726 12 12 17.3726 12 24C12 17.3726 6.62742 12 0 12C6.62742 12 12 6.62742 12 0Z" fill="currentColor"/>
-    </svg>
-  );
-}
+import { PlusIcon, CloseIcon, StarIcon } from "../ui/icons";
+import GridLine from "../ui/GridLine";
 
 export default function CTASection({ onNavigate }: { onNavigate?: () => void }) {
   const { language, t } = useTranslation();
@@ -49,7 +27,7 @@ export default function CTASection({ onNavigate }: { onNavigate?: () => void }) 
   return (
     <section className="relative bg-[#F5F5F0] pt-8 md:pt-12 pb-6 md:pb-8">
       {/* Global Vertical line */}
-      <div className="hidden md:block absolute top-[0px] bottom-0 w-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
+      <GridLine />
 
       {/* Top horizontal border to seamlessly connect with Testimonials */}
       <div className="hidden md:block absolute top-0 right-0 h-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
@@ -88,7 +66,7 @@ export default function CTASection({ onNavigate }: { onNavigate?: () => void }) 
               <div className="flex flex-col items-center md:items-center text-center relative">
                 {/* Spark Icon */}
                 <div className="hidden md:block absolute -left-10 lg:-left-12 top-0 w-10 h-10 text-black">
-                  <SparkIcon />
+                  <StarIcon className="w-full h-full text-black" />
                 </div>
                 <h3 className="font-display font-semibold text-[20px] md:text-[22px] text-black">{t("cta_table_wgb_title")}</h3>
                 <p className="font-display text-[13px] md:text-[14px] text-black/50 mt-1">{t("cta_table_wgb_sub")}</p>
@@ -103,7 +81,7 @@ export default function CTASection({ onNavigate }: { onNavigate?: () => void }) 
                   {/* Bad Card */}
                   <div className="bg-white rounded-2xl p-5 md:p-6 flex items-start gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
                     <div className="w-8 h-8 rounded-xl bg-[#FFE9E0] text-[#FF5A00] flex items-center justify-center shrink-0">
-                      <CloseIcon />
+                      <CloseIcon size={12} />
                     </div>
                     <p className="font-display text-[14px] md:text-[15px] text-black/90 leading-[1.5] mt-1 font-medium">
                       {item.bad}
@@ -113,7 +91,7 @@ export default function CTASection({ onNavigate }: { onNavigate?: () => void }) 
                   {/* Good Card */}
                   <div className="bg-white rounded-2xl p-5 md:p-6 flex items-start gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
                     <div className="w-8 h-8 rounded-xl bg-black text-white flex items-center justify-center shrink-0">
-                      <PlusIcon />
+                      <PlusIcon size={12} />
                     </div>
                     <p className="font-display text-[14px] md:text-[15px] text-black/90 leading-[1.5] mt-1 font-medium">
                       {item.good}
@@ -130,7 +108,7 @@ export default function CTASection({ onNavigate }: { onNavigate?: () => void }) 
               className="group inline-flex items-center gap-3 bg-black text-white rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-800 shadow-lg shadow-black/10"
             >
               <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black transition-all duration-500 ease-out group-hover:scale-110">
-                <PlusIcon />
+                <PlusIcon size={12} />
               </span>
               {t("cta_btn")}
             </button>

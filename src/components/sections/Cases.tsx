@@ -1,6 +1,8 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "../providers/LanguageContext";
+import { PlusIcon, CloseIcon } from "../ui/icons";
+import GridLine from "../ui/GridLine";
 
 const productCardImages = [
   "/assets/images/products/product-1.png",
@@ -32,14 +34,6 @@ const partnerLogos: { src: string; alt: string; name?: string; sizeClass?: strin
   { src: "/assets/images/logos/clients/logo.png", alt: "Bhabani" },
   { src: "/assets/images/logos/clients/prgana-group-logo-new.png", alt: "Pragna Group" },
 ];
-
-function PlusIconSm() {
-  return (
-    <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
-      <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="currentColor"/>
-    </svg>
-  );
-}
 
 function ProductZoomModal({ product, onClose }: { product: { img: string; name: string }; onClose: () => void }) {
   const { t } = useTranslation();
@@ -98,9 +92,7 @@ function ProductZoomModal({ product, onClose }: { product: { img: string; name: 
         onClick={onClose}
         className="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
       >
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="currentColor"/>
-        </svg>
+        <CloseIcon />
       </button>
 
       {/* Zoom hint */}
@@ -158,7 +150,7 @@ export default function Cases() {
   return (
     <section id="cases-section" className="relative overflow-hidden" style={{ backgroundColor: "#F5F5F0" }}>
       {/* Global Vertical Line */}
-      <div className="hidden md:block absolute top-0 bottom-0 w-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
+      <GridLine />
 
       {/* Our Products Header */}
       <div className="md:ml-[max(1.5rem,min(5vw,4rem))] border-t border-b border-black">
@@ -210,7 +202,7 @@ export default function Cases() {
                 <div className="absolute inset-0 flex items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                    <div className="flex items-center justify-center gap-2 w-[calc(100%-12px)] h-[calc(100%-12px)] bg-white text-black rounded-lg font-display font-semibold text-[14px]">
                       <span className="flex items-center justify-center w-4 h-4 text-black shrink-0">
-                        <PlusIconSm />
+                        <PlusIcon size={10} />
                       </span>
                       {t("view_product")}
                    </div>

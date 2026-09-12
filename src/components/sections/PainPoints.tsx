@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "../providers/LanguageContext";
+import { PlusIcon, StarIcon } from "../ui/icons";
+import GridLine from "../ui/GridLine";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,7 +65,7 @@ export default function PainPoints({ onViewChange }: { onViewChange?: (view: "ho
 
   return (
     <section ref={sectionRef} className="relative py-[128px] px-6 md:px-[max(1.5rem,min(5vw,4rem))]" style={{ backgroundColor: "#F5F5F0" }}>
-      <div className="hidden md:block absolute top-0 bottom-0 w-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
+      <GridLine />
 
       <div className="max-w-[1100px] mx-auto">
         {/* Headline */}
@@ -121,9 +123,7 @@ export default function PainPoints({ onViewChange }: { onViewChange?: (view: "ho
 
             {/* Glowing brand spark motif */}
             <div className="w-10 h-10 text-white relative z-10 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl group-hover/card:bg-white/10 group-hover/card:border-white/20 transition-all duration-500 ease-out">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 animate-pulse">
-                <path d="M12 0C12 6.62742 17.3726 12 24 12C17.3726 12 12 17.3726 12 24C12 17.3726 6.62742 12 0 12C6.62742 12 12 6.62742 12 0Z" />
-              </svg>
+              <StarIcon className="w-5 h-5 animate-pulse" />
             </div>
 
             <div className="relative z-10">
@@ -135,9 +135,7 @@ export default function PainPoints({ onViewChange }: { onViewChange?: (view: "ho
                 className="group inline-flex items-center gap-3 bg-white text-black rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-200"
               >
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-black transition-all duration-500 ease-out group-hover:scale-110">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-500 ease-out group-hover:rotate-180">
-                    <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="white"/>
-                  </svg>
+                  <PlusIcon className="text-white transition-transform duration-500 ease-out group-hover:rotate-180" />
                 </span>
                 {t("painpoints_cta_btn")}
               </button>

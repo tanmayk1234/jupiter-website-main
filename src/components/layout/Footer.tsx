@@ -1,15 +1,8 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "../providers/LanguageContext";
-
-// 4-point star mark
-function SmallStar() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-      <path d="M12 0C12 6.62742 17.3726 12 24 12C17.3726 12 12 17.3726 12 24C12 17.3726 6.62742 12 0 12C6.62742 12 12 6.62742 12 0Z" />
-    </svg>
-  );
-}
+import { CloseIcon, StarIcon } from "../ui/icons";
+import GridLine from "../ui/GridLine";
 
 interface FooterProps {
   onViewChange?: (view: "home" | "order" | "about" | "blog" | "resources" | "sustainability") => void;
@@ -118,7 +111,7 @@ export default function Footer({ onViewChange }: FooterProps) {
   return (
     <footer className="relative bg-[#020202] text-white overflow-hidden section-dark pt-0 pb-6 border-t border-white/20">
       {/* Global Vertical line */}
-      <div className="hidden md:block absolute top-0 bottom-0 w-px bg-white/20 z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
+      <GridLine className="absolute bg-white/20" />
 
       {/* Main Content Area */}
       <div className="md:ml-[max(1.5rem,min(5vw,4rem))] relative z-10 pb-16 md:pb-24 border-b border-white/20">
@@ -159,7 +152,7 @@ export default function Footer({ onViewChange }: FooterProps) {
              <div className="w-full lg:w-[45%] relative min-h-[200px] lg:min-h-[250px] flex items-start">
                 {/* Small floating star */}
                 <div className="absolute top-[5%] left-[50%] lg:left-[45%] text-white w-4 h-4 opacity-80 z-10">
-                   <SmallStar />
+                   <StarIcon className="w-full h-full" />
                 </div>
 
                 {/* Logo and text */}
@@ -313,9 +306,7 @@ export default function Footer({ onViewChange }: FooterProps) {
                 onClick={() => setActiveModal(null)}
                 className="text-white/60 hover:text-white transition-colors p-1"
               >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="currentColor"/>
-                </svg>
+                <CloseIcon />
               </button>
             </div>
 

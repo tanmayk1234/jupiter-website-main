@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useTranslation } from "../providers/LanguageContext";
+import { PlusIcon } from "../ui/icons";
+import GridLine from "../ui/GridLine";
 
 export default function OrderPage() {
   const { t } = useTranslation();
@@ -48,7 +50,7 @@ export default function OrderPage() {
   return (
     <div ref={pageRef} className="bg-[#F5F5F0] text-black min-h-screen pt-32 pb-24 px-6 md:px-[max(1.5rem,min(5vw,4rem))] font-display">
       {/* Global vertical border line on desktop */}
-      <div className="hidden md:block absolute top-0 bottom-0 w-px bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
+      <GridLine />
 
       <div className="max-w-[1100px] mx-auto md:pl-16 relative z-10">
         
@@ -176,9 +178,7 @@ export default function OrderPage() {
                 className="group inline-flex items-center gap-3 bg-black text-white rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-800 self-start"
               >
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black transition-all duration-500 ease-out group-hover:scale-110">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-500 ease-out group-hover:rotate-180">
-                    <path d="M7.7896 3.3936V0H6.2104V3.3936C6.2104 4.9504 4.9504 6.2104 3.3936 6.2104H0V7.78959H3.3936C4.9504 7.78959 6.2104 9.0496 6.2104 10.6064V14H7.7896V10.6064C7.7896 9.0496 9.0496 7.78959 10.6064 7.78959H14V6.2104H10.6064C9.0496 6.2104 7.7896 4.9504 7.7896 3.3936Z" fill="black"/>
-                  </svg>
+                  <PlusIcon className="text-black transition-transform duration-500 ease-out group-hover:rotate-180" />
                 </span>
                 {t("order_form_submit")}
               </button>
