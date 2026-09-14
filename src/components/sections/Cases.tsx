@@ -466,7 +466,7 @@ export default function Cases() {
       </div>
 
       {/* Product cards marquee (left) */}
-      <div className="md:ml-[max(1.5rem,min(5vw,4rem))] overflow-hidden my-6 md:my-8">
+      <div className="md:ml-[max(1.5rem,min(5vw,4rem))] overflow-x-auto md:overflow-hidden overflow-y-hidden my-6 md:my-8">
         <div className="flex gap-5 md:gap-8 animate-marquee-left" style={{ width: "max-content" }}>
           {loopCards.map((p, i) => (
             <button
@@ -527,7 +527,7 @@ export default function Cases() {
       </div>
 
       {/* Partner logos marquee */}
-      <div className="md:ml-[max(1.5rem,min(5vw,4rem))] overflow-hidden border-t border-b border-black">
+      <div className="md:ml-[max(1.5rem,min(5vw,4rem))] overflow-x-auto md:overflow-hidden overflow-y-hidden border-t border-b border-black">
         <div className="flex animate-marquee-right" style={{ width: "max-content" }}>
           {loopLogos.map((logo, i) => (
             <div key={i} className="flex-shrink-0 flex flex-col items-center justify-center w-[200px] md:w-[250px] h-[110px] md:h-[130px] border-r border-black px-6">

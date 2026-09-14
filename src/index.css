@@ -65,11 +65,18 @@ body::-webkit-scrollbar,
   }
 }
 
-.animate-marquee-left { animation: marquee-left 30s linear infinite; }
-.animate-marquee-right { animation: marquee-right 30s linear infinite; }
+/* The horizontal marquees pause on :hover so a card can be read and clicked.
+   Touch has no hover, so on a phone the product cards never stopped and tapping
+   one meant hitting a moving target. Below md the animation is dropped entirely
+   and the row becomes a natively swipeable overflow-x container instead — the
+   gesture people already expect there, and it needs no JS. */
+@media (min-width: 768px) {
+  .animate-marquee-left { animation: marquee-left 30s linear infinite; }
+  .animate-marquee-right { animation: marquee-right 30s linear infinite; }
 
-.animate-marquee-left:hover,
-.animate-marquee-right:hover { animation-play-state: paused; }
+  .animate-marquee-left:hover,
+  .animate-marquee-right:hover { animation-play-state: paused; }
+}
 
 @keyframes marquee-left {
   from { transform: translateX(0); }
