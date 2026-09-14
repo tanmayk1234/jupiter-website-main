@@ -179,7 +179,7 @@ export default function Footer({ onViewChange }: FooterProps) {
                       href="https://www.linkedin.com/in/ravindra-mundada-91044323/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="relative rounded-[12px] overflow-hidden border border-white/10 w-[160px] h-[220px] md:w-[180px] md:h-[260px] bg-[#111] shrink-0 flex flex-col justify-end cursor-pointer group/card hover:border-white/30 transition-all duration-300"
+                      className="relative rounded-[12px] overflow-hidden border border-white/10 flex-1 min-w-0 h-[220px] md:flex-none md:w-[180px] md:h-[260px] bg-[#111] flex flex-col justify-end cursor-pointer group/card hover:border-white/30 transition-all duration-300"
                     >
                        <div className="absolute inset-0 bg-[#111] flex items-center justify-center overflow-hidden">
                          <img 
@@ -196,7 +196,7 @@ export default function Footer({ onViewChange }: FooterProps) {
                     </a>
                     
                     {/* Viraj Card (Staggered slightly down) */}
-                    <div className="relative mt-12 rounded-[12px] overflow-hidden border border-white/10 w-[160px] h-[220px] md:w-[180px] md:h-[260px] bg-[#111] shrink-0 flex flex-col justify-end group/card hover:border-white/30 transition-all duration-300">
+                    <div className="relative mt-12 rounded-[12px] overflow-hidden border border-white/10 flex-1 min-w-0 h-[220px] md:flex-none md:w-[180px] md:h-[260px] bg-[#111] flex flex-col justify-end group/card hover:border-white/30 transition-all duration-300">
                        <div className="absolute inset-0 bg-[#111] flex items-center justify-center overflow-hidden">
                          <img 
                            src="/assets/images/team/viraj.png" 

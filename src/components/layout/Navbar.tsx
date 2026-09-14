@@ -128,8 +128,10 @@ export default function Navbar({
         style={{ backgroundColor: bgColor }}
       >
         {/* Horizontal bottom border — Left segment */}
+        <div className={`md:hidden absolute bottom-0 left-0 right-0 h-[1.5px] transition-colors duration-300 ${borderColor}`} />
+
         <div
-          className={`absolute bottom-0 left-0 h-[1.5px] transition-colors duration-300 ${borderColor}`}
+          className={`hidden md:block absolute bottom-0 left-0 h-[1.5px] transition-colors duration-300 ${borderColor}`}
           style={{
             width: "calc(max(1.5rem, min(5vw, 4rem)) - 24px)",
           }}
@@ -137,7 +139,7 @@ export default function Navbar({
 
         {/* Horizontal bottom border — Right segment */}
         <div
-          className={`absolute bottom-0 right-0 h-[1.5px] transition-colors duration-300 ${borderColor}`}
+          className={`hidden md:block absolute bottom-0 right-0 h-[1.5px] transition-colors duration-300 ${borderColor}`}
           style={{
             left: "calc(max(1.5rem, min(5vw, 4rem)) + 24px)",
           }}

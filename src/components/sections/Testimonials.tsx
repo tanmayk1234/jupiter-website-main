@@ -42,17 +42,17 @@ export default function Testimonials({ onViewChange }: { onViewChange?: (view: "
   ];
 
   return (
-    <section className="relative h-[800px] md:h-[85vh] min-h-[600px] max-h-[1000px] overflow-hidden" style={{ backgroundColor: "#F5F5F0" }}>
+    <section className="relative md:h-[85vh] md:min-h-[600px] md:max-h-[1000px] overflow-hidden" style={{ backgroundColor: "#F5F5F0" }}>
       {/* Global Vertical line */}
       <GridLine />
 
       {/* Top horizontal border to seamlessly connect with previous dark section */}
       <div className="hidden md:block absolute top-0 right-0 h-[1.5px] bg-black z-20 pointer-events-none" style={{ left: "max(1.5rem, min(5vw, 4rem))" }} />
 
-      <div className="md:ml-[max(1.5rem,min(5vw,4rem))] px-6 md:px-16 flex flex-col md:flex-row gap-16 md:gap-12 items-center md:items-stretch relative h-full max-w-[1400px] mx-auto py-12 md:py-0">
+      <div className="md:ml-[max(1.5rem,min(5vw,4rem))] px-6 md:px-16 flex flex-col md:flex-row gap-16 md:gap-12 items-center md:items-stretch relative md:h-full max-w-[1400px] mx-auto py-12 md:py-0">
         
         {/* Left Static Column */}
-        <div className="w-full md:w-[45%] shrink-0 relative z-30 flex flex-col justify-center h-full">
+        <div className="w-full md:w-[45%] shrink-0 relative z-30 flex flex-col justify-center md:h-full">
           <h2 className="font-display font-medium text-[clamp(2.5rem,4.5vw,5rem)] leading-[1.05] tracking-[-0.03em] text-black mb-6 mt-12 md:mt-0">
             {language === "en" ? (
               <>
