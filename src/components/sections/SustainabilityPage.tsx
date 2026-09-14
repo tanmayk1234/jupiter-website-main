@@ -114,7 +114,11 @@ export default function SustainabilityPage({ onViewChange }: { onViewChange?: (v
           </span>
           <h1 className="hero-reveal font-medium text-[clamp(2.8rem,6vw,6.5rem)] leading-[0.95] tracking-[-0.04em] mb-8 max-w-[900px]">
             {t("sust_hero_title_1")}{" "}
-            <em className="font-accent font-normal tracking-normal italic">{t("sust_hero_title_italic")}</em>
+            <em className="font-accent font-normal tracking-normal italic">{t("sust_hero_title_italic")}</em>{" "}
+            {/* The space above is load-bearing on mobile, where this br is
+                display:none — JSX drops the newline between elements, so without
+                it the headline read "greenerindustrial future". On desktop the
+                br breaks the line and the trailing space collapses. */}
             <br className="hidden md:block" />
             {t("sust_hero_title_2")}
           </h1>
