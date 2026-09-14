@@ -129,6 +129,7 @@ export const translations = {
 
     // Zoom modal
     zoom_hint: "Scroll to zoom · Drag to pan · Double-click to reset",
+    zoom_hint_touch: "Pinch to zoom · Drag to pan · Double-tap to reset",
 
     // Sustainability Page
     sust_commitment: "Our Commitment",
@@ -336,6 +337,7 @@ export const translations = {
 
     // Zoom modal
     zoom_hint: "ઝૂમ માટે સ્ક્રોલ · ખેંચવા ડ્રેગ · રિસેટ માટે ડબલ-ક્લિક",
+    zoom_hint_touch: "ઝૂમ માટે પિંચ · ખેંચવા ડ્રેગ · રિસેટ માટે ડબલ-ટેપ",
 
     // Sustainability Page
     sust_commitment: "અમારી પ્રતિબદ્ધતા",
@@ -544,6 +546,7 @@ export const translations = {
 
     // Zoom modal
     zoom_hint: "జూమ్ చేయడానికి స్క్రోల్ · ఈడ్చడానికి డ్రాగ్ · రీసెట్ చేయడానికి డబుల్-క్లిక్",
+    zoom_hint_touch: "జూమ్ చేయడానికి పించ్ · ఈడ్చడానికి డ్రాగ్ · రీసెట్ చేయడానికి డబుల్-ట్యాప్",
 
     // Sustainability Page
     sust_commitment: "మా నిబద్ధత",
