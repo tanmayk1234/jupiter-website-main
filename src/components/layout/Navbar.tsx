@@ -310,8 +310,19 @@ export default function Navbar({
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <span className={`block w-5 h-px bg-current transition-transform duration-300 ${mobileMenuOpen ? "translate-y-[3px] rotate-45" : ""}`} />
-            <span className={`block w-5 h-px bg-current transition-transform duration-300 ${mobileMenuOpen ? "-translate-y-[3px] -rotate-45" : ""}`} />
+            {/* One transform rather than Tailwind's separate translate/rotate
+                utilities: those compile to the standalone `translate` and
+                `rotate` properties, which transition-transform does not drive,
+                and the open state came out as a shallow chevron instead of an X.
+                gap-1.5 puts the bars 3.5px either side of centre. */}
+            <span
+              className="block w-5 h-px bg-current transition-transform duration-300"
+              style={{ transform: mobileMenuOpen ? "translateY(3.5px) rotate(45deg)" : "none" }}
+            />
+            <span
+              className="block w-5 h-px bg-current transition-transform duration-300"
+              style={{ transform: mobileMenuOpen ? "translateY(-3.5px) rotate(-45deg)" : "none" }}
+            />
           </button>
         </div>
       </nav>
@@ -327,7 +338,7 @@ export default function Navbar({
                 onClick={() => setLanguage(lang)}
                 className={`px-4 py-2 rounded-full border text-[14px] font-medium transition-all ${
                   language === lang 
-                    ? "bg-black border-black text-white" 
+                    ? "bg-white border-white text-black" 
                     : "border-white/20 text-white/60 hover:text-white"
                 }`}
               >
@@ -391,7 +402,7 @@ export default function Navbar({
               onViewChange("order");
               window.scrollTo(0, 0);
             }}
-            className="mt-8 inline-flex items-center justify-center gap-3 bg-black text-white hover:bg-neutral-800 rounded-full py-4 font-medium text-base w-full shrink-0"
+            className="mt-8 inline-flex items-center justify-center gap-3 bg-white text-black hover:bg-neutral-200 rounded-full py-4 font-medium text-base w-full shrink-0"
           >
             {t("talk_to_us")}
           </button>
