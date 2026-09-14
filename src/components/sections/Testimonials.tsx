@@ -91,7 +91,7 @@ export default function Testimonials({ onViewChange }: { onViewChange?: (view: "
         <div className="w-full md:w-[55%] flex flex-row gap-6 h-[500px] md:h-full overflow-hidden relative" style={{ maskImage: "linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)" }}>
           
           {/* Lane 1: Scrolling UP */}
-          <div className="w-1/2 h-full overflow-hidden">
+          <div className="w-full md:w-1/2 h-full overflow-hidden">
             <div className="flex flex-col gap-6 animate-marquee-up" style={{ height: "max-content" }}>
               {[...testimonialsLeft, ...testimonialsLeft].map((t, i) => (
                 <div key={`l-${i}`} className="bg-white rounded-xl p-6 md:p-8 flex flex-col gap-5 shadow-sm">
@@ -113,7 +113,7 @@ export default function Testimonials({ onViewChange }: { onViewChange?: (view: "
           </div>
 
           {/* Lane 2: Scrolling DOWN */}
-          <div className="w-1/2 h-full overflow-hidden">
+          <div className="hidden md:block w-1/2 h-full overflow-hidden">
             <div className="flex flex-col gap-6 animate-marquee-down" style={{ height: "max-content" }}>
               {[...testimonialsRight, ...testimonialsRight].map((t, i) => (
                 <div key={`r-${i}`} className="bg-white rounded-xl p-6 md:p-8 flex flex-col gap-5 shadow-sm">

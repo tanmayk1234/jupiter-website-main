@@ -88,7 +88,7 @@ export default function OrderPage() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="border border-black/10 hover:border-black/30 focus:border-black rounded-xl px-4 py-3 text-[14px] bg-transparent outline-none transition-colors"
+                    className="border border-black/10 hover:border-black/30 focus:border-black rounded-xl px-4 py-3 text-[16px] md:text-[14px] bg-transparent outline-none transition-colors"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
@@ -98,7 +98,7 @@ export default function OrderPage() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="border border-black/10 hover:border-black/30 focus:border-black rounded-xl px-4 py-3 text-[14px] bg-transparent outline-none transition-colors"
+                    className="border border-black/10 hover:border-black/30 focus:border-black rounded-xl px-4 py-3 text-[16px] md:text-[14px] bg-transparent outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -111,7 +111,7 @@ export default function OrderPage() {
                   required
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="border border-black/10 hover:border-black/30 focus:border-black rounded-xl px-4 py-3 text-[14px] bg-transparent outline-none transition-colors resize-none font-sans"
+                  className="border border-black/10 hover:border-black/30 focus:border-black rounded-xl px-4 py-3 text-[16px] md:text-[14px] bg-transparent outline-none transition-colors resize-none font-sans"
                 />
               </div>
 
