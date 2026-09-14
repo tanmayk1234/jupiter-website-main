@@ -42,9 +42,31 @@ function ProductZoomModal({ product, onClose }: { product: { img: string; name: 
   const dragging = useRef(false);
   const lastMouse = useRef({ x: 0, y: 0 });
 
-  const handleWheel = useCallback((e: React.WheelEvent) => {
-    e.stopPropagation();
-    setScale(s => Math.min(5, Math.max(0.5, s - e.deltaY * 0.002)));
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  // Wheel has to be bound natively with passive:false. React registers onWheel
+  // as a passive listener, so preventDefault() inside it is ignored and the
+  // page keeps scrolling behind the modal — stopPropagation() never addressed
+  // that, it only stops React's own bubbling.
+  useEffect(() => {
+    const el = overlayRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      setScale(s => Math.min(5, Math.max(0.5, s - e.deltaY * 0.002)));
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, []);
+
+  // Lenis drives scrolling from its own window listener, which preventDefault
+  // on our element does not reach. Locking the body is what actually stops it,
+  // and it covers keyboard scrolling too. data-lenis-prevent on the overlay
+  // below is Lenis's own opt-out for the wheel path.
+  useEffect(() => {
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previous; };
   }, []);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
@@ -81,6 +103,8 @@ function ProductZoomModal({ product, onClose }: { product: { img: string; name: 
 
   return createPortal(
     <div
+      ref={overlayRef}
+      data-lenis-prevent
       className="fixed inset-0 bg-black/85 backdrop-blur-md z-[99999] flex items-center justify-center cursor-grab active:cursor-grabbing"
       onClick={onClose}
       onMouseMove={handleMouseMove}
@@ -113,7 +137,6 @@ function ProductZoomModal({ product, onClose }: { product: { img: string; name: 
       {/* Image */}
       <div
         onClick={(e) => e.stopPropagation()}
-        onWheel={handleWheel}
         onMouseDown={handleMouseDown}
         onDoubleClick={handleDoubleClick}
         className="max-w-[85vw] max-h-[85vh] select-none"
