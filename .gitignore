@@ -17,3 +17,6 @@ parse-pdf.cjs
 pdf-text.txt
 profile-text.txt
 *.mp4
+
+# Local-only mobile test harness (dev tool, never ship)
+public/__mobile-harness.html
