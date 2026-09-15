@@ -78,13 +78,15 @@ body::-webkit-scrollbar,
   .animate-marquee-right:hover { animation-play-state: paused; }
 }
 
+/* The tracks in Cases.tsx are three copies of the list, so one copy is a third
+   of the width. Shifting by half landed mid-copy and the loop visibly jumped. */
 @keyframes marquee-left {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to { transform: translateX(-33.3333%); }
 }
 
 @keyframes marquee-right {
-  from { transform: translateX(-50%); }
+  from { transform: translateX(-33.3333%); }
   to { transform: translateX(0); }
 }
 

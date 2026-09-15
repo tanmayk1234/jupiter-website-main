@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "../providers/LanguageContext";
 import { CloseIcon, StarIcon } from "../ui/icons";
@@ -11,6 +11,15 @@ interface FooterProps {
 export default function Footer({ onViewChange }: FooterProps) {
   const { language, t } = useTranslation();
   const [activeModal, setActiveModal] = useState<"privacy" | "imprint" | "cookies" | null>(null);
+
+  // Footer stays mounted for the life of the page, so this has to key on the
+  // modal rather than run on mount the way the product modal's own lock does.
+  useEffect(() => {
+    if (!activeModal) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previous; };
+  }, [activeModal]);
 
   const footerLinks = [
     { label: t("home"), view: "home" as const },
@@ -233,14 +242,14 @@ export default function Footer({ onViewChange }: FooterProps) {
                           window.scrollTo(0, 0);
                         }
                       }} 
-                      className="font-display font-bold text-[14px] text-white hover:text-white/70 transition-colors"
+                      className="font-display font-bold text-[14px] text-white hover:text-white/70 transition-colors inline-flex items-center min-h-[44px]"
                     >
                       {link.label}
                     </a>
                  ))}
                </nav>
                
-               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 border border-white/20 rounded-[6px] px-4 py-2 hover:bg-white/10 transition-colors shrink-0">
+               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 border border-white/20 rounded-[6px] px-4 py-2 min-h-[44px] hover:bg-white/10 transition-colors shrink-0">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                   </svg>
@@ -259,7 +268,7 @@ export default function Footer({ onViewChange }: FooterProps) {
               id="footer-privacy-link"
               href="#" 
               onClick={(e) => { e.preventDefault(); setActiveModal("privacy"); }} 
-              className="hover:text-white transition-colors"
+              className="hover:text-white transition-colors inline-flex items-center min-h-[44px]"
             >
               {t("footer_privacy")}
             </a>
@@ -267,7 +276,7 @@ export default function Footer({ onViewChange }: FooterProps) {
               id="footer-imprint-link"
               href="#" 
               onClick={(e) => { e.preventDefault(); setActiveModal("imprint"); }} 
-              className="hover:text-white transition-colors"
+              className="hover:text-white transition-colors inline-flex items-center min-h-[44px]"
             >
               {t("footer_imprint")}
             </a>
@@ -275,7 +284,7 @@ export default function Footer({ onViewChange }: FooterProps) {
               id="footer-cookies-link"
               href="#" 
               onClick={(e) => { e.preventDefault(); setActiveModal("cookies"); }} 
-              className="hover:text-white transition-colors"
+              className="hover:text-white transition-colors inline-flex items-center min-h-[44px]"
             >
               {t("footer_cookies")}
             </a>
@@ -288,6 +297,7 @@ export default function Footer({ onViewChange }: FooterProps) {
       {/* Modals Popup */}
       {activeModal && createPortal(
         <div 
+          data-lenis-prevent
           className="fixed inset-0 bg-black/80 backdrop-blur-md z-[99999] flex items-center justify-center p-4 cursor-pointer"
           onClick={() => setActiveModal(null)}
         >
@@ -304,7 +314,7 @@ export default function Footer({ onViewChange }: FooterProps) {
               <button 
                 id="modal-close-btn-top"
                 onClick={() => setActiveModal(null)}
-                className="text-white/60 hover:text-white transition-colors p-1"
+                className="text-white/60 hover:text-white transition-colors p-[15px] -m-[11px]"
               >
                 <CloseIcon />
               </button>

@@ -484,7 +484,7 @@ export default function Cases() {
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
                 {/* Zoom icon on hover */}
-                <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/0 group-hover:bg-black/80 flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100">
+                <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/80 md:bg-black/0 md:group-hover:bg-black/80 flex items-center justify-center transition-all duration-300 opacity-100 md:opacity-0 md:group-hover:opacity-100 scale-100 md:scale-75 md:group-hover:scale-100">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="11" cy="11" r="8" />
                     <path d="M21 21l-4.35-4.35" />

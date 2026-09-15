@@ -185,7 +185,7 @@ export default function Services({ onViewChange }: { onViewChange?: (view: "home
             <p className="font-display text-[15px] text-white/70 leading-[1.7]">{p.body}</p>
             <button 
               onClick={() => { onViewChange?.("order"); window.scrollTo(0, 0); }}
-              className="self-start inline-flex items-center gap-2.5 border border-white/20 text-white rounded-full font-display font-medium text-[14px] pl-1.5 pr-5 py-1.5 hover:bg-white hover:text-black transition-colors duration-300"
+              className="self-start inline-flex items-center gap-2.5 border border-white/20 text-white rounded-full font-display font-medium text-[14px] pl-1.5 pr-5 py-1.5 min-h-[48px] hover:bg-white hover:text-black transition-colors duration-300"
             >
               <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/10">
                 <PlusIcon size={12} />

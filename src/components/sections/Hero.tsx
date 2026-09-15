@@ -77,7 +77,7 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen pt-20 px-6 md:px-[max(1.5rem,min(5vw,4rem))] flex flex-col justify-center overflow-hidden"
+      className="relative min-h-svh pt-20 px-6 md:px-[max(1.5rem,min(5vw,4rem))] flex flex-col justify-center overflow-hidden"
       style={{ backgroundColor: "#F5F5F0" }}
     >
       {/* Left vertical border — starts exactly below the logo and runs full height */}
@@ -148,7 +148,7 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
             key={language}
             startTrigger={isLoaded}
             delay={hasAnimated ? 0.05 : 2.6}
-            className="hero-headline font-display font-medium text-[clamp(3rem,5.8vw,8rem)] leading-[0.92] tracking-[-0.04em] m-0 text-black mb-8"
+            className="hero-headline font-display font-medium text-[clamp(2.25rem,5.8vw,8rem)] leading-[0.92] tracking-[-0.04em] m-0 text-black mb-8"
             text={
               <>
                 {t("hero_headline_1")}<br />{t("hero_headline_2")}<br /><em className="font-accent font-normal tracking-normal">{t("hero_headline_3")}</em>
@@ -159,7 +159,7 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
 
         {/* Subtext + buttons */}
         <div className="flex flex-col gap-6">
-          <p ref={subtextRef} className="opacity-0 font-display text-black/60 text-[clamp(13px,1vw,16px)] max-w-[55ch]">
+          <p ref={subtextRef} className="opacity-0 font-display text-black/60 text-[clamp(15px,1.2vw,18px)] max-w-[55ch]">
             {t("hero_subtext")}
           </p>
           <div ref={btnsRef} className="flex flex-wrap items-center gap-3">

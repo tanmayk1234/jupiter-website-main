@@ -63,6 +63,15 @@ export default function Navbar({
     }
   };
 
+  // The menu is a fixed full-screen overlay; without this the page scrolls
+  // underneath it and the visitor returns to a different position than they left.
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previous; };
+  }, [mobileMenuOpen]);
+
   useEffect(() => {
     if (!isLoaded) return;
     
@@ -329,14 +338,14 @@ export default function Navbar({
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-[99] bg-black text-white flex flex-col pt-20 px-6 font-display overflow-y-auto">
+        <div className="fixed inset-0 z-[99] bg-black text-white flex flex-col pt-20 px-6 pb-10 font-display overflow-y-auto">
           {/* Mobile Language Switcher */}
           <div className="flex items-center justify-around border-b border-white/10 pb-4 mb-2">
             {(["en", "gu", "te"] as Language[]).map((lang) => (
               <button
                 key={lang}
                 onClick={() => setLanguage(lang)}
-                className={`px-4 py-2 rounded-full border text-[14px] font-medium transition-all ${
+                className={`px-4 py-2 min-h-[44px] inline-flex items-center justify-center rounded-full border text-[14px] font-medium transition-all ${
                   language === lang 
                     ? "bg-white border-white text-black" 
                     : "border-white/20 text-white/60 hover:text-white"
