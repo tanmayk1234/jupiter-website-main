@@ -5,6 +5,12 @@ import "@dotlottie/react-player/dist/index.css";
 
 const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }: { onHeroStart: () => void, onComplete: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  // The artwork stops drawing its own black backdrop at frame 216 of the 245 it
+  // plays, and spends its last second drawing black lines meant to be seen over
+  // a light page. Until then the overlay has to be opaque or the site shows
+  // through around the letterboxed artwork; from then on it has to be see-through
+  // or that last second is black on black.
+  const [revealed, setRevealed] = useState(false);
   // Read once: the intro is over in under four seconds, so a rotation mid-play
   // is not worth re-rendering the player for.
   const [isPortrait] = useState(
@@ -62,32 +68,33 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
   return (
     <div 
       ref={containerRef} 
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black pointer-events-none"
+      className={`fixed inset-0 z-[9999] flex items-center justify-center ${revealed ? "bg-transparent" : "bg-black"} pointer-events-none`}
     >
       <div className="absolute inset-0 flex items-center justify-center w-full h-full">
-        {/* We use 150vw to ensure the lottie animation drawing covers the screen just like the main website.
-            The artwork is 1920x1080. At 150vw it is wider than a phone screen,
-            so below md it is scaled to 175vw instead — the widest it goes before
-            its line of copy runs off the screen, and large enough that the copy
-            can be read at all. It is letterboxed inside that box, which is
-            invisible because the backdrop matches the artwork's own black. */}
-        <div className={isPortrait ? "w-[175vw] h-full" : "w-[150vw] h-[150vh] flex items-center justify-center"}>
+        {/* The artwork is 1920x1080. Fitted to a phone that is a 390x219 strip
+            and its line of copy renders about five pixels tall, so below md it is
+            scaled to 175vw — the widest it goes before that line runs off the
+            screen. shrink-0 is what makes the width stick: this is a flex item,
+            and without it the box is shrunk back to the viewport. Desktop keeps
+            the shrinking it has always had; its framing is not the problem. */}
+        <div className={isPortrait ? "w-[175vw] shrink-0 h-full" : "w-[150vw] h-[150vh] flex items-center justify-center"}>
           <DotLottiePlayer
             src="/assets/lottie/intro-comp.lottie"
             autoplay={true}
             loop={false}
             onEvent={(event) => {
               if (event === PlayerEvents.Play) {
+                // Frame 216 at 30fps. Switching a shade late is harmless (the
+                // artwork is drawing on black either way); switching early would
+                // show the page through the backdrop while it is still up.
+                setTimeout(() => setRevealed(true), 3000);
+                // Hero's headline waits 2.6s after this fires, so this is set so
+                // that it starts exactly as the backdrop lifts. Left at 2s the
+                // headline began at 4.6s and the intro spent its last second and
+                // a half revealing an empty page — the "white screen".
                 setTimeout(() => {
                   onHeroStartRef.current();
-                }, 2000); // 2s after start
-                // The artwork carries its own black backdrop layer, but only to
-                // frame 216 of 245 — the source composition cuts to a pale one
-                // there and spends its last second drawing black lines on it,
-                // which arrives as a white flash mid-intro. Frame 216 is 2.97s
-                // in at 30fps, so start the half-second fade just before it and
-                // hand over while everything is still black.
-                setTimeout(finish, 2900);
+                }, 400);
               }
               if (event === PlayerEvents.Complete) {
                 finish();
