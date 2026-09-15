@@ -6,6 +6,11 @@ import "@dotlottie/react-player/dist/index.css";
 const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }: { onHeroStart: () => void, onComplete: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [lottieReady, setLottieReady] = useState(false);
+  // Read once: the intro is over in under four seconds, so a rotation mid-play
+  // is not worth re-rendering the player for.
+  const [isPortrait] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
+  );
   
   // Keep stable references
   const onHeroStartRef = useRef(onHeroStart);
@@ -61,8 +66,13 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
       className={`fixed inset-0 z-[9999] flex items-center justify-center transition-colors duration-500 ${lottieReady ? 'bg-[#050505] md:bg-transparent' : 'bg-[#050505]'} pointer-events-none`}
     >
       <div className="absolute inset-0 flex items-center justify-center w-full h-full">
-        {/* We use 150vw to ensure the lottie animation drawing covers the screen just like the main website */}
-        <div className="w-[150vw] h-[150vh] flex items-center justify-center">
+        {/* We use 150vw to ensure the lottie animation drawing covers the screen just like the main website.
+            The artwork is 1920x1080. At 150vw it is wider than a phone screen, so
+            the composition was clipped to whatever fell in the middle 390px.
+            Below md it is fitted to the viewport instead, which shows the whole
+            drawing — small, but intact. Cropping it to fill was tried and is
+            worse: at this aspect ratio the crop lands on a single line. */}
+        <div className={isPortrait ? "w-full h-full" : "w-[150vw] h-[150vh] flex items-center justify-center"}>
           <DotLottiePlayer
             src="/assets/lottie/intro-comp.lottie"
             autoplay={true}

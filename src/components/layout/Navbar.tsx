@@ -183,6 +183,8 @@ export default function Navbar({
               height: "100%",
               objectFit: "contain",
               display: "block",
+              filter: isDark ? "invert(1)" : "none",
+              transition: "filter 300ms",
             }}
           />
         </div>
@@ -196,6 +198,26 @@ export default function Navbar({
 
           {/* Inner nav */}
           <div className="flex-1 relative flex items-center px-5 md:px-6">
+            {/* Mobile brand. The gear mark below and the wordmark beside it are
+                both hidden md:block, so the phone navbar carried no branding at
+                all — an empty bar with a burger in it. Tapping returns home,
+                which is what people expect of a masthead. */}
+            <button
+              onClick={() => handleItemClick("home")}
+              aria-label="Jupiter Engineering Solutions, go to home"
+              className="md:hidden flex items-center gap-2 min-w-0 mr-2"
+            >
+              <img
+                src="/jupiter-logo.png"
+                alt=""
+                className="w-7 h-7 object-contain shrink-0 transition-[filter] duration-300"
+                style={{ filter: isDark ? "invert(1)" : "none" }}
+              />
+              <span className="font-friz font-medium tracking-[0.06em] text-[13px] leading-tight text-left truncate">
+                Jupiter Engineering Solutions
+              </span>
+            </button>
+
             {/* Jupiter wordmark — left side, offset right to clear the gear logo */}
             <span
               className="hidden md:block font-friz font-medium tracking-[0.12em] select-none relative z-20"
