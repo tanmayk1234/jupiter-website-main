@@ -45,10 +45,22 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
 
     setTimeout(() => {
       preloaderPlayerRef.current?.play();
-      mobileFormPlayerRef.current?.play();
       // loop player is intentionally NOT started here —
       // it starts from frame 0 only when the preloader completes (see onEvent below)
     }, 1200);
+
+    // isLoaded fires two seconds into the intro, but the intro overlay covers
+    // the page until its own animation completes and fades — about 2.4s after
+    // this. Starting the phone's forming pass on the same 1.2s as desktop meant
+    // its opening sweep, the part that actually reads as motion, played behind a
+    // black screen, and the orbit was already assembled by the time the page
+    // appeared. It starts once the page is visible instead, at full strength:
+    // the artwork opens on an empty frame and draws itself in, so it needs no
+    // fade of its own.
+    setTimeout(() => {
+      gsap.set(mobileFormRef.current, { opacity: 0.55 });
+      mobileFormPlayerRef.current?.play();
+    }, 2600);
 
     gsap.fromTo(subtextRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, delay: 3.0, ease: "power3.out" });
     if (btnsRef.current) {
@@ -56,9 +68,6 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
         { y: 20, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, delay: 3.4, stagger: 0.1, ease: "power3.out" }
       );
-    }
-    if (mobileFormRef.current) {
-      gsap.fromTo(mobileFormRef.current, { opacity: 0 }, { opacity: 0.55, duration: 2, delay: 1.5, ease: "power2.inOut" });
     }
     // Fade in the grid lines after the circle finishes drawing
     if (vLineRef.current) {
