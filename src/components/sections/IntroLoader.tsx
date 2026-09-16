@@ -1,25 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { DotLottiePlayer, PlayerEvents } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
 
 const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }: { onHeroStart: () => void, onComplete: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  // The artwork stops drawing its own black backdrop at frame 216 of the 245 it
-  // plays, and spends its last second drawing black lines meant to be seen over
-  // a light page. Until then the overlay has to be opaque or the site shows
-  // through around the letterboxed artwork; from then on it has to be see-through
-  // or that last second is black on black.
-  const [revealed, setRevealed] = useState(false);
-  // The player reports its own frame, so the switch rides the animation rather
-  // than a stopwatch — on a device where playback runs behind, a stopwatch would
-  // lift the backdrop while the artwork was still drawing on it.
-  const firstFrameRef = useRef<number | null>(null);
-  // Read once: the intro is over in under four seconds, so a rotation mid-play
-  // is not worth re-rendering the player for.
-  const [isPortrait] = useState(
-    () => typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
-  );
+  const [lottieReady, setLottieReady] = useState(false);
   
   // Keep stable references
   const onHeroStartRef = useRef(onHeroStart);
@@ -41,80 +27,37 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
     };
   }, []);
 
-  // Tearing down the overlay is idempotent — the lottie's Complete event, a
-  // playback error and the safety timeout below can all reach it, and only the
-  // first one should run.
-  const finishedRef = useRef(false);
-  const finish = useCallback(() => {
-    if (finishedRef.current) return;
-    finishedRef.current = true;
-    document.body.style.overflow = '';
-    gsap.to(containerRef.current, {
-      opacity: 0,
-      duration: 0.5,
-      onComplete: () => {
-        if (containerRef.current) containerRef.current.style.display = 'none';
-        onCompleteRef.current();
-      }
-    });
-  }, []);
-
-  // Without this the overlay is a trap: it sits at z-[9999] over the entire site
-  // and only ever unmounts when the lottie reports Complete. If that event never
-  // arrives — a stalled download on mobile data, a decode failure, a blocked
-  // autoplay — the visitor is left staring at a covered page with no way out.
-  // The animation runs 3.9s, so in any normal load it finishes long before this.
-  useEffect(() => {
-    const bail = setTimeout(finish, 12000);
-    return () => clearTimeout(bail);
-  }, [finish]);
-
   return (
     <div 
       ref={containerRef} 
-      className={`fixed inset-0 z-[9999] flex items-center justify-center ${revealed ? "bg-transparent" : "bg-black"} pointer-events-none`}
+      className={`fixed inset-0 z-[9999] flex items-center justify-center transition-colors duration-500 ${lottieReady ? 'bg-transparent' : 'bg-[#050505]'} pointer-events-none`}
     >
       <div className="absolute inset-0 flex items-center justify-center w-full h-full">
-        {/* The artwork is 1920x1080. Fitted to a phone that is a 390x219 strip
-            and its line of copy renders about five pixels tall, so below md it is
-            scaled to 175vw — the widest it goes before that line runs off the
-            screen. shrink-0 is what makes the width stick: this is a flex item,
-            and without it the box is shrunk back to the viewport. Desktop keeps
-            the shrinking it has always had; its framing is not the problem. */}
-        <div className={isPortrait ? "w-[175vw] shrink-0 h-full" : "w-[150vw] h-[150vh] flex items-center justify-center"}>
+        {/* We use 150vw to ensure the lottie animation drawing covers the screen just like the main website */}
+        <div className="w-[150vw] h-[150vh] flex items-center justify-center">
           <DotLottiePlayer
             src="/assets/lottie/intro-comp.lottie"
             autoplay={true}
             loop={false}
-            onEvent={(event, params) => {
+            onEvent={(event) => {
+              if (event === PlayerEvents.Ready) {
+                setLottieReady(true);
+              }
               if (event === PlayerEvents.Play) {
-                // Hero's headline waits 2.6s after this fires, and the backdrop
-                // lifts 3s in, so this puts the two together. Left at 2s the
-                // headline began at 4.6s and the intro spent its last second and
-                // a half revealing an empty page — the "white screen".
                 setTimeout(() => {
                   onHeroStartRef.current();
-                }, 400);
-              }
-              // The artwork stops drawing its own black backdrop 89 frames into
-              // the segment it plays. Counting from the first frame reported
-              // rather than assuming a number keeps this right whether the player
-              // counts from the start of the file or the start of the segment.
-              if (event === PlayerEvents.Frame) {
-                const f = (params as { frame?: number } | undefined)?.frame;
-                if (typeof f === "number") {
-                  if (firstFrameRef.current === null) firstFrameRef.current = f;
-                  if (f - firstFrameRef.current >= 89) setRevealed(true);
-                }
+                }, 2000); // 2s after start
               }
               if (event === PlayerEvents.Complete) {
-                finish();
-              }
-              // A lottie that fails to load or decode never plays and never
-              // completes, so let the site through rather than holding it behind
-              // an animation that is not coming.
-              if (event === PlayerEvents.Error || event === PlayerEvents.DataFail) {
-                finish();
+                document.body.style.overflow = '';
+                gsap.to(containerRef.current, {
+                  opacity: 0,
+                  duration: 0.5,
+                  onComplete: () => {
+                    if(containerRef.current) containerRef.current.style.display = 'none';
+                    onCompleteRef.current();
+                  }
+                });
               }
             }}
             className="w-full h-full"
