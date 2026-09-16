@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { DotLottiePlayer, PlayerEvents } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
@@ -27,6 +27,31 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
     };
   }, []);
 
+  const finishedRef = useRef(false);
+  const finish = useCallback(() => {
+    if (finishedRef.current) return;
+    finishedRef.current = true;
+    document.body.style.overflow = '';
+    gsap.to(containerRef.current, {
+      opacity: 0,
+      duration: 0.5,
+      onComplete: () => {
+        if (containerRef.current) containerRef.current.style.display = 'none';
+        onCompleteRef.current();
+      }
+    });
+  }, []);
+
+  // Without this the overlay is a trap. It sits at z-[9999] over the whole site
+  // and only ever comes down on the lottie's Complete event. If that event never
+  // arrives — a stalled download on mobile data, a decode failure, autoplay
+  // blocked — the visitor is left on a covered page with no way through. The
+  // animation runs 3.9s, so on any load that works this never fires.
+  useEffect(() => {
+    const bail = setTimeout(finish, 12000);
+    return () => clearTimeout(bail);
+  }, [finish]);
+
   return (
     <div 
       ref={containerRef} 
@@ -49,15 +74,13 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
                 }, 2000); // 2s after start
               }
               if (event === PlayerEvents.Complete) {
-                document.body.style.overflow = '';
-                gsap.to(containerRef.current, {
-                  opacity: 0,
-                  duration: 0.5,
-                  onComplete: () => {
-                    if(containerRef.current) containerRef.current.style.display = 'none';
-                    onCompleteRef.current();
-                  }
-                });
+                finish();
+              }
+              // A lottie that fails to load or decode never plays and never
+              // completes, so let the site through rather than holding it behind
+              // an animation that is not coming.
+              if (event === PlayerEvents.Error || event === PlayerEvents.DataFail) {
+                finish();
               }
             }}
             className="w-full h-full"

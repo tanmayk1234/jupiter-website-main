@@ -74,6 +74,26 @@ export default function CTASection({ onNavigate }: { onNavigate?: () => void }) 
               
             </div>
 
+            {/* Below md the two column headings cannot sit above their own
+                lists: the grid collapses to one column and the bad/good cards
+                interleave, so each heading ends up over the wrong card. The
+                header row is hidden there and the pairing is stated once here
+                instead, against the same two icons the cards carry. */}
+            <div className="md:hidden flex flex-col gap-2.5 mb-5">
+              <div className="flex items-center gap-3">
+                <div className="w-7 h-7 rounded-lg bg-[#FFE9E0] text-[#FF5A00] flex items-center justify-center shrink-0">
+                  <CloseIcon size={11} />
+                </div>
+                <span className="font-display text-[13px] font-semibold text-black/70">{t("cta_table_isolated_title")}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-7 h-7 rounded-lg bg-black text-white flex items-center justify-center shrink-0">
+                  <PlusIcon size={11} />
+                </div>
+                <span className="font-display text-[13px] font-semibold text-black/70">{t("cta_table_wgb_title")}</span>
+              </div>
+            </div>
+
             {/* Table Rows */}
             <div className="flex flex-col gap-3.5">
               {localizedComparisons.map((item, i) => (
