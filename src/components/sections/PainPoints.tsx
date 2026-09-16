@@ -127,12 +127,12 @@ export default function PainPoints({ onViewChange }: { onViewChange?: (view: "ho
             </div>
 
             <div className="relative z-10">
-              <h3 className="font-display font-semibold text-[1.1rem] text-white/90 mb-6 leading-[1.3] max-w-[20ch]">
+              <h3 className="font-display font-semibold text-[1.1rem] text-white/90 mb-6 leading-[1.3] md:max-w-[20ch]">
                 {t("painpoints_cta_title")}
               </h3>
               <button 
                 onClick={() => { onViewChange?.("order"); window.scrollTo(0, 0); }}
-                className="group inline-flex items-center gap-3 bg-white text-black rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-200"
+                className="group inline-flex items-center gap-3 bg-white text-black rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 max-md:text-left transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-200"
               >
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-black transition-all duration-500 ease-out group-hover:scale-110">
                   <PlusIcon className="text-white transition-transform duration-500 ease-out group-hover:rotate-180" />

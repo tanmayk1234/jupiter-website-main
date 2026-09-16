@@ -53,7 +53,7 @@ export default function Testimonials({ onViewChange }: { onViewChange?: (view: "
         
         {/* Left Static Column */}
         <div className="w-full md:w-[45%] shrink-0 relative z-30 flex flex-col justify-center md:h-full">
-          <h2 className="font-display font-medium text-[clamp(2.5rem,4.5vw,5rem)] leading-[1.05] tracking-[-0.03em] text-black mb-6 mt-12 md:mt-0">
+          <h2 className="font-display font-medium text-[clamp(2.5rem,4.5vw,5rem)] leading-[1.05] tracking-[-0.03em] text-black mb-6 md:mt-0">
             {language === "en" ? (
               <>
                 We engineer thermal & <br className="hidden md:block" />

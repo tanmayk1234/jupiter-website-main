@@ -38,7 +38,7 @@ export default function CTASection({ onNavigate }: { onNavigate?: () => void }) 
         <div className="bg-[#FFF3ED] rounded-[2rem] p-8 md:p-12 lg:p-16 relative overflow-hidden">
           
           {/* Black Swoosh Background Graphic */}
-          <div className="absolute top-[15%] right-[-15%] w-[800px] h-[1000px] border-[1px] border-black/10 rounded-[50%] -rotate-[15deg] pointer-events-none z-0" />
+          <div className="max-md:hidden absolute top-[15%] right-[-15%] w-[800px] h-[1000px] border-[1px] border-black/10 rounded-[50%] -rotate-[15deg] pointer-events-none z-0" />
 
           {/* Header */}
           <div className="text-center relative z-10 max-w-[800px] mx-auto mb-16">
@@ -54,7 +54,7 @@ export default function CTASection({ onNavigate }: { onNavigate?: () => void }) 
           {/* Comparison Table */}
           <div className="relative z-10 max-w-[1000px] mx-auto">
             {/* Table Headers */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-6 relative">
+            <div className="max-md:hidden grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-6 relative">
               
               {/* Left Header */}
               <div className="flex flex-col items-center md:items-center text-center">

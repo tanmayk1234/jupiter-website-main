@@ -124,10 +124,13 @@ export default function Navbar({
     };
   }, [isLoaded]);
 
-  // Dynamic colors based on isDark
-  const bgColor = isDark ? "#000000" : "#F5F5F0";
-  const textColor = isDark ? "text-white" : "text-black";
-  const borderColor = isDark ? "bg-white" : "bg-black";
+  // Dynamic colors based on isDark. The mobile menu is a black full-screen
+  // panel that starts below the bar, so while it is open the bar has to read as
+  // dark too or it sits as a cream band across the top of the overlay.
+  const onDark = isDark || mobileMenuOpen;
+  const bgColor = onDark ? "#000000" : "#F5F5F0";
+  const textColor = onDark ? "text-white" : "text-black";
+  const borderColor = mobileMenuOpen ? "bg-transparent" : (isDark ? "bg-white" : "bg-black");
 
   return (
     <>
@@ -197,7 +200,7 @@ export default function Navbar({
           />
 
           {/* Inner nav */}
-          <div className="flex-1 relative flex items-center px-5 md:px-6">
+          <div className="flex-1 relative flex items-center px-6">
             {/* Mobile brand. The gear mark below and the wordmark beside it are
                 both hidden md:block, so the phone navbar carried no branding at
                 all — an empty bar with a burger in it. Tapping returns home,
@@ -211,7 +214,7 @@ export default function Navbar({
                 src="/jupiter-logo.png"
                 alt=""
                 className="w-7 h-7 object-contain shrink-0 transition-[filter] duration-300"
-                style={{ filter: isDark ? "invert(1)" : "none" }}
+                style={{ filter: onDark ? "invert(1)" : "none" }}
               />
               <span className="font-friz font-medium tracking-[0.06em] text-[13px] leading-tight text-left truncate">
                 Jupiter Engineering Solutions
@@ -337,7 +340,7 @@ export default function Navbar({
 
           {/* Mobile burger */}
           <button
-            className="md:hidden flex flex-col items-center justify-center gap-1.5 px-5"
+            className="md:hidden flex flex-col items-center justify-center gap-1.5 px-6"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -362,7 +365,7 @@ export default function Navbar({
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-[99] bg-black text-white flex flex-col pt-20 px-6 pb-10 font-display overflow-y-auto">
           {/* Mobile Language Switcher */}
-          <div className="flex items-center justify-around border-b border-white/10 pb-4 mb-2">
+          <div className="flex items-center justify-around max-md:justify-between border-b border-white/10 pb-4 mb-2">
             {(["en", "gu", "te"] as Language[]).map((lang) => (
               <button
                 key={lang}

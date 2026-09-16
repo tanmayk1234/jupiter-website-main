@@ -158,7 +158,7 @@ export default function Footer({ onViewChange }: FooterProps) {
          {/* Content Wrapper */}
          <div className="px-6 md:px-12 relative z-10 flex flex-col lg:flex-row justify-between gap-16 lg:gap-8 h-full">
              {/* Left Side: Brand Graphics */}
-             <div className="w-full lg:w-[45%] relative min-h-[200px] lg:min-h-[250px] flex items-start">
+             <div className="w-full lg:w-[45%] relative min-h-[130px] md:min-h-[200px] lg:min-h-[250px] flex items-start">
                 {/* Small floating star */}
                 <div className="absolute top-[5%] left-[50%] lg:left-[45%] text-white w-4 h-4 opacity-80 z-10">
                    <StarIcon className="w-full h-full" />
@@ -229,8 +229,8 @@ export default function Footer({ onViewChange }: FooterProps) {
             </div>
             
             {/* Links & Button row */}
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-6 ml-2">
-               <nav className="flex flex-wrap items-center gap-5 md:gap-6">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-6 ml-0 md:ml-2">
+               <nav className="flex flex-wrap items-center gap-x-5 gap-y-0 md:gap-6">
                  {footerLinks.map(link => (
                     <a 
                       key={link.label} 

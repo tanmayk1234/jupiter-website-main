@@ -466,7 +466,7 @@ export default function Cases() {
       </div>
 
       {/* Product cards marquee (left) */}
-      <div className="md:ml-[max(1.5rem,min(5vw,4rem))] overflow-x-auto md:overflow-hidden overflow-y-hidden my-6 md:my-8">
+      <div className="md:ml-[max(1.5rem,min(5vw,4rem))] max-md:pl-6 overflow-x-auto md:overflow-hidden overflow-y-hidden my-6 md:my-8">
         <div className="flex gap-5 md:gap-8 animate-marquee-left" style={{ width: "max-content" }}>
           {loopCards.map((p, i) => (
             <button
