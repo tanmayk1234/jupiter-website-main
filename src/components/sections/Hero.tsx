@@ -30,10 +30,12 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
   const introLottieRef = useRef<HTMLDivElement>(null);
   const loopLottieRef  = useRef<HTMLDivElement>(null);
   const mobileLottieRef = useRef<HTMLDivElement>(null);
+  const mobileFormRef   = useRef<HTMLDivElement>(null);
 
   const preloaderPlayerRef = useRef<DotLottieCommonPlayer>(null);
   const loopPlayerRef      = useRef<DotLottieCommonPlayer>(null);
   const mobilePlayerRef    = useRef<DotLottieCommonPlayer>(null);
+  const mobileFormPlayerRef = useRef<DotLottieCommonPlayer>(null);
 
   const vLineRef      = useRef<HTMLDivElement>(null);
   const hLineRef      = useRef<HTMLDivElement>(null);
@@ -43,7 +45,7 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
 
     setTimeout(() => {
       preloaderPlayerRef.current?.play();
-      mobilePlayerRef.current?.play();
+      mobileFormPlayerRef.current?.play();
       // loop player is intentionally NOT started here —
       // it starts from frame 0 only when the preloader completes (see onEvent below)
     }, 1200);
@@ -55,8 +57,8 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
         { y: 0, opacity: 1, duration: 0.8, delay: 3.4, stagger: 0.1, ease: "power3.out" }
       );
     }
-    if (mobileLottieRef.current) {
-      gsap.fromTo(mobileLottieRef.current, { opacity: 0 }, { opacity: 0.55, duration: 2, delay: 1.5, ease: "power2.inOut" });
+    if (mobileFormRef.current) {
+      gsap.fromTo(mobileFormRef.current, { opacity: 0 }, { opacity: 0.55, duration: 2, delay: 1.5, ease: "power2.inOut" });
     }
     // Fade in the grid lines after the circle finishes drawing
     if (vLineRef.current) {
@@ -84,7 +86,7 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
       <div ref={vLineRef} className="hidden md:block absolute bottom-0 w-[1.5px] bg-black z-20 pointer-events-none opacity-0" style={{ left: "max(1.5rem, min(5vw, 4rem))", top: "88px" }} />
 
       {/* Background Lottie */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 scale-[1.1] md:scale-[1.15] max-md:scale-[1.45] translate-x-0 md:translate-x-[5%] max-md:translate-x-[24%] translate-y-[-5%] md:translate-y-[-2%] max-md:translate-y-[-28%]">
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 scale-[1.1] md:scale-[1.15] max-md:scale-[1.35] translate-x-0 md:translate-x-[5%] max-md:translate-x-[-5%] translate-y-[-5%] md:translate-y-[-2%] max-md:translate-y-[-22%]">
         <div className="hidden md:block w-full h-full">
           <div ref={introLottieRef} className="absolute inset-0 w-full h-full">
             <DotLottiePlayer
@@ -127,16 +129,42 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
             />
           </div>
         </div>
-        <div ref={mobileLottieRef} className="block md:hidden w-full h-full opacity-0">
-          <DotLottiePlayer
-            ref={mobilePlayerRef}
-            src="/assets/lottie/mobile-loop.lottie"
-            autoplay={false}
-            loop
-            rendererSettings={{ glyphs: false }}
-            className="absolute inset-0 w-full h-full"
-            style={{ objectFit: "contain" }}
-          />
+        {/* Mobile runs the same two stages desktop does — the orbit draws
+            itself in, then hands over to the loop — from copies of the same two
+            files with the previous agency's labels stripped out. Before this the
+            phone only ever got the loop, so the orbit was simply there, already
+            formed, and the motion that builds it was never seen. */}
+        <div className="block md:hidden w-full h-full">
+          <div ref={mobileFormRef} className="absolute inset-0 w-full h-full opacity-0">
+            <DotLottiePlayer
+              ref={mobileFormPlayerRef}
+              src="/assets/lottie/mobile-orbit-form.lottie"
+              autoplay={false}
+              loop={false}
+              rendererSettings={{ glyphs: false }}
+              onEvent={(event) => {
+                if (event === PlayerEvents.Complete) {
+                  mobilePlayerRef.current?.stop();
+                  mobilePlayerRef.current?.play();
+                  gsap.to(mobileLottieRef.current, { opacity: 0.55, duration: 1.8, ease: "power2.inOut" });
+                  gsap.to(mobileFormRef.current, { opacity: 0, duration: 1.6, delay: 0.4, ease: "power2.inOut" });
+                }
+              }}
+              className="absolute inset-0 w-full h-full"
+              style={{ objectFit: "contain" }}
+            />
+          </div>
+          <div ref={mobileLottieRef} className="absolute inset-0 w-full h-full opacity-0">
+            <DotLottiePlayer
+              ref={mobilePlayerRef}
+              src="/assets/lottie/mobile-orbit-loop.lottie"
+              autoplay={false}
+              loop
+              rendererSettings={{ glyphs: false }}
+              className="absolute inset-0 w-full h-full"
+              style={{ objectFit: "contain" }}
+            />
+          </div>
         </div>
       </div>
 
