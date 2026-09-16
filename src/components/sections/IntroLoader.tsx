@@ -11,6 +11,10 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
   // through around the letterboxed artwork; from then on it has to be see-through
   // or that last second is black on black.
   const [revealed, setRevealed] = useState(false);
+  // The player reports its own frame, so the switch rides the animation rather
+  // than a stopwatch — on a device where playback runs behind, a stopwatch would
+  // lift the backdrop while the artwork was still drawing on it.
+  const firstFrameRef = useRef<number | null>(null);
   // Read once: the intro is over in under four seconds, so a rotation mid-play
   // is not worth re-rendering the player for.
   const [isPortrait] = useState(
@@ -82,19 +86,26 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
             src="/assets/lottie/intro-comp.lottie"
             autoplay={true}
             loop={false}
-            onEvent={(event) => {
+            onEvent={(event, params) => {
               if (event === PlayerEvents.Play) {
-                // Frame 216 at 30fps. Switching a shade late is harmless (the
-                // artwork is drawing on black either way); switching early would
-                // show the page through the backdrop while it is still up.
-                setTimeout(() => setRevealed(true), 3000);
-                // Hero's headline waits 2.6s after this fires, so this is set so
-                // that it starts exactly as the backdrop lifts. Left at 2s the
+                // Hero's headline waits 2.6s after this fires, and the backdrop
+                // lifts 3s in, so this puts the two together. Left at 2s the
                 // headline began at 4.6s and the intro spent its last second and
                 // a half revealing an empty page — the "white screen".
                 setTimeout(() => {
                   onHeroStartRef.current();
                 }, 400);
+              }
+              // The artwork stops drawing its own black backdrop 89 frames into
+              // the segment it plays. Counting from the first frame reported
+              // rather than assuming a number keeps this right whether the player
+              // counts from the start of the file or the start of the segment.
+              if (event === PlayerEvents.Frame) {
+                const f = (params as { frame?: number } | undefined)?.frame;
+                if (typeof f === "number") {
+                  if (firstFrameRef.current === null) firstFrameRef.current = f;
+                  if (f - firstFrameRef.current >= 89) setRevealed(true);
+                }
               }
               if (event === PlayerEvents.Complete) {
                 finish();
