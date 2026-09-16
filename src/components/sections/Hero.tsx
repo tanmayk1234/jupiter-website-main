@@ -56,7 +56,7 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
       );
     }
     if (mobileLottieRef.current) {
-      gsap.fromTo(mobileLottieRef.current, { opacity: 0 }, { opacity: 0.12, duration: 2, delay: 1.5, ease: "power2.inOut" });
+      gsap.fromTo(mobileLottieRef.current, { opacity: 0 }, { opacity: 0.35, duration: 2, delay: 1.5, ease: "power2.inOut" });
     }
     // Fade in the grid lines after the circle finishes drawing
     if (vLineRef.current) {
