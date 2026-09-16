@@ -30,11 +30,11 @@ const IntroLoader = React.memo(function IntroLoader({ onHeroStart, onComplete }:
   return (
     <div 
       ref={containerRef} 
-      className={`fixed inset-0 z-[9999] flex items-center justify-center transition-colors duration-500 ${lottieReady ? 'bg-transparent' : 'bg-[#050505]'} pointer-events-none`}
+      className={`fixed inset-0 z-[9999] flex items-center justify-center transition-colors duration-500 ${lottieReady ? 'bg-black md:bg-transparent' : 'bg-black md:bg-[#050505]'} pointer-events-none`}
     >
       <div className="absolute inset-0 flex items-center justify-center w-full h-full">
         {/* We use 150vw to ensure the lottie animation drawing covers the screen just like the main website */}
-        <div className="w-[150vw] h-[150vh] flex items-center justify-center">
+        <div className="w-[150vw] h-[150vh] max-md:w-[175vw] max-md:shrink-0 flex items-center justify-center">
           <DotLottiePlayer
             src="/assets/lottie/intro-comp.lottie"
             autoplay={true}
