@@ -95,7 +95,7 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
       <div ref={vLineRef} className="hidden md:block absolute bottom-0 w-[1.5px] bg-black z-20 pointer-events-none opacity-0" style={{ left: "max(1.5rem, min(5vw, 4rem))", top: "88px" }} />
 
       {/* Background Lottie */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 scale-[1.1] md:scale-[1.15] max-md:scale-[1.35] translate-x-0 md:translate-x-[5%] max-md:translate-x-[-5%] translate-y-[-5%] md:translate-y-[-2%] max-md:translate-y-[-22%]">
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 scale-[1.1] md:scale-[1.15] max-md:scale-[1.55] translate-x-0 md:translate-x-[5%] max-md:translate-x-[-21.4%] translate-y-[-5%] md:translate-y-[-2%] max-md:translate-y-[-18%]">
         <div className="hidden md:block w-full h-full">
           <div ref={introLottieRef} className="absolute inset-0 w-full h-full">
             <DotLottiePlayer
