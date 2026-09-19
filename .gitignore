@@ -25,3 +25,6 @@ public/__mobile-harness.html
 # on the server and must never be committed.
 jupiter-mail-config.php
 jupiter-enquiries.log
+
+# Deploy archive built from dist/ — regenerate, never commit
+jupiter-site.zip
