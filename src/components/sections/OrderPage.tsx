@@ -38,7 +38,7 @@ export default function OrderPage() {
       "",
       formData.message,
     ].join("\n");
-    return `mailto:jupiterengg18@gmail.com?subject=${encodeURIComponent(
+    return `mailto:admin@jupiterengg.co.in?cc=jupiterengg18@gmail.com&subject=${encodeURIComponent(
       `Technical enquiry - ${formData.name}`
     )}&body=${encodeURIComponent(body)}`;
   };

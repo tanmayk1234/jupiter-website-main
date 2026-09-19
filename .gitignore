@@ -20,3 +20,8 @@ profile-text.txt
 
 # Local-only mobile test harness (dev tool, never ship)
 public/__mobile-harness.html
+
+# Mail credentials for the enquiry form. The real file lives above public_html
+# on the server and must never be committed.
+jupiter-mail-config.php
+jupiter-enquiries.log
