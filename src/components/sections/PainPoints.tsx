@@ -64,7 +64,7 @@ export default function PainPoints({ onViewChange }: { onViewChange?: (view: "ho
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-[128px] px-6 md:px-[max(1.5rem,min(5vw,4rem))]" style={{ backgroundColor: "#F5F5F0" }}>
+    <section ref={sectionRef} className="relative py-[128px] max-md:py-16 px-6 md:px-[max(1.5rem,min(5vw,4rem))]" style={{ backgroundColor: "#F5F5F0" }}>
       <GridLine />
 
       <div className="max-w-[1100px] mx-auto">

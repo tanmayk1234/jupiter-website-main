@@ -17,12 +17,58 @@ const plusMarks = [
 
 const FRAME_COUNT = 132;
 
+// Both viewports scrub the same 132-frame sequence; they differ only in which
+// copy of it they fetch. Desktop pulls /frames (800x1422, 7.1 MB). A phone pulls
+// /frames-mobile (440x782, 2.1 MB) — the canvas is about 300 CSS px wide there,
+// so the larger set is detail nobody can see, paid for on mobile data.
+function loadSequence(canvas: HTMLCanvasElement, dir: string) {
+  const ctx2d = canvas.getContext("2d");
+  if (!ctx2d) return null;
+
+  const images: HTMLImageElement[] = [];
+  let loadedCount = 0;
+  let currentFrame = 0;
+  let dimensionsSet = false;
+
+  const renderFrame = (index: number) => {
+    const img = images[index];
+    if (!img || !img.complete) return;
+    if (!dimensionsSet) {
+      // Set canvas internal resolution once from first loaded image
+      canvas.width = img.width;
+      canvas.height = img.height;
+      dimensionsSet = true;
+    }
+    ctx2d.clearRect(0, 0, canvas.width, canvas.height);
+    ctx2d.drawImage(img, 0, 0);
+    currentFrame = index;
+  };
+
+  for (let i = 1; i <= FRAME_COUNT; i++) {
+    const img = new Image();
+    img.src = `${dir}/frame_${String(i).padStart(4, "0")}.jpg`;
+    const frameIndex = i - 1;
+    img.onload = () => {
+      loadedCount++;
+      // Draw the frame immediately if it is the currently active frame, or the very first loaded frame
+      if (frameIndex === currentFrame || (loadedCount === 1 && currentFrame === 0)) {
+        renderFrame(frameIndex);
+      }
+    };
+    images.push(img);
+  }
+
+  return { images, renderFrame };
+}
+
 export default function Services({ onViewChange }: { onViewChange?: (view: "home" | "order" | "about" | "blog" | "resources" | "sustainability") => void }) {
   const { language, t } = useTranslation();
   const sectionRef  = useRef<HTMLElement>(null);
   const canvasRef   = useRef<HTMLCanvasElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const imagesRef   = useRef<HTMLImageElement[]>([]);
+  const mCanvasRef  = useRef<HTMLCanvasElement>(null);
+  const mTrackRef   = useRef<HTMLDivElement>(null);
 
   const localizedPanels = [
     {
@@ -73,51 +119,20 @@ export default function Services({ onViewChange }: { onViewChange?: (view: "home
 
   // --- Scroll-driven frame animation ---
   useEffect(() => {
-    // The canvas lives inside a `hidden md:block` wrapper, so on phones it never
-    // paints — but the ref still resolves and all 132 frames (7.1 MB) downloaded.
-    // ponytail: checked once on mount, not on resize. A desktop user who starts
-    // below 768px and widens gets no frames until reload; costs nothing to live with.
+    // Each viewport fetches only its own copy of the sequence; the phone runs the
+    // effect below instead. Without this gate a phone downloaded the 7.1 MB
+    // desktop set for a canvas inside a `hidden md:block` wrapper that never paints.
+    // ponytail: checked once on mount, not on resize. Crossing 768px without a
+    // reload leaves one canvas unfed; costs nothing to live with.
     if (!window.matchMedia("(min-width: 768px)").matches) return;
 
     const canvas = canvasRef.current;
     if (!canvas || !sectionRef.current) return;
-    const ctx2d = canvas.getContext("2d");
-    if (!ctx2d) return;
 
-    // Build frame paths & preload images
-    const images: HTMLImageElement[] = [];
-    let loadedCount = 0;
-    let currentFrame = 0;
-    let dimensionsSet = false;
-
-    const renderFrame = (index: number) => {
-      const img = images[index];
-      if (!img || !img.complete) return;
-      if (!dimensionsSet) {
-        // Set canvas internal resolution once from first loaded image
-        canvas.width = img.width;
-        canvas.height = img.height;
-        dimensionsSet = true;
-      }
-      ctx2d.clearRect(0, 0, canvas.width, canvas.height);
-      ctx2d.drawImage(img, 0, 0);
-      currentFrame = index;
-    };
-
-    for (let i = 1; i <= FRAME_COUNT; i++) {
-      const img = new Image();
-      img.src = `/frames/frame_${String(i).padStart(4, "0")}.jpg`;
-      const frameIndex = i - 1;
-      img.onload = () => {
-        loadedCount++;
-        // Draw the frame immediately if it is the currently active frame, or the very first loaded frame
-        if (frameIndex === currentFrame || (loadedCount === 1 && currentFrame === 0)) {
-          renderFrame(frameIndex);
-        }
-      };
-      images.push(img);
-    }
-    imagesRef.current = images;
+    const seq = loadSequence(canvas, "/frames");
+    if (!seq) return;
+    const { renderFrame } = seq;
+    imagesRef.current = seq.images;
 
     // GSAP context for ScrollTrigger
     const gsapCtx = gsap.context(() => {
@@ -162,6 +177,35 @@ export default function Services({ onViewChange }: { onViewChange?: (view: "home
     return () => gsapCtx.revert();
   }, []);
 
+  // --- Same sequence on a phone, scrubbed by its own pinned track ---
+  useEffect(() => {
+    if (window.matchMedia("(min-width: 768px)").matches) return;
+
+    const canvas = mCanvasRef.current;
+    const track = mTrackRef.current;
+    if (!canvas || !track) return;
+
+    const seq = loadSequence(canvas, "/frames-mobile");
+    if (!seq) return;
+    const { renderFrame } = seq;
+
+    const gsapCtx = gsap.context(() => {
+      const obj = { frame: 0 };
+      gsap.to(obj, {
+        frame: FRAME_COUNT - 1,
+        ease: "none",
+        snap: "frame",
+        // Tied to the track rather than the whole section: the section also
+        // holds the text panels below, and the sequence should have finished
+        // playing by the time they arrive.
+        scrollTrigger: { trigger: track, start: "top top", end: "bottom bottom", scrub: 0.5 },
+        onUpdate: () => renderFrame(Math.round(obj.frame)),
+      });
+    }, track);
+
+    return () => gsapCtx.revert();
+  }, []);
+
   return (
     <section ref={sectionRef} className="relative bg-black text-white section-dark">
       {/* Decorative plus marks */}
@@ -175,8 +219,36 @@ export default function Services({ onViewChange }: { onViewChange?: (view: "home
 
       <GridLine className="absolute bg-white" />
 
+      {/* Mobile: the sequence pins and scrubs, then the panels follow */}
+      <div className="md:hidden">
+        <div ref={mTrackRef} className="relative h-[200svh]">
+          <div className="sticky top-0 h-svh flex items-center justify-center px-8">
+            <div className="relative w-full max-w-[300px] aspect-[9/16] flex items-center justify-center">
+              <div
+                className="absolute w-[120%] h-[120%] bg-blue-600/20 rounded-full filter blur-[70px] -z-10 pointer-events-none"
+              />
+              <canvas
+                ref={mCanvasRef}
+                width={440}
+                height={782}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "1.25rem",
+                  display: "block",
+                  boxShadow: "0 20px 40px -12px rgba(0, 40, 255, 0.35), 0 0 40px rgba(0, 40, 255, 0.2)",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  position: "relative",
+                  zIndex: 10,
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Mobile: stacked layout */}
-      <div className="md:hidden px-6 py-24 flex flex-col gap-16">
+      <div className="md:hidden px-6 pt-4 pb-24 flex flex-col gap-16">
         {localizedPanels.map((p) => (
           <div key={p.id} className="flex flex-col gap-5">
             <h3 className="font-display font-medium text-[clamp(1.8rem,5vw,3rem)] leading-[1.05] tracking-[-0.03em]">

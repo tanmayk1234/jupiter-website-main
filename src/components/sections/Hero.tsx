@@ -88,7 +88,7 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
   return (
     <section
       ref={containerRef}
-      className="relative min-h-svh pt-20 px-6 md:px-[max(1.5rem,min(5vw,4rem))] flex flex-col justify-center overflow-hidden"
+      className="relative min-h-svh pt-20 px-6 md:px-[max(1.5rem,min(5vw,4rem))] flex flex-col justify-center max-md:justify-end max-md:pb-14 overflow-hidden"
       style={{ backgroundColor: "#F5F5F0" }}
     >
       {/* Left vertical border — starts exactly below the logo and runs full height */}
