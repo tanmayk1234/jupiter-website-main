@@ -58,7 +58,7 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
     // the artwork opens on an empty frame and draws itself in, so it needs no
     // fade of its own.
     setTimeout(() => {
-      gsap.set(mobileFormRef.current, { opacity: 0.55 });
+      gsap.set(mobileFormRef.current, { opacity: 0.85 });
       mobileFormPlayerRef.current?.play();
     }, 2600);
 
@@ -155,7 +155,7 @@ export default function Hero({ isLoaded, onViewChange }: { isLoaded: boolean; on
                 if (event === PlayerEvents.Complete) {
                   mobilePlayerRef.current?.stop();
                   mobilePlayerRef.current?.play();
-                  gsap.to(mobileLottieRef.current, { opacity: 0.55, duration: 1.8, ease: "power2.inOut" });
+                  gsap.to(mobileLottieRef.current, { opacity: 0.85, duration: 1.8, ease: "power2.inOut" });
                   gsap.to(mobileFormRef.current, { opacity: 0, duration: 1.6, delay: 0.4, ease: "power2.inOut" });
                 }
               }}
