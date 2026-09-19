@@ -7,7 +7,11 @@ import GridLine from "../ui/GridLine";
 export default function OrderPage() {
   const { t } = useTranslation();
   const pageRef = useRef<HTMLDivElement>(null);
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+  // Not shown to anyone. A bot fills in every field it finds, so anything here
+  // means the submission did not come from a person.
+  const [company, setCompany] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,12 +27,9 @@ export default function OrderPage() {
     );
   }, []);
 
-  // ponytail: mailto is the only send channel a static site has, and it beats
-  // the previous behaviour of silently discarding every lead. Swap the body of
-  // this handler for a fetch POST once a real endpoint exists (that also needs
-  // connect-src widened in index.html).
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // Kept only as the escape hatch. If the endpoint cannot be reached, the
+  // visitor is offered this rather than losing what they typed.
+  const mailtoHref = () => {
     const body = [
       `Name: ${formData.name}`,
       `Email: ${formData.email}`,
@@ -37,14 +38,38 @@ export default function OrderPage() {
       "",
       formData.message,
     ].join("\n");
-    window.location.href =
-      `mailto:jupiterengg18@gmail.com?subject=${encodeURIComponent(
-        `Technical enquiry - ${formData.name}`
-      )}&body=${encodeURIComponent(body)}`;
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-    }, 8000);
+    return `mailto:jupiterengg18@gmail.com?subject=${encodeURIComponent(
+      `Technical enquiry - ${formData.name}`
+    )}&body=${encodeURIComponent(body)}`;
+  };
+
+  // Posts to contact.php, which sits on this same origin, so the visitor stays
+  // on the page and the CSP does not have to allow any outside host.
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (status === "sending") return;
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/contact.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, company }),
+      });
+      // A dev server with no PHP answers the SPA index.html with a 200, so a
+      // reply that is not JSON means the endpoint is not really there.
+      const data = await res.json().catch(() => null);
+      if (!data) {
+        throw new Error("We could not reach the server.");
+      }
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || `The server replied ${res.status}.`);
+      }
+      setStatus("sent");
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : "The message could not be sent.");
+      setStatus("error");
+    }
   };
 
   return (
@@ -67,7 +92,7 @@ export default function OrderPage() {
 
         {/* Form Container */}
         <div className="bg-white rounded-3xl border border-black/10 shadow-sm p-6 md:p-10 max-w-[900px] relative">
-          {submitted ? (
+          {status === "sent" ? (
             <div className="py-16 text-center flex flex-col items-center justify-center gap-6">
               <div className="w-16 h-16 rounded-full bg-black text-white flex items-center justify-center animate-bounce">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -78,6 +103,17 @@ export default function OrderPage() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+
+              <input
+                type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                className="hidden"
+              />
               
               {/* Contact Info */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -172,15 +208,29 @@ export default function OrderPage() {
                 </div>
               </div>
 
+              {status === "error" && (
+                <div className="rounded-xl border border-[#FF5A00]/30 bg-[#FFF3ED] px-4 py-3.5 text-[14px] leading-[1.5]">
+                  <p className="font-semibold mb-1">That did not go through.</p>
+                  <p className="text-black/70 mb-1">{errorMsg}</p>
+                  <a
+                    href={mailtoHref()}
+                    className="inline-flex items-center min-h-[44px] font-semibold underline underline-offset-4"
+                  >
+                    Send it as an email instead
+                  </a>
+                </div>
+              )}
+
               {/* Submit button */}
               <button
                 type="submit"
-                className="group inline-flex items-center gap-3 bg-black text-white rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-800 self-start"
+                disabled={status === "sending"}
+                className="group inline-flex items-center gap-3 bg-black text-white rounded-full font-display font-medium text-[15px] pr-5 pl-1.5 py-1.5 transition-all duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] hover:shadow-xl hover:bg-neutral-800 self-start disabled:opacity-60 disabled:hover:scale-100 disabled:cursor-wait"
               >
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black transition-all duration-500 ease-out group-hover:scale-110">
                   <PlusIcon className="text-black transition-transform duration-500 ease-out group-hover:rotate-180" />
                 </span>
-                {t("order_form_submit")}
+                {status === "sending" ? "Sending..." : t("order_form_submit")}
               </button>
 
             </form>
