@@ -65,17 +65,21 @@ body::-webkit-scrollbar,
   }
 }
 
-/* The horizontal marquees pause on :hover so a card can be read and clicked.
-   Touch has no hover, so on a phone the product cards never stopped and tapping
-   one meant hitting a moving target. Below md the animation is dropped entirely
-   and the row becomes a natively swipeable overflow-x container instead — the
-   gesture people already expect there, and it needs no JS. */
-@media (min-width: 768px) {
-  .animate-marquee-left { animation: marquee-left 30s linear infinite; }
-  .animate-marquee-right { animation: marquee-right 30s linear infinite; }
+/* The horizontal marquees run at every width. They pause on :hover so a card can
+   be read and clicked, and on :active so the same is true on a phone, where
+   there is no hover and tapping a moving card otherwise means hitting a moving
+   target — holding a finger on the row stops it. */
+.animate-marquee-left { animation: marquee-left 30s linear infinite; }
+.animate-marquee-right { animation: marquee-right 30s linear infinite; }
 
-  .animate-marquee-left:hover,
-  .animate-marquee-right:hover { animation-play-state: paused; }
+.animate-marquee-left:hover,
+.animate-marquee-right:hover { animation-play-state: paused; }
+
+/* Touch only, so a mouse held down on the row does not change what it already
+   does. A finger on the row stops it long enough to tap a card. */
+@media (hover: none) {
+  .animate-marquee-left:active,
+  .animate-marquee-right:active { animation-play-state: paused; }
 }
 
 /* The tracks in Cases.tsx are three copies of the list, so one copy is a third
